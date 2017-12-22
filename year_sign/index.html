@@ -14,43 +14,156 @@
     <div id="app" class="page">
         <div class="page01" v-if="page01.show">
             <div class="top-block">
-                <img v-animate-css="page01.transition1" class="ydzy img100" src="https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/page01_text_ydzy_min.png" alt="">
-                <img v-animate-css="page01.transition2" class="date img100" src="https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/page01_text_date.png" alt="">
+                <img v-animate-css="transitionSlideInDown" class="ydzy img100" src="https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/page01_text_ydzy_min.png" alt="">
+                <img v-animate-css="transitionZoomIn200" class="date img100" src="https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/page01_text_date.png" alt="">
             </div>
             <div class="mid-block">
-                <img v-animate-css="page01.transition3" class="img100" src="https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/page01_text_zsqh_min.png" alt="">
-                <a v-animate-css="page01.transition4" class="btn ft-16" href="#">查看签到流程</a>
+                <img v-animate-css="transitionZoomIn400" class="img100" src="https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/page01_text_zsqh_min.png" alt="">
+                <a v-animate-css="transitionFadeInUp600" class="btn ft-16" href="#">查看签到流程</a>
             </div>
         </div>
         <div class="page02" v-if="page02.show">
             <div class="top-block">
-                <img v-animate-css="page01.transition1" class="ydzy img100" src="https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/page01_text_ydzy_min.png" alt="">
-                <img v-animate-css="page01.transition2" class="bjdl img100" src="https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/page02_text_bjdl.png" alt="">
+                <img v-animate-css="transitionSlideInDown" class="ydzy img100" src="https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/page01_text_ydzy_min.png" alt="">
+                <img v-animate-css="transitionZoomIn200" class="bjdl img100" src="https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/page02_text_bjdl.png" alt="">
             </div>
             <div class="mid-block">
-                <img v-animate-css="page01.transition4" class="planet img100" src="https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/planet_light_min.png" alt="">
-                <img v-animate-css="page01.transition5" class="zsqh img100" src="https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/page02_text_zsqh.png" alt="">
-                <span v-animate-css="page01.transition5" class="countdown ft-64">18:22:47</span>
-                <a v-animate-css="page01.transition6" class="btn ft-16" href="#">查看签到流程</a>
+                <img v-animate-css="transitionFadeInUp600" class="planet img100" src="https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/planet_light_min.png" alt="">
+                <img v-animate-css="transitionZoomIn800" class="zsqh img100" src="https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/page02_text_zsqh.png" alt="">
+                <span v-animate-css="transitionZoomIn800" class="countdown ft-64">18:22:47</span>
+                <a v-animate-css="transitionFadeInUp1000" class="btn ft-16" href="#">查看签到流程</a>
+            </div>
+        </div>
+        <div class="page03" v-if="page03.show">
+            <div class="top-block">
+                <img v-animate-css="transitionSlideInDown" class="img100" src="https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/page03_text_top.png" alt="">
+            </div>
+            <div class="mid-block">
+                <input v-animate-css="transitionZoomIn200" type="text" class="v-input ft-18" placeholder="输入报名人的姓名">
+                <input v-animate-css="transitionZoomIn400" type="text" class="v-input ft-18" placeholder="输入报名时的手机号">
+                <a v-animate-css="transitionFadeInUp600" class="btn ft-21" href="#">签&nbsp;到</a>
+                <a v-animate-css="transitionFadeInUp800" class="process ft-16" href="#">查看签到流程</a>
+            </div>
+        </div>
+        <div class="page04" v-if="page04.show">
+            <div class="top-block">
+                <span v-animate-css="transitionFadeInLeft" class="name ft-21">欢迎您 小豆：</span>
+                <!-- <img v-animate-css="transitionFadeInLeft" class="wkh img100" src="https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/page04_text_wkh.png?v=1" alt=""> -->
+                <img v-animate-css="transitionFadeInLeft" class="ykh img100" src="https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/page04_text_ykh.png?v=1" alt="">
+                <transition name="fade">
+                    <img v-if="!openedGiftBox" v-animate-css="transitionFadeInRight" class="lqlwts img100" src="https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/page04_text_lqlyts.png?v=1" alt="">
+                </transition>
+            </div>
+            <div class="mid-block">
+                <transition name="fade">
+                    <div v-if="!openedGiftBox">
+                        <img v-animate-css="transitionZoomIn400" class="giftbox img100" src="https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/page04_giftbox.png?v=1" alt="">
+                        <a v-animate-css="transitionFadeInUp600" @click="openGiftBox" class="btn ft-18" href="#">银豆之约&nbsp;正式起航</a>
+                    </div>
+                </transition>
+                <span v-show="openedGiftBox" v-animate-css="transitionZoomIn200" class="tabel_num">您的桌号：{{tabel_num}}</span>
+                <img v-show="openedGiftBox" v-animate-css="transitionZoomIn200" class="giftbox_open img100" src="https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/page04_giftbox_open.png?v=1" alt="">
+            </div>
+        </div>
+        <div class="page05" v-if="page05.show">
+            <div class="top-block">
+                <img v-animate-css="transitionZoomIn" class="fail img100" src="https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/page05_giftbox_open_fail.png" alt="">
+            </div>
+            <div class="mid-block">
+                <a v-animate-css="transitionFlipInX200" class="btn ft-21" href="#">重新签到</a>
             </div>
         </div>
         <div class="bot-block"></div>
     </div>
-    <!-- <div class="page02" v-show="page02.show"> -->
-        <!-- <div class="top-block">
-            <img v-animate-css="page01.transition1" class="ydzy img100" src="https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/page01_text_ydzy_min.png" alt="">
-            <img v-animate-css="page01.transition2" class="date img100" src="https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/page01_text_date.png" alt="">
-        </div>
-        <div class="mid-block">
-            <img v-animate-css="page01.transition3" class="date img100" src="https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/page01_text_zsqh_min.png" alt="">
-            <a v-animate-css="page01.transition4" class="btn ft-16" href="#">查看签到流程</a>
-        </div>
-        <div class="bot-block"></div> -->
-    <!-- </div> -->
-
 
     <script type="text/javascript" src="https://static.yindou.com/weixin/js/vue.min.2.js"></script>
     <script src="https://unpkg.com/v-animate-css/dist/v-animate-css.js"></script>
-    <script src="./index.js"></script>
+    <!-- <script src="./index.js"></script> -->
+
+    <script>
+        Vue.use(VAnimateCss.default);
+        new Vue({
+            el: '#app',
+            data: {
+                transitionSlideInDown: {
+                    classes: 'slideInDown',
+                    duration: 1000,
+                    delay: 0,
+                },
+                transitionZoomIn: {
+                    classes: 'zoomIn',
+                    duration: 1000,
+                    delay: 0
+                },
+                transitionZoomIn200: {
+                    classes: 'zoomIn',
+                    duration: 1000,
+                    delay: 200
+                },
+                transitionZoomIn400: {
+                    classes: 'zoomIn',
+                    duration: 1000,
+                    delay: 400
+                },
+                transitionFadeInUp600: {
+                    classes: 'fadeInUp',
+                    duration: 1000,
+                    delay: 600
+                },
+                transitionFadeInUp800: {
+                    classes: 'fadeInUp',
+                    duration: 1000,
+                    delay: 800
+                },
+                transitionZoomIn800: {
+                    classes: 'zoomIn',
+                    duration: 1000,
+                    delay: 800
+                },
+                transitionFadeInUp1000: {
+                    classes: 'fadeInUp',
+                    duration: 1000,
+                    delay: 1000
+                },
+                transitionFadeInLeft: {
+                    classes: 'fadeInLeft',
+                    duration: 1000,
+                    delay: 0
+                },
+                transitionFadeInRight: {
+                    classes: 'fadeInRight',
+                    duration: 1000,
+                    delay: 0
+                },
+                transitionFlipInX200: {
+                    classes: 'flipInX',
+                    duration: 1000,
+                    delay: 200
+                },
+                page01: {
+                    show: false,
+                },
+                page02: {
+                    show: false,
+                },
+                page03: {
+                    show: false,
+                },
+                page04: {
+                    show: false,
+                },
+                page05: {
+                    show: true,
+                },
+                openedGiftBox: false,
+                tabel_num: 520
+            },
+            methods: {
+                openGiftBox: function(){
+                    this.openedGiftBox = true;
+                }
+            }
+        }) 
+    </script>
 </body>
 </html>
