@@ -9,20 +9,31 @@
 <script src="https://static.yindou.com/weixin/js/flexible_css.js"></script>
 <script src="https://static.yindou.com/weixin/js/flexible.js"></script>
 <link rel="stylesheet" href="style.css" />
+<script type="text/javascript" src="https://static.yindou.com/weixin/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="https://static.yindou.com/weixin/js/vue.min.2.js"></script>
+<script src="https://unpkg.com/v-animate-css/dist/v-animate-css.js"></script>
 </head>
 <body>
     <div id="app" class="page">
-        <div class="page01" v-if="page01.show">
+        <div class="progress-block" v-if="progress">
+            <div class="progress-outer">
+                <div class="progress-enter">
+                    <div class="progress-bg" :style="{width: process_percent + '%'}"></div>
+                </div>
+                <div class="tooltip ft-15" :style="{left: 'calc(' + process_percent + '%)'}">{{process_percent}}%</div>
+            </div>
+        </div>
+        <div class="page01" v-cloak v-if="page01.show">
             <div class="top-block">
                 <img v-animate-css="transitionSlideInDown" class="ydzy img100" src="https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/page01_text_ydzy_min.png" alt="">
                 <img v-animate-css="transitionZoomIn200" class="date img100" src="https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/page01_text_date.png" alt="">
             </div>
             <div class="mid-block">
-                <img v-animate-css="transitionZoomIn400" class="img100" src="https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/page01_text_zsqh_min.png" alt="">
+                <img v-animate-css="transitionZoomIn400" class="zsqh img100" src="https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/page01_text_zsqh_min.png" alt="">
                 <a v-animate-css="transitionFadeInUp600" class="btn ft-16" href="#">查看签到流程</a>
             </div>
         </div>
-        <div class="page02" v-if="page02.show">
+        <div class="page02" v-cloak v-if="page02.show">
             <div class="top-block">
                 <img v-animate-css="transitionSlideInDown" class="ydzy img100" src="https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/page01_text_ydzy_min.png" alt="">
                 <img v-animate-css="transitionZoomIn200" class="bjdl img100" src="https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/page02_text_bjdl.png" alt="">
@@ -30,54 +41,116 @@
             <div class="mid-block">
                 <img v-animate-css="transitionFadeInUp600" class="planet img100" src="https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/planet_light_min.png" alt="">
                 <img v-animate-css="transitionZoomIn800" class="zsqh img100" src="https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/page02_text_zsqh.png" alt="">
-                <span v-animate-css="transitionZoomIn800" class="countdown ft-64">18:22:47</span>
+                <span v-animate-css="transitionZoomIn800" class="countdown ft-64">{{countdown}}</span>
                 <a v-animate-css="transitionFadeInUp1000" class="btn ft-16" href="#">查看签到流程</a>
             </div>
         </div>
-        <div class="page03" v-if="page03.show">
+        <div class="page03" v-cloak v-if="page03.show">
             <div class="top-block">
                 <img v-animate-css="transitionSlideInDown" class="img100" src="https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/page03_text_top.png" alt="">
             </div>
             <div class="mid-block">
-                <input v-animate-css="transitionZoomIn200" type="text" class="v-input ft-18" placeholder="输入报名人的姓名">
-                <input v-animate-css="transitionZoomIn400" type="text" class="v-input ft-18" placeholder="输入报名时的手机号">
-                <a v-animate-css="transitionFadeInUp600" class="btn ft-21" href="#">签&nbsp;到</a>
+                <div v-animate-css="transitionZoomIn200" class="input-wraper">
+                    <input type="text" class="v-input first ft-18" placeholder="输入报名人的姓名" v-model="username">
+                    <i class="icon name"></i>
+                </div>
+                <div v-animate-css="transitionZoomIn400" class="input-wraper">
+                    <input type="text" class="v-input ft-18" placeholder="输入报名时的手机号" v-model="userphone">
+                    <i class="icon phone"></i>
+                </div>
+                <a v-animate-css="transitionFadeInUp600" @click="sign" class="btn ft-21" href="#">签&nbsp;到</a>
                 <a v-animate-css="transitionFadeInUp800" class="process ft-16" href="#">查看签到流程</a>
             </div>
         </div>
-        <div class="page04" v-if="page04.show">
+        <div class="page04" v-cloak v-if="page04.show">
             <div class="top-block">
-                <span v-animate-css="transitionFadeInLeft" class="name ft-21">欢迎您 小豆：</span>
-                <!-- <img v-animate-css="transitionFadeInLeft" class="wkh img100" src="https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/page04_text_wkh.png?v=1" alt=""> -->
-                <img v-animate-css="transitionFadeInLeft" class="ykh img100" src="https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/page04_text_ykh.png?v=1" alt="">
+                <span v-animate-css="transitionFadeInLeft" class="name ft-21">欢迎您 {{userinfo.name}}：</span>
+                <div v-if="userinfo.reward === 0">
+                    <img v-animate-css="transitionFadeInLeft" class="wkh img100" src="https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/page04_text_wkh.png?v=1" alt="">
+                </div>
+                <div v-if="userinfo.reward === 1">
+                    <img v-animate-css="transitionFadeInLeft" class="ykh img100" src="https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/page04_text_ykh.png?v=1" alt="">
+                </div>
                 <transition name="fade">
-                    <img v-if="!openedGiftBox" v-animate-css="transitionFadeInRight" class="lqlwts img100" src="https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/page04_text_lqlyts.png?v=1" alt="">
+                    <div v-if="!openedGiftBox">
+                        <img  v-animate-css="transitionFadeInRight" class="lqlwts img100" :class="[userinfo.reward === 1 ? 'ykw_top' : '']" src="https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/page04_text_lqlyts.png?v=1" alt="">
+                    </div>
                 </transition>
             </div>
             <div class="mid-block">
                 <transition name="fade">
                     <div v-if="!openedGiftBox">
                         <img v-animate-css="transitionZoomIn400" class="giftbox img100" src="https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/page04_giftbox.png?v=1" alt="">
-                        <a v-animate-css="transitionFadeInUp600" @click="openGiftBox" class="btn ft-18" href="#">银豆之约&nbsp;正式起航</a>
+                        <a v-animate-css="transitionFadeInUp600" @click="openGiftBox(userinfo.number)" class="btn ft-18" href="#">银豆之约&nbsp;正式起航</a>
                     </div>
                 </transition>
-                <span v-show="openedGiftBox" v-animate-css="transitionZoomIn200" class="tabel_num">您的桌号：{{tabel_num}}</span>
+                <span v-show="openedGiftBox" v-animate-css="transitionZoomIn200" class="tabel_num">您的桌号：{{userinfo.number}}</span>
                 <img v-show="openedGiftBox" v-animate-css="transitionZoomIn200" class="giftbox_open img100" src="https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/page04_giftbox_open.png?v=1" alt="">
             </div>
         </div>
-        <div class="page05" v-if="page05.show">
-            <div class="top-block">
+        <div class="page05" v-cloak v-if="page05.show">
+            <!-- <div class="top-block"> -->
                 <img v-animate-css="transitionZoomIn" class="fail img100" src="https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/page05_giftbox_open_fail.png" alt="">
-            </div>
+            <!-- </div> -->
             <div class="mid-block">
-                <a v-animate-css="transitionFlipInX200" class="btn ft-21" href="#">重新签到</a>
+                <a v-animate-css="transitionFlipInX200" class="btn ft-21" href="#" @click="resign">重新签到</a>
+                <p v-animate-css="transitionFadeInUp400" class="txt ft-13">若没有报名纪录，建议您：</p>
+                <p v-animate-css="transitionFadeInUp400" class="txt ft-13">1.核对所填姓名是否为您报名时所填姓名；</p>
+                <p v-animate-css="transitionFadeInUp400" class="txt ft-13">2.核对所填电话是否为您报名时所填电话；</p>
+                <p v-animate-css="transitionFadeInUp400" class="txt ft-13">3.由于签到人数较多网络所限，建议您重新输入一次；</p>
+                <p v-animate-css="transitionFadeInUp400" class="txt ft-13">4.询问现场工作人员。</p>
             </div>
         </div>
-        <div class="bot-block"></div>
+        <div class="page06" v-cloak v-if="page06.show">
+            <div class="step1">
+                <img v-animate-css="transitionFadeInLeft" class="step01 img100" src="https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/step01.png" alt="">
+                <img v-animate-css="transitionFlipInX200" class="step01_card img100" src="https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/step01_card.png" alt="">
+            </div>
+            <div class="step2">
+                <img v-animate-css="transitionFadeInLeft400" class="step02 img100" src="https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/step02.png" alt="">
+                <img v-animate-css="transitionFlipInX600" class="step02_sign img100" src="https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/step02_sign.png" alt="">
+                <img v-animate-css="transitionFadeInRight600" class="step02_text img100" src="https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/step02_text.png" alt="">
+            </div>
+            <div class="step3">
+                <img v-animate-css="transitionFadeInLeft800" class="step03 img100" src="https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/step03.png" alt="">
+                <img v-animate-css="transitionFlipInX1000" class="step03_giftbox img100" src="https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/step03_giftbox.png" alt="">
+                <img v-animate-css="transitionFadeInRight1000" class="step03_text img100" src="https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/step03_texts.png?v=2" alt="">
+                <p v-animate-css="transitionFadeInUp400" class="txt ft-13">温馨小提醒哦：</p>
+                <p v-animate-css="transitionFadeInUp400" class="txt ft-13">1.领取礼物的环节切勿自己操作，需由工作人员协助完成并确认后方可领取成功；</p>
+                <p v-animate-css="transitionFadeInUp400" class="txt ft-13">2.签到完成后，会自动发送桌号信息，如果需要再次确认，重新输入个人信息后点击签到即可；</p>
+                <p v-animate-css="transitionFadeInUp400" class="txt ft-13">3.来到年会现场已开户的豆粉，在签到完成后均可自动获取一张2%加息券，请注意查收平台账户；</p>
+                <p v-animate-css="transitionFadeInUp400" class="txt ft-13">4.如有任何操作疑问，都可以让现场工作人员协同完成。</p>
+                <div class="bot-block"></div>
+            </div>
+        </div>
+        <div class="bot-block" v-if="!progress && !page06.show"></div>
+        <transition name="cube-dialog-fade">
+            <div class="cube-popup cube-dialog" v-cloak v-show="showDialog">
+                <div class="cube-popup-mask"></div>
+                <div class="cube-popup-container cube-popup-center">
+                    <div class="cube-popup-content">
+                        <div class="cube-dialog-main">
+                            <div class="cube-dialog-confirm">
+                                <div class="cube-dialog-content ft-15">
+                                    <div class="cube-dialog-content-def">
+                                        <p>如果这是您自己的操作，请点击“取消”</p>
+                                        <p>并出示给工作人员协助完成</p>
+                                        <p>否则礼品会与您擦肩而过哦</p>
+                                    </div>
+                                </div>
+                                <div class="cube-dialog-btns border-right-1px">
+                                    <a href="javascript:;" @click="restart" class="cube-dialog-btn border-top-1px cube-dialog-btn_highlight ft-18">继续开启</a>
+                                    <a href="javascript:;" @click="cancelDialog" class="cube-dialog-btn border-top-1px ft-18">取消</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </transition>
     </div>
 
-    <script type="text/javascript" src="https://static.yindou.com/weixin/js/vue.min.2.js"></script>
-    <script src="https://unpkg.com/v-animate-css/dist/v-animate-css.js"></script>
+    
     <!-- <script src="./index.js"></script> -->
 
     <script>
@@ -85,6 +158,36 @@
         new Vue({
             el: '#app',
             data: {
+                imgs: [
+                    'https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/progress.jpg',
+                    'https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/page01bg_bai.jpg',
+                    'https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/citybg.png',
+                    'https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/page01_text_ydzy_min.png',
+                    'https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/page01_text_date.png',
+                    'https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/page01_text_zsqh_min.png',
+                    'https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/page02_text_bjdl.png',
+                    'https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/planet_light_min.png',
+                    'https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/page02_text_zsqh.png',
+                    'https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/page03_text_top.png',
+                    'https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/icon_name.png',
+                    'https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/icon_phone.png',
+                    'https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/page04_text_wkh.png',
+                    'https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/page04_text_ykh.png',
+                    'https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/page04_text_lqlyts.png',
+                    'https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/page04_giftbox.png',
+                    'https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/page04_giftbox_open.png',
+                    'https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/page05_giftbox_open_fail.png',
+                    'https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/step01.png',
+                    'https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/step02.png',
+                    'https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/step03.png',
+                    'https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/step02_sign.png',
+                    'https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/step02_text.png',
+                    'https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/step03_giftbox.png',
+                    'https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/step03_texts.png',
+                    'https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/signflow_bg01_new.jpg',
+                    'https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/signflow_bg02_new.jpg',
+                    'https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/signflow_bg03_new.jpg',
+                ],
                 transitionSlideInDown: {
                     classes: 'slideInDown',
                     duration: 1000,
@@ -102,6 +205,11 @@
                 },
                 transitionZoomIn400: {
                     classes: 'zoomIn',
+                    duration: 1000,
+                    delay: 400
+                },
+                transitionFadeInUp400: {
+                    classes: 'fadeInUp',
                     duration: 1000,
                     delay: 400
                 },
@@ -130,15 +238,56 @@
                     duration: 1000,
                     delay: 0
                 },
+                transitionFadeInLeft400: {
+                    classes: 'fadeInLeft',
+                    duration: 1000,
+                    delay: 400
+                },
+                transitionFadeInLeft800: {
+                    classes: 'fadeInLeft',
+                    duration: 1000,
+                    delay: 800
+                },
                 transitionFadeInRight: {
                     classes: 'fadeInRight',
                     duration: 1000,
                     delay: 0
                 },
+                transitionFadeInRight600: {
+                    classes: 'fadeInRight',
+                    duration: 1000,
+                    delay: 600
+                },
+                transitionFadeInRight1000: {
+                    classes: 'fadeInRight',
+                    duration: 1000,
+                    delay: 1000
+                },
                 transitionFlipInX200: {
                     classes: 'flipInX',
                     duration: 1000,
                     delay: 200
+                },
+                transitionFlipInX600: {
+                    classes: 'flipInX',
+                    duration: 1000,
+                    delay: 600
+                },
+                transitionFlipInX1000: {
+                    classes: 'flipInX',
+                    duration: 1000,
+                    delay: 1000
+                },
+                countdown: '12:00:00',
+                startDate: '2018/01/20 17:00:00',
+                progress: true,
+                count: 0,
+                timer: null,
+                process_percent: 0,
+                username: '',
+                userphone: null,
+                userinfo: {
+
                 },
                 page01: {
                     show: false,
@@ -153,14 +302,151 @@
                     show: false,
                 },
                 page05: {
-                    show: true,
+                    show: false,
+                },
+                page06: {
+                    show: false,
                 },
                 openedGiftBox: false,
-                tabel_num: 520
+                showDialog: false,
             },
             methods: {
-                openGiftBox: function(){
-                    this.openedGiftBox = true;
+                showPage: function(page){
+                    var self = this;
+                    this.page01.show = this.page02.show = this.page03.show = this.page04.show = this.page05.show = false;
+                    page.show = true;
+                },
+                openGiftBox: function(num){
+                    this.showDialog = true;
+                },
+                getTimeDiff: function(){
+                    var self = this,
+                        currentDate = new Date(),
+                        startDate = new Date(self.startDate),
+                        _12h_convert_milli = 12 * 60 * 60 * 1000,
+                        // _12h_convert_milli = 60 * 1000,
+                        diff = startDate.getTime() - currentDate.getTime(),
+                        h = 0,
+                        m = 0,
+                        s = 0;
+                    if(diff >= 0 && diff <= _12h_convert_milli){
+                        !self.page02.show ? self.showPage(self.page02): null;
+                        h = Math.floor(diff / 1000 / 60 / 60 % 24);
+                        m = Math.floor(diff / 1000 / 60 % 60);
+                        s = Math.floor(diff / 1000 % 60);
+                        h = h < 10 ? '0' + h : h;
+                        m = m < 10 ? '0' + m : m;
+                        s = s < 10 ? '0' + s : s;
+                        if(self.timer && diff === 0){
+                            clearInterval(self.timer);
+                            self.timer=null;
+                            self.countdown = '00:00:00';
+                        }
+                        console.log(h + ':' + m + ':' + s);
+                    }else if(diff < 0){
+                        self.showPage(self.page03);
+                        return false;
+                    }else{
+                        self.showPage(self.page01);
+                        return false;
+                    }
+                    return h + ':' + m + ':' + s;
+                },
+                start_count_down: function(){
+                    var self = this;
+
+                    self.getTimeDiff();
+                    clearInterval(self.timer);
+                    self.timer = setInterval(function(){
+                        self.countdown = self.getTimeDiff();
+                    }, 1000);
+                },
+                sign: function(){
+                    var self = this;
+
+                    // if(self.username === '') {
+                    //     alert('姓名不能为空');
+                    //     return false;
+                    // };
+                    // if(self.userphone === '') {
+                    //     alert('手机号不能为空');
+                    //     return false;
+                    // };
+                    // if(self.userphone.lenght !== 11 || Number(self.userphone) === 'number') {
+                    //     alert('手机号格式错误');
+                    //     return false;
+                    // };
+                    self.action_yeal_sign();
+                    
+                },
+                resign: function(){
+                    this.showPage(this.page03);
+                },
+                restart: function(){
+                    this.showDialog = false;
+                    if(this.userinfo.number === 520){
+                        this.showPage(this.page05);
+                    }else{
+                        this.openedGiftBox = true;
+                    }
+                },
+                cancelDialog: function(){
+                    this.showDialog = false;
+                },
+                action_yeal_sign: function () {
+                    var self = this,
+                        data = {
+                            username: self.username,
+                            userphone: self.userphone
+                        };
+                     
+                    self.showPage(self.page04);
+                    self.userinfo = {
+                        name: 'LHammer',
+                        reward: 1,  //0：无2%加息券； 1：有2%加息券
+                        sign: 0,  // 0：第一次签到；1：已经签到过
+                        number: 520  // 桌号
+                    }  
+                    // $.ajax({
+                    //     url: '/webapi/action_yeal_sign',
+                    //     type: "POST",
+                    //     data: data,
+                    //     success: function (res) {
+                    //         if (res.code == 0) {
+                    //             self.userinfo = res.data;
+                    //         } else {
+                    //             alert(res.message);
+                    //         }
+                    //     },
+                    //     error: function (res) {
+                    //         alert(res);
+                    //     }
+                    // })
+                },
+            },
+            mounted: function(){
+                var self = this;
+                self.imgs.forEach(function(url){
+                    var img = new Image();
+                    img.onload = function(){
+                        self.count++;
+                    };
+                    img.src = url;
+                })
+            },
+            watch: {
+                count: function(val){
+                    var self = this,
+                        per = val/self.imgs.length;
+
+                    self.process_percent = per * 100;
+                    if(per===1){
+                        setTimeout(function(){
+                            self.progress = false;
+                            // self.start_count_down();
+                            self.showPage(self.page06);
+                        }, 500)
+                    }
                 }
             }
         }) 
