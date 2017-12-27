@@ -150,6 +150,10 @@ img.img100{
     border-top-color: #fbe900;
     border-bottom-width: 0;
 }
+#app{
+    width: 100%;
+    height: 100%;
+}
 .page{
     width: 100%;
     min-height: 100%;
@@ -173,7 +177,7 @@ img.img100{
 .page .top-block img.ydzy{
     margin-top: 1.306667rem;
 }
-.page .bot-block{
+.page .bot-block, .page06 .bot-block{
     width: 100%;
     height: 1.96rem;
     background: url('https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/citybg.png') repeat -10rem bottom / 100% 100%;
