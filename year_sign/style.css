@@ -1,13 +1,15 @@
 
 *{
     box-sizing: border-box;
-    user-select: none;
+    /* user-select: none; */
 }
 ::input-placeholder { /* WebKit browsers */ 
-    color: #9c8b59 !important; 
+    color: #9c8b59 !important;
+    line-height: .653333rem; 
 }
 ::-webkit-input-placeholder { /* WebKit browsers */ 
     color: #9c8b59 !important; 
+    line-height: .653333rem;
 } 
 a:hover, a:active, a:visited{
     text-decoration: none;
@@ -89,7 +91,7 @@ html, body{
     font-size: 192px;
 }
 
-img.img100{
+.img100{
     width: 100%;
 }
 .progress-block{
@@ -162,7 +164,13 @@ img.img100{
     display: flex;
     flex-direction: column;
     font-family: "Lantinghei SC";
+    position: relative;
+    overflow: hidden;
 }
+/* .page_h{
+    height: auto;
+    min-height: 100% !important;
+} */
 .page01, .page02, .page03, .page04, .page05, page06, .progress-block{
     flex: 1;
     /* overflow: hidden; */
@@ -188,7 +196,7 @@ img.img100{
         background-position: 200% 0;
     }
 }
-.page a.btn:active{
+.page .btn:active{
     background: linear-gradient(to right, rgba(210, 169, 83, .85), rgba(254, 224, 123, .85), rgba(230, 179, 83, .85)) !important;
 }
 .page01 .top-block{
@@ -208,8 +216,8 @@ img.img100{
 .page01 .top-block .date{
     margin-top: .133334rem;
 }
-.page01 .mid-block a.btn,
-.page02 .mid-block a.btn{
+/* .page01 .mid-block .btn,
+.page02 .mid-block .btn{
     display: inline-block;
     color: #5f4506;
     padding: .186667rem .386667rem;
@@ -218,15 +226,22 @@ img.img100{
     left: 50%;
     margin-left: -1.666667rem;
     background: linear-gradient(to right, #d2a953, #fee07b, #e6b353);
+} */
+.page01 .mid-block span.btn,
+.page02 .mid-block span.btn{
+    display: inline-block;
+    color: #5f4506;
+    padding: .186667rem .386667rem;
+    border-radius: .106667rem;
+    background: linear-gradient(to right, #d2a953, #fee07b, #e6b353);
 }
 .page01 .mid-block img.zsqh{
     position: absolute;
     top: -.2rem;
 }
-.page01 .mid-block a.btn{
-    /* top: 8.52rem; */
+/* .page01 .mid-block .btn{
     top: 7.84rem;
-}
+} */
 .page02 .top-block .bjdl{
     position: absolute;
     top: 4.16rem;
@@ -243,10 +258,10 @@ img.img100{
     position: absolute;
     top: 3rem;
 }
-.page02 .mid-block .btn{
+/* .page02 .mid-block .btn{
     position: absolute;
     top: 7.4rem;
-}
+} */
 .page02 .mid-block .countdown{
     display: block;
     width: 100%;
@@ -264,6 +279,7 @@ img.img100{
 }
 .page03 .mid-block .input-wraper{
     position: relative;
+    vertical-align: hidden;
 }
 .page03 .mid-block .v-input{
     display: block;
@@ -299,7 +315,7 @@ img.img100{
     position: absolute;
     top: .253333rem; left: 1.266667rem;
 }
-.page03 .mid-block a.btn{
+.page03 .mid-block .btn{
     display: block;
     width: 5.466667rem;
     text-align: center;
@@ -310,13 +326,13 @@ img.img100{
     background: linear-gradient(to right, #d2a953, #fee07b, #e6b353);
     border-radius: .133333rem;
 }
-.page03 .mid-block a.process{
+.page03 .mid-block .process{
     display: inline-block;
     color: #fbd975;
     position: relative;
     margin-left: 3.626667rem;
 }
-.page03 .mid-block a.process:after{
+.page03 .mid-block .process:after{
     content: "";
     position: absolute;
     left: 0; right: 0; bottom: -.04rem;
@@ -359,7 +375,7 @@ img.img100{
     position: absolute;
     top: 6.333333rem;
 }
-.page04 .mid-block a.btn{
+.page04 .mid-block span.btn{
     display: block;
     width: 4.52rem;
     text-align: center;
@@ -368,9 +384,6 @@ img.img100{
     color: #5f4506;
     background: linear-gradient(to right, #d2a953, #fee07b, #e6b353);
     border-radius: .133333rem;
-    position: absolute;
-    top: 13.04rem; 
-    left: 2.733333rem;
 }
 .page04 .mid-block .tabel_num{
     display: block;
@@ -382,8 +395,6 @@ img.img100{
     background: linear-gradient(to right, #d1a852, #fee17d, #e6b253);
     border-radius: .746667rem;
     font-size: .8rem;
-    position: absolute;
-    top: 4.826667rem; left: .72rem;
 }
 
 /* .animation_scale{
@@ -407,7 +418,7 @@ img.img100{
     margin-top: 2.373333rem;
 }
 
-.page05 .mid-block a.btn{
+.page05 span.btn{
     display: block;
     width: 5.466667rem;
     line-height: 1.173333rem;
@@ -421,9 +432,16 @@ img.img100{
     margin-bottom: 1.28rem;
 }
 
-.page05 .mid-block p.txt{
+.page05 span.txt{
+    display: inline-block;
     color: #fedf7a;
     padding: .133333rem .653333rem;
+}
+
+.page06 {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
 }
 
 .page06 .step1{
@@ -442,7 +460,8 @@ img.img100{
     background: url('https://caiyunupload.b0.upaiyun.com/ydimg/theme/2017/12/year_sign/signflow_bg03_new.jpg') no-repeat 0 0 / 100% 100%;
     position: relative;
 }
-.page06 p.txt{
+.page06 .txt{
+    display: inline-block;
     color: #fedf7a;
     padding: 0 .653333rem;
     line-height: .613333rem !important;
