@@ -16,59 +16,49 @@ YD.FouthAnnual = function(){
 	this.$isEnd = $('#isEnd').val() == 0 ? false : true;
 	this.$isLogin = $('#isLogin').val();
 	this.$getCouponBtn = $('#getCouponBtn');
+	this.$scrollTop = $('#scrollTop');
+	this.$recordTbody = $('#recordTbody');
 
 
     this.init = function(){
 		this.events();
-		// this.$isEnd ? this.YDDialog(this.isstart, this.isEnd) : false;
+		// this.YDModel();
     }
-	this.YDDialog = function(result, isend, load){
-		load = load || '';
-		var _y = new YindouDialog({
-			width: '629',
-			content : '<div class="convert_confirm">\
-							<div class="ischange" style="display: block;">\
-							<p class="">'+result+'</p>\
-						</div>\
-							<div class="ischange_btn">\
-								<a class="btn small primary dialog_ok_btn">确定</a>\
-							</div>\
-						</div>',
-			okFn: function(){
-			   !isend ? (load ? (_y.dialogHide(), window.location.reload()) : _y.dialogHide()) : window.location.href = '/';
-			},
-			cancelFn : function(){
-			   !isend ? (load ? (_y.dialogHide(), window.location.reload()) : _y.dialogHide()) : window.location.href = '/';
-			}
+	this.YDModel = function(result, isend, load){
+		var modal_template="\
+			<div class='dg-modal yd-modal' id='get-form'>\
+				<p class='desp'>恭喜亲领取成功，请在“我的账户”-“优惠券”查看</p>\
+			</div>";                               
+		$(modal_template).appendTo('body').dg_modal({
+			fadeDuration: 250,
 		});
-		_y.dialogShow();
+		return false;
 	}
     this.events = function(){
 		var self = this;
 		self.$unLoginBtn.on('click', function(){
-			// YD.showLogin(); return;
+			YD.showLogin(); return;
 		});
 		self.$getCouponBtn.on('click', function(){
 			if(self.$isLogin){
-				// $.ajax({
-				// 	url: '/ajax.php?modInfo=special/action_lend_vote',                                                                                                        
-				// 	type: 'POST',
-				// 	data: data,
-				// 	success: function(res){
-				// 		var result = $.parseJSON(res);
-				// 		if(result && result.err_code === 0){
-				// 			self.YDDialog(result.err_msg, false, 1);
-				// 		}else{
-				// 			self.$isEnd = result.err_code == 5 ? true : false;
-				// 			self.$isEnd ? self.YDDialog(result.err_msg, self.$isEnd) : self.YDDialog(result.err_msg);
-				// 		}
-				// 	},
-				// 	error: function(res){
-				// 		alert(res)
-				// 	}
-				// })
+				$.ajax({
+					url: '/webapi/send_user_bonus',                                                                                                  
+					type: 'POST',
+					success: function(res){
+						var result = $.parseJSON(res);
+						if(result && result.code === 0){
+							self.YDDialog(result.message, false, 1);
+						}else{
+							self.$isEnd = result.code == 5 ? true : false;
+							self.$isEnd ? self.YDDialog(result.message, self.$isEnd) : self.YDDialog(result.message);
+						}
+					},
+					error: function(res){
+						alert(res)
+					}
+				})
 			}else{
-				// YD.showLogin(); return;
+				YD.showLogin(); return;
 			}
 		});
 		self.$swiper = new Swiper('.swiper-container', {
@@ -86,30 +76,45 @@ YD.FouthAnnual = function(){
 		})
 		self.$exchangeBtnEles.on('click', function(){
 			console.log('exchange');
-			// var data = {};
-			// if(self.$isLogin){
-			// 	data.activity_id = self.$activityId.val();
-			// 	data.type = $(this).data('id'); 
-			// 	$.ajax({
-			// 		url: '/ajax.php?modInfo=special/action_lend_vote',                                                                                                        
-			// 		type: 'POST',
-			// 		data: data,
-			// 		success: function(res){
-			// 			var result = $.parseJSON(res);
-			// 			if(result && result.err_code === 0){
-			// 				self.YDDialog(result.err_msg, false, 1);
-			// 			}else{
-			// 				self.$isEnd = result.err_code == 5 ? true : false;
-			// 				self.$isEnd ? self.YDDialog(result.err_msg, self.$isEnd) : self.YDDialog(result.err_msg);
-			// 			}
-			// 		},
-			// 		error: function(res){
-			// 			alert(res)
-			// 		}
-			// 	})
-			// }else{
-			// 	YD.showLogin();return false;   
-			// }
+			var data = {};
+			if(self.$isLogin){
+				data.activity_id = self.$activityId.val();
+				data.type = $(this).data('id'); 
+				$.ajax({
+					url: '/ajax.php?modInfo=special/action_lend_vote',                                                                                                        
+					type: 'POST',
+					data: data,
+					success: function(res){
+						var result = $.parseJSON(res);
+						if(result && result.err_code === 0){
+							self.YDDialog(result.err_msg, false, 1);
+						}else{
+							self.$isEnd = result.err_code == 5 ? true : false;
+							self.$isEnd ? self.YDDialog(result.err_msg, self.$isEnd) : self.YDDialog(result.err_msg);
+						}
+					},
+					error: function(res){
+						alert(res)
+					}
+				})
+			}else{
+				YD.showLogin();return false;   
+			}
+		});
+		// 滚动条
+		self.$recordTbody.perfectScrollbar(); 
+		// 滚动侧边栏
+		self.$scrollTop.on('click', function(){
+			$(window).scrollTop() === 0 ? false : ($('html, body').stop(true).animate({ scrollTop: 0 },600));
+		});
+		$(window).scroll(function(){                                                                                                                                          
+			var wst = $(window).scrollTop() + $(window).height();
+			for (var i=2; i<6; i++){            
+				if($("#floor"+i).offset().top<=wst){ 
+					$(".menu_item").removeClass("active");
+					$('a[href=#floor'+i+']').addClass("active");
+				}
+			} 
 		});
         self._GetDateDiff = function(startTime, endTime, diffType) {
             var time_array = [];
