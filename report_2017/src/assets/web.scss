@@ -1,0 +1,185 @@
+/**
+ * 为避免打包代码量过大，较大的（大于一百行）第三方样式建议不要使用@import引入，使用CDN引入即可
+ * 例如：swiper.scss就不要使用@import引入，直接使用<link rel="stylesheet" href="https://static.yindou.com/web/css/swiper.min.css">
+ */
+@import "normalize/index.scss";  /* resets */
+@import "mixins/index.scss";  /* mixins */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font: 16px/1.8 "Microsoft Yahei", verdana;
+    user-select: none;
+    -webkit-font-smoothing: antialiased;
+}
+.clearfix {
+    @include clearfix();
+}
+li{
+    list-style: none;
+}
+.bg {
+    width: 100%;
+    height: 100%;
+    position: absolute;                                                                                                                                                       
+    top: 0;
+    left: 0;
+    z-index: 1
+}
+.bg > img {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+.section {
+    background-color: #fff;
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+}
+/** 
+ * 侧边导航页
+ */
+#fp-nav{
+    height: 316px;
+}
+#fp-nav.right{
+    right: 45px;
+}
+#fp-nav ul li, .fp-slidesNav ul li{
+    margin-bottom: 8px;
+}
+#fp-nav ul li .fp-tooltip{
+    top: -4px;
+    font-size: 12px;
+}
+#fp-nav ul li a span, .fp-slidesNav ul li a span{
+    width: 12px;
+    height: 12px;
+    border: 1px solid #82828f;
+    background: transparent;
+    margin: -6px 0 0 -6px;
+}
+#fp-nav ul li:hover a span, .fp-slidesNav ul li:hover a span{
+    width: 12px;
+    height: 12px;
+    background: #fbfbfb;
+    border-color: #fbfbfb;
+    margin: -6px 0 0 -6px;
+    transition: all .3s ease-in-out;
+}
+#fp-nav ul li a.active span, #fp-nav ul li:hover a.active span, .fp-slidesNav ul li a.active span, .fp-slidesNav ul li:hover a.active span{
+    width: 12px;
+    height: 12px;
+    background: #fbfbfb;
+    border-color: #fbfbfb;
+    transition: all .3s ease-in-out;
+}
+#fp-nav ul li a.active ~ div.fp-tooltip{
+    width: auto;
+    opacity: 1;
+    transition: all .39s ease-in-out;
+}   
+.nav-pager {
+    width: 85px; height: 28px;
+    position: absolute;
+    top: 50%;
+    right: 13px;
+    z-index: 99;               
+    margin-top: 136px;
+    color: #fbfbfb;
+    font-size: 12px;
+    line-height: 28px;
+    a{
+        display: inline-block;
+        text-align: center;
+        position: relative;
+        border-color: #fbfbfb;
+        &.nav-pager-prev:before, &.nav-pager-next:after{
+            display: inline-block;
+            content: "";
+            width:6px; height: 6px;
+            border-width: 1px;
+            border-style: solid;
+            border-color: inherit;
+            border-bottom: 0;
+            vertical-align: 1px;
+        }
+        &.nav-pager-prev:before{
+            border-right: 0;
+            transform: rotate(-45deg);
+        }
+        &.nav-pager-next:after{
+            border-left: 0;
+            transform: rotate(45deg);
+        }
+    }
+    p{
+        width: 66px;
+        text-align: center;
+        color: #82828f;
+        .pages-num{
+            color: #fbfbfb;
+        }
+    }
+}
+.section-01 .bg{
+    z-index: 3;
+}
+.section-01 .block-1-1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -393px;
+    margin-top: -393px;
+    z-index: 3;
+}
+.section-01 .block-1-2 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -463px;
+    margin-top: -192px;
+    z-index: 3;
+}
+.section-02 .block-2-1 {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    margin-left: -742px;
+    z-index: 2;
+}
+.section-02 .block-2-2 {
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    margin-left: -154px;
+    margin-bottom: 200px;
+    z-index: 2;
+}
+.block-2-3{
+    width: 594px;
+    height: 406px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -170px;
+    margin-left: -96px;
+    z-index: 2;
+}
+/** 
+ * page3
+ */
+.section-03 .bg{
+    
+}
