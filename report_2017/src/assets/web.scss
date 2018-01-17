@@ -3,6 +3,7 @@
  * 例如：swiper.scss就不要使用@import引入，直接使用<link rel="stylesheet" href="https://static.yindou.com/web/css/swiper.min.css">
  */
 @import "normalize/index.scss";  /* resets */
+@import "animation/index.scss";
 @import "mixins/index.scss";  /* mixins */
 
 * {
@@ -11,7 +12,7 @@
     box-sizing: border-box;
 }
 body {
-    font: 16px/1.8 "Microsoft Yahei", verdana;
+    font: 16px/1.8 "Lantinghei SC", "Microsoft Yahei", verdana;
     user-select: none;
     -webkit-font-smoothing: antialiased;
 }
@@ -47,10 +48,54 @@ li{
     overflow: hidden;
     height: 100%;
 }
+.section-01 .bg{
+    z-index: 3;
+}
+.section-01 .block-1-1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -393px;
+    margin-top: -393px;
+    z-index: 3;
+}
+.section-01 .block-1-2 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -463px;
+    margin-top: -192px;
+    z-index: 3;
+}
+.section-02 .block-2-1 {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    margin-left: -742px;
+    z-index: 2;
+}
+.section-02 .block-2-2 {
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    margin-left: -154px;
+    margin-bottom: 200px;
+    z-index: 2;
+}
+.block-2-3{
+    width: 594px;
+    height: 406px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -170px;
+    margin-left: -96px;
+    z-index: 2;
+}
 /** 
  * 侧边导航页
  */
-#fp-nav{
+ #fp-nav{
     height: 316px;
 }
 #fp-nav.right{
@@ -133,53 +178,329 @@ li{
         }
     }
 }
-.section-01 .bg{
-    z-index: 3;
-}
-.section-01 .block-1-1 {
+h3.tit{
+    color: #fff;
+    font-size: 60px;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-left: -393px;
-    margin-top: -393px;
-    z-index: 3;
-}
-.section-01 .block-1-2 {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-left: -463px;
-    margin-top: -192px;
-    z-index: 3;
-}
-.section-02 .block-2-1 {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    margin-left: -742px;
+    left: 50%; top: 50%;
     z-index: 2;
-}
-.section-02 .block-2-2 {
-    position: absolute;
-    bottom: 50%;
-    left: 50%;
-    margin-left: -154px;
-    margin-bottom: 200px;
-    z-index: 2;
-}
-.block-2-3{
-    width: 594px;
-    height: 406px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-top: -170px;
-    margin-left: -96px;
-    z-index: 2;
+    margin-top: -342px; 
+    font-weight: 500;
 }
 /** 
  * page3
  */
-.section-03 .bg{
-    
+ @mixin aligncenter($zIndex) {
+    position: absolute;
+    left: 50%; top: 50%;
+    z-index: $zIndex; 
+    transform: translate(-50%, -50%);
+}
+.section-03{
+    h3.tit{
+       margin-left: -165px; 
+    }
+    .events{
+        width: 1000px;
+        // background: #fff;
+        @include aligncenter(2);
+        .top, .bot{
+            min-height: 129px;
+        }
+        .top{
+            padding-left: 55px;
+        }
+        .mid{
+            min-height: 108px;
+        }
+        .planet{
+            width: 240px;
+            height: 109px;
+            padding: 25px 135px 25px 45px;
+            background: url("https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/01/report_2017/pc/page-3-2.png") no-repeat center;
+            transform-origin: left center;
+        }
+        .planet-txt{
+            display: inline-block;
+            width: 59px; height: 59px;
+            text-align: center;
+            line-height: 59px;
+            font-size: 21px;
+            overflow: hidden;
+            background: url("https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/01/report_2017/pc/page-3-3.png") no-repeat left 1px; 
+        }
+        .planet:nth-of-type(1){
+            margin-left: -8px;
+        }
+        .planet:not(:nth-of-type(1)){
+            margin-left: -120px;
+        }
+        .planet:nth-of-type(2) .planet-txt{
+            background-position: -129px 1px;
+        }
+        .planet:nth-of-type(3) .planet-txt{
+            background-position: -257px 1px;
+        }
+        .planet:nth-of-type(4) .planet-txt{
+            background-position: -386px 1px;
+        }
+        .planet:nth-of-type(5) .planet-txt{
+            background-position: -515px 1px;
+        }
+        .planet:nth-of-type(6) .planet-txt{
+            background-position: -643px 1px;
+        }
+        .planet:nth-of-type(7) .planet-txt{
+            background-position: -771px 1px;
+        }
+        .event-name{
+            width: 239px; height: 129px;
+            padding-top: 42px;
+            &:nth-of-type(4){
+                width: 209px;
+            }
+            span{
+                display: inline-block;
+                font-size: 17px;
+                line-height: 21px;
+                font-weight: 500;
+            }
+            span.pot{
+                width: 29px;
+                height: 128px;
+                margin-right: 4px;
+                margin-top: -42px;
+                padding-left: 1px;
+                position: relative;
+                .circle{
+                    width: 28px; height: 28px;
+                    padding: 3px;
+                    border: 2px solid #fff;
+                    border-radius: 50%;
+                    transform-origin: center bottom;
+                    > span{
+                        display: inline-block;
+                        content: "";
+                        width: 18px; height: 18px;
+                        border-radius: 50%;
+                        background: #007cd5;
+                    }
+                }
+                .line{
+                    width: 2px;
+                    height: 0px;
+                    background: #fff;
+                    position: absolute;
+                    left: 13px; bottom: 13px;
+                    transform-origin: center 6px;
+                    &:after{
+                        display: inline-block;
+                        content: "";
+                        width: 12px; height: 12px;
+                        border-radius: 50%;
+                        background: #fff; 
+                        position: absolute;
+                        left: -5px; bottom: -12px;
+                    }
+                }
+            }
+            span.txt{
+                color: #fff;
+            }
+        }
+        .bot .event-name{
+            text-align: right;
+            &:nth-of-type(1){
+                margin-left: -36px;
+            }
+        }
+        .bot span.pot{
+            margin-right: 0;
+            margin-left: 4px;
+            .line{
+                position: absolute;
+                height: 87px;
+                left: 13px; top: 13px;
+                transform-origin: center 0;
+                &:before{
+                    display: inline-block;
+                    content: "";
+                    width: 12px; height: 12px;
+                    border-radius: 50%;
+                    background: #fff; 
+                    position: absolute;
+                    left: -5px; top: -12px;
+                }
+                &:after{
+                    width: 0; height: 0;
+                }
+            }
+            .circle{
+                position: absolute;
+                left: 0; bottom: 0;
+                transform-origin: center top;
+            }
+        }
+    }
+}
+.section-05{
+    h3.tit{
+       margin-left: -120px; 
+    }
+    .con{
+        width: 1000px;
+        height: 372px;
+        text-align: center;
+        @include aligncenter(2);
+        .chart{
+            height: 372px;
+            background: url('https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/01/report_2017/pc/page-5-1.png') no-repeat center;
+            transform-origin: center;
+            .proline{
+                width: 306px; height: 149px;
+                position: absolute;
+                left: 306px; top: 19px;
+                color: #009ed8;
+                font-size: 12px;
+                span{
+                    display: inline-block;
+                }
+                .pot1{
+                    width: 1px;
+                    height: 211px;
+                    background: #009ed8;
+                    position: absolute;
+                    left: 71px; bottom: 13px;
+                    box-shadow: 0 0 3px rgba(0, 158, 216, 1);
+                    transform-origin: center bottom;
+                    transform: rotate(64deg);
+                    &:after{
+                        display: inline-block;
+                        content: "";
+                        width: 12px; height: 12px;
+                        border-radius: 50%;
+                        background: #009ed8; 
+                        position: absolute;
+                        left: -5px; bottom: -12px;
+                        box-shadow: 0 0 3px rgba(0, 158, 216, 1);
+                    } 
+                }
+                .pot2{
+                    width: 12px;
+                    height: 12px;
+                    border-radius: 50%;
+                    background: #009ed8;
+                    position: absolute;
+                    right: 33px; top: 35px;
+                    box-shadow: 0 0 3px rgba(0, 158, 216, 1);
+                    transform-origin: left bottom;
+                }
+                .valall2016{
+                    position: absolute;
+                    left: 29px; top: 98px;
+                }
+                .valall2017{
+                    position: absolute;
+                    right: 2px; top: 0px;
+                }
+            }
+            .bar1-outer{
+                width: 192px; height: 98px;
+                text-align: center;
+                position: absolute;
+                left: 278px; top: 183px;
+                transform-origin: center bottom;
+                p{
+                    color: #fff;
+                    font-size: 12px;
+                    line-height: 32px;
+                }
+                .bar{
+                    display: inline-block;
+                    width: 64px; height: 72px;
+                    border-radius: 50% / 100% 100% 0 0;
+                    background: #ca7f3f;
+                }
+            }
+            .bar2-outer{
+                width: 192px; height: 187px;
+                text-align: center;
+                position: absolute;
+                left: 478px; top: 101px;
+                transform-origin: center bottom;
+                p{
+                    color: #fff;
+                    font-size: 12px;
+                    line-height: 32px;
+                }
+                .bar{
+                    display: inline-block;
+                    width: 114px; height: 154px;
+                    border-radius: 50% / 100% 100% 0 0;
+                    background: #bc5d0c;
+                }
+            }
+        }
+        p.desc{
+            color: #fff;
+            font-size: 20px;
+            margin-top: 86px;
+            > span {
+                font-size: 30px;
+                font-weight: 500;
+            }
+        }
+    }
+}
+.section-07{
+    h3.tit{
+       margin-left: -120px; 
+    }
+    p.cut-off-data{
+        color: #fff;
+        font-size: 18px;
+        position: absolute;
+        right: 50%; top: 50%;
+        z-index: 2;
+        margin-right: -500px;
+        margin-top: -232px;
+    }
+    .con{
+        width: 1000px;
+        height: 318px;
+        text-align: center;
+        @include aligncenter(2);
+        .chart{
+            height: 318px;
+            background: url('https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/01/report_2017/pc/page-7-1.png') no-repeat center;
+            transform-origin: center;
+            margin-top: 48px;
+            position: relative;
+            img.perloan{
+                position: absolute;
+                right: 266px; top: -19px;
+            }
+            img.comploan{
+                position: absolute;
+                left: 195px; top: 35px;
+            }
+            img.otherloan{
+                position: absolute;
+                right: 266px; top: -19px;
+            }
+            img.carloan{
+                position: absolute;
+                right: 266px; top: -19px;
+            }
+        }
+        p.desc{
+            color: #fff;
+            font-size: 20px; 
+            margin-top: 66px;
+            > span {
+                font-size: 30px;
+                font-weight: 500;
+            }
+        }
+    }
 }
