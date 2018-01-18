@@ -202,8 +202,8 @@ h3.tit{
     }
     .events{
         width: 1000px;
-        // background: #fff;
         @include aligncenter(2);
+        margin-top: 29px;
         .top, .bot{
             min-height: 129px;
         }
@@ -352,6 +352,7 @@ h3.tit{
         height: 372px;
         text-align: center;
         @include aligncenter(2);
+        margin-top: 19px;
         .chart{
             height: 372px;
             background: url('https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/01/report_2017/pc/page-5-1.png') no-repeat center;
@@ -444,7 +445,7 @@ h3.tit{
         p.desc{
             color: #fff;
             font-size: 20px;
-            margin-top: 86px;
+            margin-top: 36px;
             > span {
                 font-size: 30px;
                 font-weight: 500;
@@ -463,7 +464,7 @@ h3.tit{
         right: 50%; top: 50%;
         z-index: 2;
         margin-right: -500px;
-        margin-top: -232px;
+        margin-top: -198px;
     }
     .con{
         width: 1000px;
@@ -474,7 +475,7 @@ h3.tit{
             height: 318px;
             background: url('https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/01/report_2017/pc/page-7-1.png') no-repeat center;
             transform-origin: center;
-            margin-top: 48px;
+            margin-top: 29px;
             position: relative;
             img.perloan{
                 position: absolute;
@@ -486,20 +487,341 @@ h3.tit{
             }
             img.otherloan{
                 position: absolute;
-                right: 266px; top: -19px;
+                left: 200px; top: 116px;
             }
             img.carloan{
                 position: absolute;
-                right: 266px; top: -19px;
+                left: 162px; top: 193px;
             }
         }
         p.desc{
             color: #fff;
             font-size: 20px; 
-            margin-top: 66px;
+            margin-top: 52px;
             > span {
                 font-size: 30px;
                 font-weight: 500;
+            }
+        }
+    }
+}
+.section-08{
+    h3.tit{
+       margin-left: -120px; 
+    }
+    p.cut-off-data{
+        color: #fff;
+        font-size: 18px;
+        position: absolute;
+        right: 50%; top: 50%;
+        z-index: 2;
+        margin-right: -500px;
+        margin-top: -232px;
+    }
+    .con{
+        width: 1000px;
+        height: 433px;
+        text-align: center;
+        @include aligncenter(2);
+        .user{
+            width: 265px; height: 265px;
+            position: absolute;
+            top: 28px; left: 56px;
+            .user-data{
+                position: absolute;
+                left: 2px; top: 2px;
+            }
+        }
+        p.tit{
+            color: #fff;
+            font-size: 21px;
+            font-weight: 500;
+            position: absolute;
+            left: 500px; top: 176px;
+            .icon.goldingot{
+                display: inline-block;
+                width: 32px; height: 22px;
+                background: url('https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/01/report_2017/pc/page-8-9.png') no-repeat center;
+                margin-right: 6px;
+                vertical-align: -1px;
+            }
+        }
+        .map{
+            height: 433px;
+            background: url('https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/01/report_2017/pc/page-8-1s.png') no-repeat center;
+            transform-origin: center;
+            margin-top: 119px;
+            position: relative;
+            
+            img.jiangsu{
+                position: absolute;
+                top: 223px; right: 220px;
+            }
+            img.zhejiang{
+                position: absolute;
+                top: 268px; right: 210px;
+            }
+            img.beijing{
+                position: absolute;
+                top: 153px; right: 278px;
+            }
+            div.loanno{
+                position: absolute;
+                .ring{
+                    display: inline-block;
+                    width: 13px; height: 13px;
+                    background: #fff;
+                    border-radius: 50%;
+                    border: 4px solid #1c82c6;
+                    position: absolute;
+                    left: 0; bottom: 0;
+                    box-shadow: 0 0 12px #1c82c6;
+                    animation: ringBoxShadow 2s linear infinite;
+                    animation-delay: 2.8s;
+                }
+            }
+            div.loanno1{
+                width: 181px; height: 77px;
+                right: 63px; top: 188px; 
+                .ring{
+                    border: 4px solid #17ffe6;
+                    box-shadow: 0 0 12px #17ffe6;
+                } 
+            }
+            div.loanno2{
+                width: 178px; height: 61px;
+                right: 63px; top: 242px;
+            }
+            div.loanno3{
+                width: 227px; height: 61px;
+                right: 64px; top: 108px; 
+            }
+        }
+    }
+}
+.section-09{
+    h3.tit{
+       margin-left: -120px; 
+    }
+    p.cut-off-data{
+        color: #fff;
+        font-size: 18px;
+        position: absolute;
+        right: 50%; top: 50%;
+        z-index: 2;
+        margin-right: -500px;
+        margin-top: -232px;
+    }
+    .con{
+        width: 1000px;
+        height: 496px;
+        text-align: center;
+        @include aligncenter(2);
+        .chart{
+            width:50%; height: 496px;
+            transform-origin: left top;
+            margin-top: 74px;
+            position: relative;
+            &.chart1{
+                background: url('https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/01/report_2017/pc/page-9-1.png') no-repeat center;
+                .bar{
+                    width: 500px; height: 338px;
+                    background: url('https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/01/report_2017/pc/page-9-3.png') no-repeat center;
+                    position: absolute;
+                    left: 0; bottom: 0;
+                    transform-origin: left 282px;
+                    .axis{
+                        width: 58px;
+                        font-size: 14px;
+                        color: #fff;
+                        font-weight: 500;
+                        position: absolute;
+                        left: 81px; bottom: 88px;
+                        > div{
+                            width: 13px;
+                            position: absolute;
+                            left:0; bottom: 0;
+                            transform-origin: center bottom;
+                            &.ele1{
+                                height: 5px * 13;
+                                background: #00ffea;
+                            }
+                            &.ele2{
+                                height: 5px * 5;
+                                background: #e77a37;
+                                left: 24px;
+                            }
+                            > span {
+                                position: absolute;
+                                left: 50%; top: 0;
+                                transform: translate(-50%, -90%);
+                            }
+                        }
+                        &.axis2{
+                            left: 139px;
+                            > div{
+                                &.ele1{
+                                    height: 5px * 39;
+                                }
+                                &.ele2{
+                                    height: 5px * 35;
+                                }
+                            }
+                        }
+                        &.axis3{
+                            left: 196px;
+                            > div{
+                                &.ele1{
+                                    height: 5px * 23;
+                                }
+                                &.ele2{
+                                    height: 5px * 31;
+                                }
+                            }
+                        }
+                        &.axis4{
+                            left: 254px;
+                            > div{
+                                &.ele1{
+                                    height: 5px * 14;
+                                }
+                                &.ele2{
+                                    height: 5px * 20;
+                                }
+                            }
+                        }
+                        &.axis5{
+                            left: 311px;
+                            > div{
+                                &.ele1{
+                                    height: 5px * 10;
+                                    > span {
+                                        transform: translate(-62%, -90%);
+                                    }
+                                }
+                                &.ele2{
+                                    height: 5px * 10;
+                                    > span {
+                                        transform: translate(-38%, -90%);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            &.chart2{
+                background: url('https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/01/report_2017/pc/page-9-2.png') no-repeat center;
+                .pie-outer{
+                    width: 203px; height: 199px;
+                    background: url('https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/01/report_2017/pc/page-9-7.png') no-repeat center;
+                    position: absolute;
+                    left: 159px; top: 132px;
+                }
+                .pie-enter{
+                    width: 203px; height: 199px;
+                    background: url('https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/01/report_2017/pc/page-9-8.png') no-repeat center;
+                    position: absolute;
+                    left: 159px; top: 132px;
+                    > img{
+                        position: absolute;
+                    }
+                    > img.large{
+                        left: -92px; top: 62px;
+                    }
+                    > img.small{
+                        right: -69px; bottom: -18px;
+                    }
+                    span{
+                        color: #fff;
+                        font-size: 15px;
+                        font-weight: 500;
+                        position: absolute;
+                        &.valman{
+                            left: 58px; top: 79px;
+                        }
+                        &.valwomen{
+                            left: 112px; top: 91px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+.section-12{
+    h3.tit{
+       margin-left: -120px; 
+    }
+    p.cut-off-data{
+        color: #fff;
+        font-size: 18px;
+        position: absolute;
+        right: 50%; top: 50%;
+        z-index: 2;
+        margin-right: -500px;
+        margin-top: -232px;
+    }
+    .con-wraper{
+        width: 1000px; height: 497px;
+        @include aligncenter(2);
+        .con{
+            height: 497px;
+            background: url('https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/01/report_2017/pc/page-12-1.png') no-repeat center;
+            margin-top: 52px;
+            padding: 25px 30px 20px 68px;
+            color: #fff;
+            transform-origin: left top;
+            position: relative;
+            p.txt{
+                font-size: 18px;
+                > span {
+                    font-size: 24px;
+                    font-weight: 800;
+                }
+            }
+            p.xAxis{
+                font-size: 16px;
+                font-weight: 500;
+                position: relative;
+                margin-left: 15px;
+                margin-top: 39px;
+                margin-bottom: 32px;
+                &:before{
+                    content: "";
+                    display: inline-block;
+                    width: 10px; height: 10px;
+                    background: #047dd5;
+                    position: absolute;
+                    left: -15px; top: 8px;
+                }
+            }
+            .chart{
+                width: 606px; height: 177px;
+                background: url('https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/01/report_2017/pc/page-12-5s.png') no-repeat center;
+                margin-bottom: 25px;
+            }
+            p.desc{
+                line-height: 32px;
+                > span{
+                    font-size: 18px;
+                    font-weight: 500;
+                }
+                > span.val{
+                    color: #f08525;
+                }
+            }
+            img.score{
+                position: absolute;
+                top: 109px; right: 128px;
+            }
+            img.sign{
+                position: absolute;
+                top: 258px; right: 186px;
+            }
+            img.cheer{
+                position: absolute;
+                top: 239px; right: 69px;
             }
         }
     }

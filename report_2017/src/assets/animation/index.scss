@@ -90,3 +90,42 @@
 .rotatePointToLine {
     animation-name: rotatePointToLine;
 }
+@keyframes zoomInBig {
+    0% {
+        opacity: 0;
+        transform: scale3d(0,0,0)
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+.zoomInBig {
+    animation-name: zoomInBig
+}
+@keyframes ringRotate {
+    0% {
+        stroke-dashoffset: 301.593px;
+    }
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+.ringRotate{
+    animation-name: ringRotate;
+}
+@keyframes ringBoxShadow {
+    0% {
+        box-shadow: 0 0 0 #1c82c6;
+    }
+    50% {
+        box-shadow: 0 0 12px #1c82c6;
+    }
+    100% {
+        box-shadow: 0 0 0 #1c82c6;
+    }
+}
+.ringBoxShadow{
+    animation-name: ringBoxShadow;
+}
