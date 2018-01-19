@@ -22,6 +22,9 @@ body {
 li{
     list-style: none;
 }
+p{
+    margin-bottom: 0;
+}
 .bg {
     width: 100%;
     height: 100%;
@@ -67,31 +70,31 @@ li{
     margin-top: -192px;
     z-index: 3;
 }
-.section-02 .block-2-1 {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    margin-left: -742px;
-    z-index: 2;
-}
-.section-02 .block-2-2 {
-    position: absolute;
-    bottom: 50%;
-    left: 50%;
-    margin-left: -154px;
-    margin-bottom: 200px;
-    z-index: 2;
-}
-.block-2-3{
-    width: 594px;
-    height: 406px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-top: -170px;
-    margin-left: -96px;
-    z-index: 2;
-}
+// .section-02 .block-2-1 {
+//     position: absolute;
+//     bottom: 0;
+//     left: 50%;
+//     margin-left: -742px;
+//     z-index: 2;
+// }
+// .section-02 .block-2-2 {
+//     position: absolute;
+//     bottom: 50%;
+//     left: 50%;
+//     margin-left: -154px;
+//     margin-bottom: 200px;
+//     z-index: 2;
+// }
+// .block-2-3{
+//     width: 594px;
+//     height: 406px;
+//     position: absolute;
+//     top: 50%;
+//     left: 50%;
+//     margin-top: -170px;
+//     margin-left: -96px;
+//     z-index: 2;
+// }
 /** 
  * 侧边导航页
  */
@@ -187,14 +190,60 @@ h3.tit{
     margin-top: -342px; 
     font-weight: 500;
 }
+p.cut-off-data{
+    color: #fff;
+    font-size: 18px;
+    position: absolute;
+    right: 50%; top: 50%;
+    z-index: 2;
+    margin-right: -500px;
+    margin-top: -232px;
+}
 /** 
  * page3
  */
- @mixin aligncenter($zIndex) {
+ @mixin aligncenter($zIndex, $top: 55px) {
     position: absolute;
     left: 50%; top: 50%;
     z-index: $zIndex; 
-    transform: translate(-50%, -50%);
+    // transform: translate(-50%, -50%);
+    margin-left: -500px;
+    margin-top: $top; 
+}
+.section-02{
+    h3.tit{
+       margin-left: -134px; 
+    }
+    img.boss{
+        height: 800px;
+        position: absolute;
+        z-index: 2;
+        left: 50%; bottom: 0;
+        margin-left: -740px;
+    }
+    div.message{
+        width: 600px;
+        min-height: 500px;
+        position: absolute;
+        z-index: 2;
+        left: 50%; top: 50%; 
+        margin-left: -98px;
+        margin-top: -149px;
+        > p{
+            color: #fff;
+            font-weight: 500;
+        }
+        > p.tit{
+            font-size: 20px;
+            margin-bottom: 27px;
+        }
+        > p.ele{
+            font-size: 16px;
+            text-indent: 32px;
+            line-height: 30px;
+            margin-bottom: 30px;
+        }
+    }
 }
 .section-03{
     h3.tit{
@@ -202,8 +251,8 @@ h3.tit{
     }
     .events{
         width: 1000px;
-        @include aligncenter(2);
-        margin-top: 29px;
+        // margin-top: 29px;
+        @include aligncenter(2, -154px);
         .top, .bot{
             min-height: 129px;
         }
@@ -351,12 +400,12 @@ h3.tit{
         width: 1000px;
         height: 372px;
         text-align: center;
-        @include aligncenter(2);
-        margin-top: 19px;
+        // margin-top: 19px;
+        @include aligncenter(2, -177px);
         .chart{
             height: 372px;
             background: url('https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/01/report_2017/pc/page-5-1.png') no-repeat center;
-            transform-origin: center;
+            transform-origin: 758px bottom;
             .proline{
                 width: 306px; height: 149px;
                 position: absolute;
@@ -445,7 +494,7 @@ h3.tit{
         p.desc{
             color: #fff;
             font-size: 20px;
-            margin-top: 36px;
+            margin-top: 72px;
             > span {
                 font-size: 30px;
                 font-weight: 500;
@@ -457,20 +506,11 @@ h3.tit{
     h3.tit{
        margin-left: -120px; 
     }
-    p.cut-off-data{
-        color: #fff;
-        font-size: 18px;
-        position: absolute;
-        right: 50%; top: 50%;
-        z-index: 2;
-        margin-right: -500px;
-        margin-top: -198px;
-    }
     .con{
         width: 1000px;
         height: 318px;
         text-align: center;
-        @include aligncenter(2);
+        @include aligncenter(2, -159px);
         .chart{
             height: 318px;
             background: url('https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/01/report_2017/pc/page-7-1.png') no-repeat center;
@@ -497,7 +537,7 @@ h3.tit{
         p.desc{
             color: #fff;
             font-size: 20px; 
-            margin-top: 52px;
+            margin-top: 88px;
             > span {
                 font-size: 30px;
                 font-weight: 500;
@@ -509,20 +549,11 @@ h3.tit{
     h3.tit{
        margin-left: -120px; 
     }
-    p.cut-off-data{
-        color: #fff;
-        font-size: 18px;
-        position: absolute;
-        right: 50%; top: 50%;
-        z-index: 2;
-        margin-right: -500px;
-        margin-top: -232px;
-    }
     .con{
         width: 1000px;
         height: 433px;
         text-align: center;
-        @include aligncenter(2);
+        @include aligncenter(2, -216px);
         .user{
             width: 265px; height: 265px;
             position: absolute;
@@ -603,20 +634,11 @@ h3.tit{
     h3.tit{
        margin-left: -120px; 
     }
-    p.cut-off-data{
-        color: #fff;
-        font-size: 18px;
-        position: absolute;
-        right: 50%; top: 50%;
-        z-index: 2;
-        margin-right: -500px;
-        margin-top: -232px;
-    }
     .con{
         width: 1000px;
         height: 496px;
         text-align: center;
-        @include aligncenter(2);
+        @include aligncenter(2, -248px);
         .chart{
             width:50%; height: 496px;
             transform-origin: left top;
@@ -753,18 +775,9 @@ h3.tit{
     h3.tit{
        margin-left: -120px; 
     }
-    p.cut-off-data{
-        color: #fff;
-        font-size: 18px;
-        position: absolute;
-        right: 50%; top: 50%;
-        z-index: 2;
-        margin-right: -500px;
-        margin-top: -232px;
-    }
     .con-wraper{
         width: 1000px; height: 497px;
-        @include aligncenter(2);
+        @include aligncenter(2, -249px);
         .con{
             height: 497px;
             background: url('https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/01/report_2017/pc/page-12-1.png') no-repeat center;
@@ -800,6 +813,66 @@ h3.tit{
                 width: 606px; height: 177px;
                 background: url('https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/01/report_2017/pc/page-12-5s.png') no-repeat center;
                 margin-bottom: 25px;
+                transform-origin: left bottom;
+                position: relative;
+                .bar{
+                    width: 22px; height: 25px * (863 / 650);
+                    background: #008fd5;
+                    position: absolute;
+                    left: 10px; bottom: 27px;
+                    transform-origin: center bottom;
+                    > span {
+                        font-size: 12px;
+                        font-weight: 500;
+                        position: absolute;
+                        left: 50%; top: 0;
+                        transform: translate(-50%, -120%);
+                    }
+                    &.ele2{
+                        height: 25px * (868 / 650);
+                        left: 63px;
+                    }
+                    &.ele3{
+                        height: 25px * (1687 / 650);
+                        left: 115px;
+                    }
+                    &.ele4{
+                        height: 25px * (2343 / 650);
+                        left: 166px;
+                    }
+                    &.ele5{
+                        height: 25px * (2559 / 650);
+                        left: 218px;
+                    }
+                    &.ele6{
+                        height: 25px * (2228 / 650);
+                        left: 270px;
+                    }
+                    &.ele7{
+                        height: 25px * (2456 / 650);
+                        left: 323px;
+                    }
+                    &.ele8{
+                        height: 25px * (2224 / 650);
+                        left: 375px;
+                    }
+                    &.ele9{
+                        height: 25px * (2697 / 650);
+                        left: 427px;
+                    }
+                    &.ele10{
+                        height: 25px * (2301 / 650);
+                        left: 478px;
+                    }
+                    &.ele11{
+                        height: 25px * (3671 / 650);
+                        left: 530px;
+                    }
+                    &.ele12{
+                        height: 25px * (2265 / 650);
+                        left: 583px;
+                    }
+                }
             }
             p.desc{
                 line-height: 32px;
@@ -824,5 +897,31 @@ h3.tit{
                 top: 239px; right: 69px;
             }
         }
+    }
+}
+
+// 可视高度低于750
+@media screen and (max-height: 720px) {
+    h3.tit{
+        margin-top: -298px; 
+    }
+    p.cut-off-data{
+        margin-top: -198px;
+    }
+    .section-05 .con p.desc{
+        margin-top: 32px;
+    }
+    .section-07 .con p.desc{
+        margin-top: 49px;
+    }
+    .section-08 .con{
+        transform-origin: center;
+        transform: scale(0.8);
+    }
+    .section-09 .con{
+        transform: scale(0.8);
+    }
+    .section-12 .con-wraper{
+        transform: scale(0.85);
     }
 }

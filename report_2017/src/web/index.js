@@ -32,10 +32,13 @@ YD.Template = function(){
                     
                     self.$pagesNum.text(index);
                     $el.each(function(i,item){
+                        
                         var _data_an=$(item).attr("data-an");
                         var _data_delay=$(item).attr("data-delay");
                         $(item).css({"animation-delay":_data_delay+"s","-webkit-animation-delay":_data_delay+"s","-moz-animation-delay":_data_delay+"s","-ms-animation-delay":_data_delay+"s"}).addClass(_data_an).css("opacity","1");
+                        item.id == "path_light" ? $(item).attr("class", "animated ringRotate") : null;
                     });
+                    
                     if(index <= 1){
                         self.$navPagerPrev.css({'borderColor': '#82828f', 'cursor': 'not-allowed'});
                     }else if(index >= 14){
@@ -52,6 +55,7 @@ YD.Template = function(){
                     $an_el.each(function(j,item){
                         var _data_an=$(item).attr("data-an");
                         $(item).css("opacity","0").removeClass(_data_an);
+                        item.id == "path_light" ? $(item).attr("class", "animated") : null;
                     });
                     
                 }
