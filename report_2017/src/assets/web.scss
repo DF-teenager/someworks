@@ -400,11 +400,10 @@ p.cut-off-data{
         width: 1000px;
         height: 372px;
         text-align: center;
-        // margin-top: 19px;
-        @include aligncenter(2, -177px);
+        @include aligncenter(2, -166px);
         .chart{
-            height: 372px;
-            background: url('https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/01/report_2017/pc/page-5-1.png') no-repeat center;
+            height: 443px;
+            background: url('https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/01/report_2017/pc/page-5-1s.png') no-repeat center;
             transform-origin: 758px bottom;
             .proline{
                 width: 306px; height: 149px;
@@ -458,12 +457,16 @@ p.cut-off-data{
                 width: 192px; height: 98px;
                 text-align: center;
                 position: absolute;
-                left: 278px; top: 183px;
+                left: 236px; top: 239px;
                 transform-origin: center bottom;
                 p{
                     color: #fff;
                     font-size: 12px;
                     line-height: 32px;
+                    font-weight: 500;
+                    > span {
+                        font-size: 20px;
+                    }
                 }
                 .bar{
                     display: inline-block;
@@ -476,12 +479,16 @@ p.cut-off-data{
                 width: 192px; height: 187px;
                 text-align: center;
                 position: absolute;
-                left: 478px; top: 101px;
+                left: 463px; top: 157px;
                 transform-origin: center bottom;
                 p{
                     color: #fff;
                     font-size: 12px;
                     line-height: 32px;
+                    font-weight: 500;
+                    > span {
+                        font-size: 20px;
+                    }
                 }
                 .bar{
                     display: inline-block;
@@ -621,7 +628,10 @@ p.cut-off-data{
             }
             div.loanno2{
                 width: 178px; height: 61px;
-                right: 63px; top: 242px;
+                right: 63px; top: 292px;
+                .ring{
+                    top: 0;
+                }
             }
             div.loanno3{
                 width: 227px; height: 61px;

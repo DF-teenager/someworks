@@ -1,4 +1,4 @@
-._ellipsis{
+@mixin _ellipsis(){
     overflow: hidden;
     white-space: nowrap;
     // word-wrap: normal;
