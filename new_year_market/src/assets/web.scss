@@ -1,0 +1,42 @@
+/**
+ * 为避免打包代码量过大，较大的（大于一百行）第三方样式建议不要使用@import引入，使用CDN引入即可
+ * 例如：swiper.scss就不要使用@import引入，直接使用<link rel="stylesheet" href="https://static.yindou.com/web/css/swiper.min.css">
+ */
+@import "normalize/index.scss";  /* resets */
+@import "animation/index.scss";  /* 常用动画 */
+@import "mixins/index.scss";  /* mixins */
+
+* {
+    box-sizing: border-box;
+}
+.clearfix {
+    @include clearfix();
+}
+::-webkit-input-placeholder { /* WebKit browsers */ 
+    line-height: 1;
+} 
+html, body {
+    height: 100%;
+    line-height: 1;
+    font-family: 'Microsoft Yahei Mono';
+    user-select: none;
+    -webkit-font-smoothing: antialiased;
+}
+.main {
+    height: 100%;
+    color: #333333;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    p {
+        width: 250.1px;
+        overflow: hidden;
+        white-space: nowrap;
+        border-right: 1px solid transparent;
+        animation: typing 5s steps(15), caret 1s steps(1) infinite;
+    }
+    img {
+        width: 180px;
+    }
+}
