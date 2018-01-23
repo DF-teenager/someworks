@@ -9,8 +9,31 @@
 
 <body>
 	<div id="app" class="main">
-		123
+		<div class="progress-block" v-if="show_progress">
+            <div class="progress-outer">
+                <div class="progress-enter">
+                    <div class="progress-bg" :style="{width: progress_percent + '%'}"></div>
+                </div>
+                <div class="tooltip ft-15" :style="{left: 'calc(' + progress_percent + '%)'}">{{progress_percent}}%</div>
+            </div>
+        </div>
+        <router-view></router-view>
 	</div>
+	<template id="home">
+		<div class="pages" v-if="!show_progress">
+			<div class="page01" v-cloak v-if="page_show==1">
+				<div class="page01-inner">
+					<a href="#" class="gomarket">开始囤货</a>
+				</div>
+			</div>
+		</div>
+	</template>
+	<template id="records">
+		<div>
+			<div class="records" v-cloak>456</div>
+		</div>
+	</template>
+
 	<!-- end line, please don't delete -->
 	<script src="./index.js"></script>
 </body>

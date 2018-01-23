@@ -1,6 +1,16 @@
 /** 
  * 上下垂直居中
  */
+$center: center;
+
+%__right {
+    position: absolute;
+    left: 50%;
+}
+%__lower {
+    position: absolute;
+    top: 50%;
+}
 %__lower_right {
     position: absolute;
     left: 50%; top: 50%;
@@ -14,4 +24,59 @@
     @supports (transform-origin: center) {
         transform: translate(-50%, -50%);
     }
+    @content;
 }
+@mixin justify-center($left: auto) {
+    @extend %__right;
+    @supports not (transform-origin: center) {
+        margin-left: $left;
+    }
+    @supports (transform-origin: center) {
+        transform: translateX(-50%);
+    }
+    @content;
+}
+@mixin align-center($top: auto) {
+    @extend %__lower;
+    @supports not (transform-origin: center) {
+        margin-top: $top;
+    }
+    @supports (transform-origin: center) {
+        transform: translateY(-50%);
+    }
+    @content;
+}
+
+// $center: center;
+// $centers: #{$center}, justify-#{$center}, align-#{$center};
+// $left: auto; $top: auto;
+// @each $item in _center, _justify-center, _align-center{
+//     @mixin #{$item} {
+//         @if #{$item} == #{$center} {
+//             @extend %__lower_right;
+//         } @else if #{$item} == justify-#{$center} {
+//             @extend %__right;
+//         } @else {
+//             @extend %__lower;
+//         }
+//         @supports not (transform-origin: center) {
+//             @if #{$item} == #{$center} {
+//                 margin-left: $left;
+//                 margin-top: $top;
+//             } @else if #{$item} == justify-#{$center} {
+//                 margin-left: $left;
+//             } @else {
+//                 margin-top: $top;
+//             }
+//         }
+//         @supports (transform-origin: center) {
+//             @if #{$item} == #{$center} {
+//                 transform: translate(-50%, -50%);
+//             } @else if #{$item} == justify-#{$center} {
+//                 transform: translateX(-50%);
+//             } @else {
+//                 transform: translateY(-50%);
+//             }
+//         }
+//     }
+// }

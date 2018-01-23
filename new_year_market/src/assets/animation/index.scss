@@ -1,11 +1,20 @@
 /**
  * 打字效果
  */
-@keyframes typing {
-    from {
-        width: 0;
+ @keyframes panoramic{
+    to {
+        background-position: 200% 0;
     }
 }
-@keyframes caret {
-    50% { border-right-color: currentColor}
+
+@keyframes openDoorBtn {
+    0% {
+        opacity: 1;
+        transform: translateX(-50%) scale3d(1, 1, 1);
+    }
+    10%, 
+    100% {
+        opacity: 0;
+        transform: translateX(-50%) scale3d(.2, .2, .2);
+    }
 }
