@@ -16,36 +16,119 @@ Vue.use(Router)
 
 var home = Vue.extend({
     template: '#home',
-    computed: {
-        show_progress:function(){
-            return this.$root.show_progress;
-        }
-    },
     data: function() {
         return {
-            page_show:0,
+            page_show: 0,
+            animationPlayState: 'paused',
+            isDoorZoomOut: false,
+            cantakeNum: 3,
+            couponIds: [],
+            marketCoupons: [
+                { id: 1, value: 2000, name: '现金卡', firstBit: '2', plusBit: '000', unit: '元', checked: false },
+                { id: 2, value: 50, name: '现金券', firstBit: '5', plusBit: '0', unit: '元', checked: false },
+                { id: 3, value: 100, name: '现金券', firstBit: '1', plusBit: '00', unit: '元', checked: false },
+                { id: 4, value: 200, name: '现金券', firstBit: '2', plusBit: '00', unit: '元', checked: false },
+                { id: 5, value: 300, name: '现金券', firstBit: '3', plusBit: '00', unit: '元', checked: false },
+                { id: 6, value: 500, name: '现金券', firstBit: '5', plusBit: '00', unit: '元', checked: false },
+                { id: 7, value: 600, name: '现金券', firstBit: '6', plusBit: '00', unit: '元', checked: false },
+                { id: 8, value: 800, name: '现金券', firstBit: '8', plusBit: '00', unit: '元', checked: false },
+                { id: 9, value: 400, name: '现金券', firstBit: '4', plusBit: '00', unit: '元', checked: false },
+                { id: 10, value: 1000, name: '现金券', firstBit: '1', plusBit: '000', unit: '元', checked: false },
+                { id: 11, value: '1%', name: '加息券', firstBit: '1', plusBit: '', unit: '%', checked: false },
+                { id: 12, value: 1500, name: '现金券', firstBit: '1', plusBit: '500', unit: '元', checked: false }
+                
+            ]
+        }
+    },
+    computed: {
+        show_progress: function() {
+            return this.$root.show_progress;
+        },
+        doorZoomOut: function() {
+            return {
+                doorZoomOut: this.isDoorZoomOut
+            }
         }
     },
     watch: {
         show_progress: function(value){
-            if(!value){
+            if(!value) {
                 this.page_show = 1;
             }
         }
     },
-    mounted: function(){
-        if(!this.show_progress){
+    mounted: function() {
+        if(!this.show_progress) {
             this.page_show = 1;
         }
     },
+    directives: {
+        animation: {
+            bind: function(el, binding, vnode) {
+                var event = binding.arg;
+                var fn = binding.value;
+                el.addEventListener(event, fn);
+            }
+        }
+    },
     methods: {
+        gomarket: function() {
 
+            var self = this;
+            var snowing = self.$refs.snowing;
+
+            self.animationPlayState = "running";
+            snowing.addEventListener("webkitAnimationEnd", function(){
+                // 动画结束
+                self.isDoorZoomOut = true;
+                setTimeout(function(){
+                    self.page_show = 2;
+                }, 1500)
+            }), true;
+        },
+        handleCheckedCoupon: function(index) {
+
+            var self = this;
+
+            self.marketCoupons.forEach(function(ele, idx, arr){
+                if(idx === index) {
+                    if(self.couponIds.length <= 2 || arr[index].checked) {
+                        arr[idx].checked = !arr[idx].checked;
+                        var pos = self.couponIds.indexOf(arr[idx].id);
+                        pos === -1 ? self.couponIds.push(arr[idx].id) : self.couponIds.splice(pos, 1);
+                    } else {
+                        console.log('您可选的年货数量已用完如果想要重新选择直接点击不满意的年货即可～');
+                    }
+                }
+            });
+            console.log(self.couponIds);
+            
+        }
     }
 })
 var records = Vue.extend({
     template: '#records',
     data: function() {
         return {
+
+        }
+    }
+})
+Vue.component('v-dialog', {
+    template: '#dialog',
+    props: {
+        showDialog: {
+            type: Boolean,
+            default: false
+        }
+    },
+    data: function() {
+        return {
+
+        }
+    },
+    methods: {
+        cancelDialog: function() {
 
         }
     }

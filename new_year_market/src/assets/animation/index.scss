@@ -12,9 +12,77 @@
         opacity: 1;
         transform: translateX(-50%) scale3d(1, 1, 1);
     }
-    10%, 
     100% {
         opacity: 0;
         transform: translateX(-50%) scale3d(.2, .2, .2);
     }
+}
+@keyframes doorZoomOut {
+    0% {
+        opacity: 1;
+        transform: scale3d(1, 1, 1);
+    }
+    80%, 
+    100% {
+        opacity: 0;
+        transform: scale3d(3, 3, 3);
+    }
+}
+@keyframes snowing {
+    to {
+        background-position: -90rem 0;
+    }
+}
+@keyframes checkCoupon {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale3d(.3, .3, .3) rotate(-15deg);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale3d(1, 1, 1) rotate(-15deg);
+    }
+}
+@keyframes cancelCheckCoupon {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale3d(1, 1, 1) rotate(-15deg);
+    } 
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale3d(.3, .3, .3) rotate(-15deg);
+    }
+}
+.checkCoupon-enter, .checkCoupon-enter-active {
+    animation: checkCoupon .25s linear;
+}
+.checkCoupon-leave-active, .checkCoupon-leave-to {
+    animation: cancelCheckCoupon .25s linear;
+}
+@keyframes dialog-fadein {
+    0% {
+        opacity: 0
+    }
+    to {
+        opacity: 1
+    }
+}
+
+@keyframes dialog-zoom {
+    0% {
+        transform: scale(0)
+    }
+    50% {
+        transform: scale(1.1)
+    }
+    to {
+        transform: scale(1)
+    }
+}
+.v-dialog-fade-enter-active {
+    animation: dialog-fadein .4s
+}
+
+.v-dialog-fade-enter-active .v-dialog-main {
+    animation: dialog-zoom .4s
 }

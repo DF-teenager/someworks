@@ -21,17 +21,47 @@
 	</div>
 	<template id="home">
 		<div class="pages" v-if="!show_progress">
-			<div class="page01" v-cloak v-if="page_show==1">
-				<div class="page01-inner">
-					<a href="#" class="gomarket">开始囤货</a>
+			<div class="page01" :class="doorZoomOut" v-cloak v-if="page_show==1">
+				<div class="page01-inner" ref="snowing" :style="{ animationPlayState: animationPlayState }"></div>
+				<a ref="gomarket" href="#" class="gomarket" :style="{ animationPlayState: animationPlayState }" v-animation:click="gomarket">开始囤货</a>
+			</div>
+			<div class="page02" v-cloak v-if="page_show==2">
+				<div class="page02-room">
+					<div class="page02-room-inner">
+						<div v-for="(coupon, index) in marketCoupons" :key="coupon.id" :class="[{checked: coupon.checked}, {mid: index === 1 || index === 4 || index === 7 || index === 10}, {couplet: index >= 3 && index <= 5 || index >= 9 && index <= 11}, 'coupon' ]" @click="handleCheckedCoupon(index)">
+							<span class="value"><span>{{coupon.firstBit}}</span>{{coupon.plusBit}}<span class="unit">{{coupon.unit}}</span></span>
+							<span class="trapezoid">{{coupon.name}}</span>
+							<transition name="checkCoupon">
+								<span v-if="coupon.checked" class="mask">我要了</span>
+							</transition>
+						</div>
+					</div>
+					<a class="btn" href="javascript:void(0);">免费拿走</a>
+					<a class="mine" href="javascript:void(0);">查看我的年货</a>
 				</div>
 			</div>
+			<v-dialog show-dialog></v-dialog>
 		</div>
 	</template>
 	<template id="records">
 		<div>
 			<div class="records" v-cloak>456</div>
 		</div>
+	</template>
+	<template id="dialog">
+		<transition name="v-dialog-fade">
+			<div class="v-dialog" v-if="showDialog">
+				<div class="v-dialog-mask"></div>
+				<div class="v-dialog-content">
+					<div class="v-dialog-content-top">
+						<div class="result">dfghjhgfdfghjhgfdfgh</div>
+					</div>
+					<div class="v-dialog-content-btns">
+						<a href="javascript:;" @click="cancelDialog" class="">知道了</a>
+					</div>
+				</div>
+			</div>
+		</transition>
 	</template>
 
 	<!-- end line, please don't delete -->
