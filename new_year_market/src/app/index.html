@@ -50,7 +50,7 @@
 				</transition>
 				<a href="javascript: void(0);" class="rule" @click="openRulesDialog = !openRulesDialog">规则</a>
 			</div>
-			<v-dialog :show-dialog="openBindDialog" is-btn @close-dialog="closeBindDialog">
+			<v-dialog :show-dialog="openBindDialog" is-bind-btn @bind-dialog="goBind" @global-close-dialog="globalCloseDialog">
 				<div class="result" slot="result">
 					<p>对不起～<br>您只有完成服务号绑定<br>才能领取您的年货，快去绑定吧～</p>
 				</div>
@@ -75,7 +75,7 @@
 					<p>您今天可选的年货数量已用完了哦~</p>
 				</div>
 			</v-dialog> -->
-			<v-dialog :show-dialog="openRulesDialog" @global-close-dialog="globalCloseDialog" @close-dialog="closeRulesDialog">
+			<v-dialog :show-dialog="openRulesDialog" @global-close-dialog="globalCloseDialog">
 				<div class="rules" slot="rules">
 					<p>1.活动期间，每人每天可任选3个奖励，如果出借金额（期限≥30天的直投项目金额-活动期间用户债权转让金额）达到5万元，则每天可以任选6个奖励；</p>
 					<p>2.以天为单位，可一次性领取3/6个奖励，也可选择任意时段分批次领取全部或部分奖励；</p>
@@ -114,6 +114,7 @@
 					</div>
 					<div class="v-dialog-content-btns">
 						<a v-if="isBtn" href="javascript:;" @click="closeDialog" class="btn">知道了</a>
+						<a v-if="isBindBtn" href="javascript:;" @click="bindDialog" class="btn">去绑定</a>
 					</div>
 				</div>
 			</div>

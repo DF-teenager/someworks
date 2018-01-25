@@ -4,10 +4,10 @@
  */
 import $ from 'exports-loader?zepto!script-loader';
 import Vue from 'vue/dist/vue';
-import Router from 'vue-router';
+import VueRouter from 'vue-router';
 import '../assets/app.scss';
 
-Vue.use(Router)
+Vue.use(VueRouter)
 
 /**
  * 使用ES5写法，上线时直接拷贝以下内容到./template.tpl
@@ -24,6 +24,7 @@ var home = Vue.extend({
             cantakeNum: 3,
             couponIds: [],
             lottery_num: 0,
+            isBind: false,
             marketCoupons: [
                 { id: 1, value: 2000, name: '现金卡', firstBit: '2', plusBit: '000', unit: '元', checked: false },
                 { id: 2, value: 50, name: '现金券', firstBit: '5', plusBit: '0', unit: '元', checked: false },
@@ -64,6 +65,9 @@ var home = Vue.extend({
             }
         }
     },
+    created: function() {
+        this.takeCouponNum();
+    },
     mounted: function() {
         if(!this.show_progress) {
             this.page_show = this.$route.meta.page;
@@ -84,14 +88,18 @@ var home = Vue.extend({
             var self = this;
             var snowing = self.$refs.snowing;
 
-            self.animationPlayState = "running";
-            snowing.addEventListener("webkitAnimationEnd", function(){
-                // 动画结束
-                self.isDoorZoomOut = true;
-                setTimeout(function(){
-                    self.page_show = 2;
-                }, 1500)
-            }), true;
+            if(self.isBind) {
+                self.animationPlayState = "running";
+                snowing.addEventListener("webkitAnimationEnd", function(){
+                    // 动画结束
+                    self.isDoorZoomOut = true;
+                    setTimeout(function(){
+                        self.page_show = 2;
+                    }, 1500)
+                });
+            } else {
+                self.openBindDialog = true;
+            }
         },
         handleCheckedCoupon: function(index) {
 
@@ -116,6 +124,9 @@ var home = Vue.extend({
         closeBindDialog: function() {
             this.openBindDialog = false;
         },
+        goBind: function(){
+            window.location.href='/wx/index?goto_url=<{$g_www_domain}>/wx/supermarket';
+        },
         closeRetakeDialog: function() {
             this.openRetakeDialog = false;
         },
@@ -133,15 +144,16 @@ var home = Vue.extend({
         },
         globalCloseDialog: function() {
             this.openRulesDialog = false;
+            this.openBindDialog = false;
         },
-        // 免费拿走
-        takeWantCoupon: function() {
+        // 获取今日领取年货剩余次数
+        takeCouponNum: function() {
             
             var self = this;
             var data = {
                 act:'getnum',     
             }
-
+            
             $.ajax({
                 type: 'POST',
                 url: '/webapi/action_supermarket',
@@ -149,6 +161,8 @@ var home = Vue.extend({
                 success: function(res) {
                     if(res.code === 0) {
                         self.lottery_num = res.data.lottery_num;
+                    } else if(res.code === 400135) {
+                        self.isBind = false;
                     } else {
                         alert(res.message);
                     }
@@ -244,6 +258,10 @@ Vue.component('v-dialog', {
         isBtn: {
             type: Boolean,
             default: false
+        },
+        isBindBtn: {
+            type: Boolean,
+            default: false
         }
     },
     data: function() {
@@ -257,6 +275,9 @@ Vue.component('v-dialog', {
         },
         globalCloseDialog: function() {
             this.$emit('global-close-dialog');
+        },
+        bindDialog: function() {
+            this.$emit('bind-dialog');
         }
     }
 })
@@ -272,7 +293,7 @@ var routes = [{
         path: '/records/:page', 
         component: records
     }]
-var router = new Router({
+var router = new VueRouter({
     routes: routes
 })
 new Vue({

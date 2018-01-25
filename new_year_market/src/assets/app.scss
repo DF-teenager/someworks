@@ -11,24 +11,46 @@
 
 @font-face {
     font-family: "lgdxkjt";
-    src: url("https://static.yindou.com/weixin/fonts/2018/01/lgdxkjt.eot"); /* IE9 */
-    src: url("https://static.yindou.com/weixin/fonts/2018/01/lgdxkjt.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
-    url("https://static.yindou.com/weixin/fonts/2018/01/lgdxkjt.woff") format("woff"), /* chrome、firefox */
-    url("https://static.yindou.com/weixin/fonts/2018/01/lgdxkjt.ttf") format("truetype"), /* chrome、firefox、opera、Safari, Android, iOS 4.2+ */
-    url("https://static.yindou.com/weixin/fonts/2018/01/lgdxkjt.svg#lgdxkjt") format("svg"); /* iOS 4.1- */
+    src: url("./iconfonts/fonts/lgdxkjt.eot"); /* IE9 */
+    src: url("./iconfonts/fonts/lgdxkjt.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+    url("./iconfonts/fonts/lgdxkjt.woff") format("woff"), /* chrome、firefox */
+    url("./iconfonts/fonts/lgdxkjt.ttf") format("truetype"), /* chrome、firefox、opera、Safari, Android, iOS 4.2+ */
+    url("./iconfonts/fonts/lgdxkjt.svg#lgdxkjt") format("svg"); /* iOS 4.1- */
     font-style: normal;
     font-weight: normal;
 }
 @font-face {
     font-family: "fjcjt";
-    src: url("https://static.yindou.com/weixin/fonts/2018/01/fjcjt.eot"); /* IE9 */
-    src: url("https://static.yindou.com/weixin/fonts/2018/01/fjcjt.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
-    url("https://static.yindou.com/weixin/fonts/2018/01/fjcjt.woff") format("woff"), /* chrome、firefox */
-    url("https://static.yindou.com/weixin/fonts/2018/01/fjcjt.ttf") format("truetype"), /* chrome、firefox、opera、Safari, Android, iOS 4.2+ */
-    url("https://static.yindou.com/weixin/fonts/2018/01/fjcjt.svg#fjcjt") format("svg"); /* iOS 4.1- */
+    src: url("./iconfonts/fonts/fjcjt.eot"); /* IE9 */
+    src: url("./iconfonts/fonts/fjcjt.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+    url("./iconfonts/fonts/fjcjt.woff") format("woff"), /* chrome、firefox */
+    url("./iconfonts/fonts/fjcjt.ttf") format("truetype"), /* chrome、firefox、opera、Safari, Android, iOS 4.2+ */
+    url("./iconfonts/fonts/fjcjt.svg#fjcjt") format("svg"); /* iOS 4.1- */
     font-style: normal;
     font-weight: normal;
 }
+
+// @font-face {
+//     font-family: "lgdxkjt";
+//     src: url("https://static.yindou.com/weixin/font/lgdxkjt.eot"); /* IE9 */
+//     src: url("https://static.yindou.com/weixin/font/lgdxkjt.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+//     url("https://static.yindou.com/weixin/font/lgdxkjt.woff") format("woff"), /* chrome、firefox */
+//     url("https://static.yindou.com/weixin/font/lgdxkjt.ttf") format("truetype"), /* chrome、firefox、opera、Safari, Android, iOS 4.2+ */
+//     url("https://static.yindou.com/weixin/font/lgdxkjt.svg#lgdxkjt") format("svg"); /* iOS 4.1- */
+//     font-style: normal;
+//     font-weight: normal;
+// }
+// @font-face {
+//     font-family: "fjcjt";
+//     src: url("https://static.yindou.com/weixin/font/fjcjt.eot"); /* IE9 */
+//     src: url("https://static.yindou.com/weixin/font/fjcjt.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+//     url("https://static.yindou.com/weixin/font/fjcjt.woff") format("woff"), /* chrome、firefox */
+//     url("https://static.yindou.com/weixin/font/fjcjt.ttf") format("truetype"), /* chrome、firefox、opera、Safari, Android, iOS 4.2+ */
+//     url("https://static.yindou.com/weixin/font/fjcjt.svg#fjcjt") format("svg"); /* iOS 4.1- */
+//     font-style: normal;
+//     font-weight: normal;
+// }
+
 * {
     padding: 0; margin: 0;
     box-sizing: border-box;
