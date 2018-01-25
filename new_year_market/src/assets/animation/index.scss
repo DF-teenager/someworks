@@ -70,19 +70,38 @@
 
 @keyframes dialog-zoom {
     0% {
-        transform: scale(0)
+        transform: translate(-50%, -50%) scale(0)
     }
     50% {
-        transform: scale(1.1)
+        transform: translate(-50%, -50%) scale(1.1)
     }
     to {
-        transform: scale(1)
+        transform: translate(-50%, -50%) scale(1)
     }
 }
 .v-dialog-fade-enter-active {
     animation: dialog-fadein .4s
 }
 
-.v-dialog-fade-enter-active .v-dialog-main {
+.v-dialog-fade-enter-active .v-dialog-content {
     animation: dialog-zoom .4s
+}
+
+@keyframes letterUp {
+    0% {
+        opacity: 0;
+        transform: translate3d(0,30%,0);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+.v-letter-up-enter, .v-letter-up-enter-active {
+    animation: letterUp .5s;
+}
+@keyframes snowing_bg {
+    to {
+        background-position: center 17.786667rem;
+    }
 }
