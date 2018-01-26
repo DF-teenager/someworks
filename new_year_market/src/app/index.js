@@ -2,7 +2,7 @@
  * jax采用zepto.ajax
  * 上线时拷贝dist目录下生成的样式，并在./template.tpl引入对应脚本
  */
-import $ from 'exports-loader?zepto!script-loader';
+// import $ from 'exports-loader?zepto!script-loader';
 import Vue from 'vue/dist/vue';
 import VueRouter from 'vue-router';
 import '../assets/app.scss';
@@ -19,12 +19,13 @@ var home = Vue.extend({
     data: function() {
         return {
             page_show: 0,
-            animationPlayState: 'paused',
+            animationPlayState: false,
             isDoorZoomOut: false,
             cantakeNum: 3,
             couponIds: [],
-            lottery_num: 0,
-            isBind: false,
+            lotteryNum: 0,
+            couponNum: 0,
+            isBind: false, // 绑定状态
             marketCoupons: [
                 { id: 1, value: 2000, name: '现金卡', firstBit: '2', plusBit: '000', unit: '元', checked: false },
                 { id: 2, value: 50, name: '现金券', firstBit: '5', plusBit: '0', unit: '元', checked: false },
@@ -40,12 +41,26 @@ var home = Vue.extend({
                 { id: 12, value: 1500, name: '现金券', firstBit: '1', plusBit: '500', unit: '元', checked: false }
                 
             ],
-            openRulesDialog: false,
-            openBindDialog: false,
-            openRetakeDialog: false,
-            openTakedDialog: false,
-            openUntakeDialog: false,
-            openNotakeDialog: false
+            dialogs: {
+                bind: {
+                    open: false
+                },
+                reTake: {
+                    open: false
+                },
+                taked: {
+                    open: false
+                },
+                unTake: {
+                    open: false
+                },
+                noTake: {
+                    open: false
+                },
+                rules: {
+                    open: false
+                }
+            },
         }
     },
     computed: {
@@ -73,32 +88,32 @@ var home = Vue.extend({
             this.page_show = this.$route.meta.page;
         }
     },
-    directives: {
-        animation: {
-            bind: function(el, binding, vnode) {
-                var event = binding.arg;
-                var fn = binding.value;
-                el.addEventListener(event, fn);
-            }
-        }
-    },
+    // directives: {
+    //     animation: {
+    //         bind: function(el, binding, vnode) {
+    //             var event = binding.arg;
+    //             var fn = binding.value;
+    //             el.addEventListener(event, fn);
+    //         }
+    //     }
+    // },
     methods: {
         gomarket: function() {
 
             var self = this;
             var snowing = self.$refs.snowing;
-
+            
             if(self.isBind) {
-                self.animationPlayState = "running";
+                self.animationPlayState = true;
                 snowing.addEventListener("webkitAnimationEnd", function(){
                     // 动画结束
                     self.isDoorZoomOut = true;
                     setTimeout(function(){
                         self.page_show = 2;
                     }, 1500)
-                });
+                }, false);
             } else {
-                self.openBindDialog = true;
+                self.dialogs.bind.open = true;
             }
         },
         handleCheckedCoupon: function(index) {
@@ -107,44 +122,38 @@ var home = Vue.extend({
 
             self.marketCoupons.forEach(function(ele, idx, arr){
                 if(idx === index) {
-                    if(self.lottery_num > 0 && self.couponIds.length < self.lottery_num || arr[index].checked) {
+                    if(self.lotteryNum > 0 && self.couponIds.length < self.lotteryNum || arr[index].checked) {
                         arr[idx].checked = !arr[idx].checked;
                         var pos = self.couponIds.indexOf(arr[idx].id);
                         pos === -1 ? self.couponIds.push(arr[idx].id) : self.couponIds.splice(pos, 1);
-                    } else if(self.lottery_num === 0) {
-                        // self.openNotakeDialog = true;
+                    } else if(self.lotteryNum === 0) {
+                        // self.dialogs.noTake.open = true;
                         self.page_show = 3;
                     } else {
-                        self.openRetakeDialog = true;
+                        self.dialogs.reTake.open = true;
                     }
                 }
             });
-            console.log(self.couponIds); 
-        },
-        closeBindDialog: function() {
-            this.openBindDialog = false;
+            self.couponNum = self.couponIds.length;
         },
         goBind: function(){
             window.location.href='/wx/index?goto_url=<{$g_www_domain}>/wx/supermarket';
         },
-        closeRetakeDialog: function() {
-            this.openRetakeDialog = false;
+        closeDialog: function(name) {
+
+            var self = this;
+
+            if(name =="taked") {
+                self.marketCoupons.forEach(function(ele, idx, arr){
+                    arr[idx].checked = false;
+                });
+                self.couponIds = [];
+                self.takeCouponNum();
+            }
+            self.dialogs[name].open = false;
         },
-        closeTakedDialog: function() {
-            this.openTakedDialog = false;
-        },
-        closeUntakeDialog: function() {
-            this.openUntakeDialog = false;
-        },
-        closeNotakeDialog: function() {
-            this.openNotakeDialog = false;
-        },
-        closeRulesDialog: function() {
-            this.openRulesDialog = false;
-        },
-        globalCloseDialog: function() {
-            this.openRulesDialog = false;
-            this.openBindDialog = false;
+        goMineCoupon: function() {
+            router.push({name: 'records', params: {page: 2}});
         },
         // 获取今日领取年货剩余次数
         takeCouponNum: function() {
@@ -160,7 +169,7 @@ var home = Vue.extend({
                 data: data,
                 success: function(res) {
                     if(res.code === 0) {
-                        self.lottery_num = res.data.lottery_num;
+                        self.lotteryNum = res.data.lottery_num;
                     } else if(res.code === 400135) {
                         self.isBind = false;
                     } else {
@@ -188,7 +197,7 @@ var home = Vue.extend({
                     data: data,
                     success: function(res) {
                         if(res.code === 0) {
-                            self.openTakedDialog = true;
+                            self.dialogs.taked.open = true;
                         } else {
                             alert(res.message);
                         }
@@ -197,10 +206,10 @@ var home = Vue.extend({
                         alert(error);
                     }
                 })
-            } else if(self.lottery_num === 0) {
+            } else if(self.lotteryNum === 0) {
                 self.page_show = 3;
             } else {
-                self.openUntakeDialog = true;
+                self.dialogs.unTake.open = true;
             }
         }
     }
@@ -243,7 +252,7 @@ var records = Vue.extend({
             })
         },
     },
-    beforeRouteLeave (to, from, next) {
+    beforeRouteLeave: function(to, from, next) {
         to.meta.page = from.params.page;
         next();
     }
@@ -251,6 +260,7 @@ var records = Vue.extend({
 Vue.component('v-dialog', {
     template: '#dialog',
     props: {
+        name: String,
         showDialog: {
             type: Boolean,
             default: false
@@ -271,7 +281,7 @@ Vue.component('v-dialog', {
     },
     methods: {
         closeDialog: function() {
-            this.$emit('close-dialog');
+            this.$emit('close-dialog', this.name);
         },
         globalCloseDialog: function() {
             this.$emit('global-close-dialog');
@@ -280,7 +290,7 @@ Vue.component('v-dialog', {
             this.$emit('bind-dialog');
         }
     }
-})
+});
 var routes = [{
         name: 'home', 
         path: '/', 
@@ -296,7 +306,7 @@ var routes = [{
 var router = new VueRouter({
     routes: routes
 })
-new Vue({
+var app = new Vue({
     router: router,
     data: function() {
         return {
@@ -304,9 +314,9 @@ new Vue({
             show_progress: true,
             progress_percent: 0,
             imgs: [
-                'https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/01/new_year_market/snowing-bg.png',
+                'https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/01/new_year_market/snowingbig.png',
                 'https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/01/new_year_market/page-1-1s.jpg',
-                'https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/01/new_year_market/gomarket-sprites_min.png',
+                'https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/01/new_year_market/girl-gomarket-sprites-min.png',
                 'https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/01/new_year_market/page-1-2.png',
                 'https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/01/new_year_market/page-2-1ss.jpg',
                 'https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/01/new_year_market/page-2-2s.png',

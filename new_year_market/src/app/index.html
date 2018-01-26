@@ -23,11 +23,12 @@
 		<div class="pages" v-if="!show_progress">
 			<div class="page01" :class="doorZoomOut" v-cloak v-if="page_show==1">
 				<div class="snowing"></div>
-				<div class="page01-inner" ref="snowing" :style="{ animationPlayState: animationPlayState }"></div>
-				<a ref="gomarket" href="#" class="gomarket" :style="{ animationPlayState: animationPlayState }" v-animation:click="gomarket">开始囤货</a>
+				<div class="page01-inner" ref="snowing" :class="[animationPlayState ? 'running' : 'paused' ]"></div>
+				<a ref="gomarket" href="javascript:void(0);" class="gomarket" :class="[animationPlayState ? 'running' : 'paused' ]" @click="gomarket">开始囤货</a>
 			</div>
 			<div class="page02" v-cloak v-if="page_show==2">
 				<div class="page02-room">
+					<div class="page02-room-title">今日可拿件数: <span>{{lotteryNum}}</span></div>
 					<div class="page02-room-inner">
 						<div v-for="(coupon, index) in marketCoupons" :key="coupon.id" :class="[{checked: coupon.checked}, {mid: index === 1 || index === 4 || index === 7 || index === 10}, {couplet: index >= 3 && index <= 5 || index >= 9 && index <= 11}, 'coupon' ]" @click="handleCheckedCoupon(index)">
 							<span class="value"><span>{{coupon.firstBit}}</span>{{coupon.plusBit}}<span class="unit">{{coupon.unit}}</span></span>
@@ -40,42 +41,42 @@
 					<a class="btn" href="javascript:void(0);" @click="takeWantCoupon">免费拿走</a>
 					<router-link class="mine" :to="{name: 'records', params: {page: 2}}">查看我的年货</router-link>
 				</div>
-				<a href="javascript: void(0);" class="rule" @click="openRulesDialog = !openRulesDialog">规则</a>
+				<a href="javascript: void(0);" class="rule" @click="dialogs.rules.open = !dialogs.rules.open">规则</a>
 			</div>
 			<div class="page03" v-cloak v-show="page_show==3">
 				<transition name="v-letter-up">
 					<div v-if="page_show==3" class="page03-content">
-						<span class="mine-coupon"></span>
+						<span class="mine-coupon" @click="goMineCoupon"></span>
 					</div>
 				</transition>
-				<a href="javascript: void(0);" class="rule" @click="openRulesDialog = !openRulesDialog">规则</a>
+				<a href="javascript: void(0);" class="rule" @click="dialogs.rules.open = !dialogs.rules.open">规则</a>
 			</div>
-			<v-dialog :show-dialog="openBindDialog" is-bind-btn @bind-dialog="goBind" @global-close-dialog="globalCloseDialog">
+			<v-dialog :show-dialog="dialogs.bind.open" is-bind-btn @bind-dialog="goBind" @global-close-dialog="closeDialog('bind')">
 				<div class="result" slot="result">
 					<p>对不起～<br>您只有完成服务号绑定<br>才能领取您的年货，快去绑定吧～</p>
 				</div>
 			</v-dialog>
-			<v-dialog :show-dialog="openRetakeDialog" is-btn @close-dialog="closeRetakeDialog">
+			<v-dialog :show-dialog="dialogs.reTake.open" is-btn @close-dialog="closeDialog('reTake')">
 				<div class="result" slot="result">
 					<p>您可选的年货数量已用完<br>如果想要重新选择<br>直接点击不满意的年货即可～</p>
 				</div>
 			</v-dialog>
-			<v-dialog :show-dialog="openTakedDialog" is-btn @close-dialog="closeTakedDialog">
+			<v-dialog :show-dialog="dialogs.taked.open" is-btn name="taked" @close-dialog="closeDialog('taked')">
 				<div class="result" slot="result">
-					<p>您挑选的3件年货<br>已经发送到您的平台账户</p>
+					<p>您挑选的{{couponNum}}件年货<br>已经发送到您的平台账户</p>
 				</div>
 			</v-dialog>
-			<v-dialog :show-dialog="openUntakeDialog" is-btn @close-dialog="closeUntakeDialog">
+			<v-dialog :show-dialog="dialogs.unTake.open" is-btn @close-dialog="closeDialog('unTake')">
 				<div class="result" slot="result">
 					<p>请先挑选年货哦~</p>
 				</div>
 			</v-dialog>
-			<!-- <v-dialog :show-dialog="openNotakeDialog" is-btn @close-dialog="closeNotakeDialog">
+			<!-- <v-dialog :show-dialog="dialogs.noTake.open" is-btn @close-dialog="closeDialog('noTake')">
 				<div class="result" slot="result">
 					<p>您今天可选的年货数量已用完了哦~</p>
 				</div>
 			</v-dialog> -->
-			<v-dialog :show-dialog="openRulesDialog" @global-close-dialog="globalCloseDialog">
+			<v-dialog :show-dialog="dialogs.rules.open" @global-close-dialog="closeDialog('rules')">
 				<div class="rules" slot="rules">
 					<p>1.活动期间，每人每天可任选3个奖励，如果出借金额（期限≥30天的直投项目金额-活动期间用户债权转让金额）达到5万元，则每天可以任选6个奖励；</p>
 					<p>2.以天为单位，可一次性领取3/6个奖励，也可选择任意时段分批次领取全部或部分奖励；</p>
@@ -105,7 +106,7 @@
 	</template>
 	<template id="dialog">
 		<transition name="v-dialog-fade">
-			<div class="v-dialog" v-if="showDialog">
+			<div class="v-dialog" v-show="showDialog">
 				<div class="v-dialog-mask" @click="globalCloseDialog"></div>
 				<div class="v-dialog-content">
 					<div class="v-dialog-content-top">
@@ -122,6 +123,7 @@
 	</template>
 
 	<!-- end line, please don't delete -->
+	<!-- <script src="http://songhwstatic.yind123.com/weixin/js/zepto-1.2.0.min.js"></script> -->
 	<script src="./index.js"></script>
 </body>
 
