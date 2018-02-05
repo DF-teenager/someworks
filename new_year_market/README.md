@@ -1,4 +1,11 @@
 
+## User Interface
+
+<img src="./interface/page-1.jpg" width="299">
+<img src="./interface/page-2.jpg" width="299">
+<img src="./interface/page-3.jpg" width="299">
+<img src="./interface/page-4.jpg" width="299">
+<img src="./interface/dialogs.jpg" width="299">
 
 ## Quick start
 
@@ -6,7 +13,7 @@ Several quick start options are available:
 
 - Install dependencies with [npm](https://www.npmjs.com/): `npm install`
 - App development Run `npm run appdev`
-- Build Run `bash build.sh @param1 @param2` (@param1:`web`,`app`,`webeg`,`appeg`; @param2:`--no-minify`)
+- Build Run `bash build.sh @param1 @param2` (@param1:`app`; @param2:`--no-minify`)
 - Open `http://localhost:1234` in your browser.
 
 ## What's included
