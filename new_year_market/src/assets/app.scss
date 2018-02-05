@@ -191,7 +191,8 @@ $page: 'page';
         background: #bd291d;
         padding-top: 2.213333rem;
         position: absolute;
-        left: 0; bottom: 0;
+        left: 0; top: .16rem; bottom: 0;
+        overflow-y: scroll;
         background-clip: content-box;
         &-title {
             @include justify-center;
@@ -312,7 +313,7 @@ $page: 'page';
             text-align: center;
             border-radius: .6rem;
             @include justify-center;
-            margin-top: .653333rem;
+            margin-top: .68rem;
             &:active {
                 background-image: linear-gradient(to bottom, rgba($color: #fbefcc, $alpha: .85), rgba($color: #f3b754, $alpha: .85));
             }
@@ -324,7 +325,18 @@ $page: 'page';
             padding-bottom: .026667rem;
             border-bottom: 1px solid #fff3c5;
             position: absolute;
-            right: .426667rem; bottom: .733333rem;
+            right: .426667rem; 
+            margin-top: 1.36rem;
+        }
+        @supports (bottom: constant(safe-area-inset-bottom)) or (bottom: env(safe-area-inset-bottom)) {
+            a.btn {
+                margin-top: calc(.68rem + constant(safe-area-inset-bottom));
+                margin-top: calc(.68rem + env(safe-area-inset-bottom));
+            }
+            a.mine {
+                margin-top: calc(1.36rem + constant(safe-area-inset-bottom));
+                margin-top: calc(1.36rem + env(safe-area-inset-bottom));
+            }
         }
     }
     .rule{
@@ -332,8 +344,18 @@ $page: 'page';
         font-family: 'lgdxkjt';
         width: 1.893333rem; height: 1.893333rem;
         position: absolute; 
-        right: .16rem; bottom: 13.52rem;
+        right: .16rem; top: .68rem;
         text-indent: -9999px;
+    }
+    @supports (bottom: constant(safe-area-inset-bottom)) or (bottom: env(safe-area-inset-bottom)) {
+        &-room {
+            margin-top: constant(safe-area-inset-bottom);
+            margin-top: env(safe-area-inset-bottom);
+        }
+        .rule {
+            top: calc(.68rem + constant(safe-area-inset-bottom));
+            top: calc(.68rem + env(safe-area-inset-bottom));
+        }
     }
 }
 .#{$page}03 {

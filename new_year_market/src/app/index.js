@@ -76,6 +76,11 @@ var home = Vue.extend({
             if(!value) {
                 this.page_show = 1;
             }
+        },
+        page_show: function(value) {
+            if(value === 2) {
+                window.scrollTo(0, document.body.scrollHeight);
+            }
         }
     },
     created: function() {
