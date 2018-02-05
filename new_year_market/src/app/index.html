@@ -51,6 +51,9 @@
 				</transition>
 				<a href="javascript: void(0);" class="rule" @click="dialogs.rules.open = !dialogs.rules.open">规则</a>
 			</div>
+			<v-dialog>
+				<div slot="result"></div>
+			</v-dialog>
 			<v-dialog :show-dialog="dialogs.bind.open" is-bind-btn @bind-dialog="goBind" @global-close-dialog="closeDialog('bind')">
 				<div class="result" slot="result">
 					<p>对不起～<br>您只有完成服务号绑定<br>才能领取您的年货，快去绑定吧～</p>
@@ -106,10 +109,11 @@
 	</template>
 	<template id="dialog">
 		<transition name="v-dialog-fade">
-			<div class="v-dialog" v-show="showDialog">
+			<div class="v-dialog" v-if="showDialog">
 				<div class="v-dialog-mask" @click="globalCloseDialog"></div>
 				<div class="v-dialog-content">
 					<div class="v-dialog-content-top">
+						<i class="YDSICON yds-icon-close" @click="globalCloseDialog"></i>
 						<slot name="result"></slot>
 						<slot name="rules"></slot>
 					</div>

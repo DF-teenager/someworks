@@ -21,7 +21,6 @@ var home = Vue.extend({
             page_show: 0,
             animationPlayState: false,
             isDoorZoomOut: false,
-            cantakeNum: 3,
             couponIds: [],
             lotteryNum: 0,
             couponNum: 0,
@@ -39,7 +38,6 @@ var home = Vue.extend({
                 { id: 10, value: 1000, name: '现金券', firstBit: '1', plusBit: '000', unit: '元', checked: false },
                 { id: 11, value: '1%', name: '加息券', firstBit: '1', plusBit: '', unit: '%', checked: false },
                 { id: 12, value: 1500, name: '现金券', firstBit: '1', plusBit: '500', unit: '元', checked: false }
-                
             ],
             dialogs: {
                 bind: {
@@ -169,6 +167,7 @@ var home = Vue.extend({
                 data: data,
                 success: function(res) {
                     if(res.code === 0) {
+                        self.isBind = true;
                         self.lotteryNum = res.data.lottery_num;
                     } else if(res.code === 400135) {
                         self.isBind = false;

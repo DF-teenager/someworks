@@ -1,34 +1,14 @@
 /**
- * 为避免打包代码量过大，较大的（大于一百行）第三方样式建议不要使用@import引入，使用CDN引入即可
+ * 为避免打包代码量过大，较大的（大于一百行）第三方样式建议不要使用@import引入，使用link标签引入即可
  * 例如：swiper.scss就不要使用@import引入，直接使用<link rel="stylesheet" href="https://static.yindou.com/web/css/swiper.min.css">
  */
 @import "normalize/index.scss";  /* resets */
 @import "animation/index.scss";  /* 常用动画 */
 @import "mixins/index.scss";  /* mixins */
+@import "iconfonts/index.scss";  /* iconfonts */
 
 @include font-size(16px, ".ft-15");
 @include font-size(16px, ".ft-16");
-
-// @font-face {
-//     font-family: "lgdxkjt";
-//     src: url("./iconfonts/fonts/lgdxkjt.eot"); /* IE9 */
-//     src: url("./iconfonts/fonts/lgdxkjt.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
-//     url("./iconfonts/fonts/lgdxkjt.woff") format("woff"), /* chrome、firefox */
-//     url("./iconfonts/fonts/lgdxkjt.ttf") format("truetype"), /* chrome、firefox、opera、Safari, Android, iOS 4.2+ */
-//     url("./iconfonts/fonts/lgdxkjt.svg#lgdxkjt") format("svg"); /* iOS 4.1- */
-//     font-style: normal;
-//     font-weight: normal;
-// }
-// @font-face {
-//     font-family: "fjcjt";
-//     src: url("./iconfonts/fonts/fjcjt.eot"); /* IE9 */
-//     src: url("./iconfonts/fonts/fjcjt.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
-//     url("./iconfonts/fonts/fjcjt.woff") format("woff"), /* chrome、firefox */
-//     url("./iconfonts/fonts/fjcjt.ttf") format("truetype"), /* chrome、firefox、opera、Safari, Android, iOS 4.2+ */
-//     url("./iconfonts/fonts/fjcjt.svg#fjcjt") format("svg"); /* iOS 4.1- */
-//     font-style: normal;
-//     font-weight: normal;
-// }
 
 @font-face {
     font-family: "lgdxkjt";
@@ -468,6 +448,14 @@ $page: 'page';
             margin-top: -2.28rem;
             padding-top: 2.666667rem;
             background: url('https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/01/new_year_market/dialog-1.png') no-repeat -.64rem top / 10rem auto;
+            position: relative;
+            i.yds-icon-close{
+                font-size: .52rem;
+                color: #fff4e1;
+                box-shadow: 0 0 .106667rem rgba(255, 255, 255, 0);
+                position: absolute;
+                top: 0; right: 0;
+            }
             .result {
                 width: 8.386667rem;
                 text-align: center;
