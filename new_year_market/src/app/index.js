@@ -264,6 +264,10 @@ Vue.component('v-dialog', {
             type: Boolean,
             default: false
         },
+        icon: {
+            type: Boolean,
+            default: false
+        },
         isBtn: {
             type: Boolean,
             default: false

@@ -70,20 +70,20 @@
 
 @keyframes dialog-zoom {
     0% {
-        transform: translate(-50%, -50%) scale(0)
+        transform: scale(0)
     }
     50% {
-        transform: translate(-50%, -50%) scale(1.1)
+        transform: scale(1.1)
     }
     to {
-        transform: translate(-50%, -50%) scale(1)
+        transform: scale(1)
     }
 }
 .v-dialog-fade-enter-active {
     animation: dialog-fadein .4s
 }
 
-.v-dialog-fade-enter-active .v-dialog-content {
+.v-dialog-fade-enter-active .v-dialog-container {
     animation: dialog-zoom .4s
 }
 
