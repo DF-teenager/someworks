@@ -1,11 +1,11 @@
 
 ## User Interface
 
-<img src="./interface/page-1.jpg" width="299">
-<img src="./interface/page-2.jpg" width="299">
-<img src="./interface/page-3.jpg" width="299">
-<img src="./interface/page-4.jpg" width="299">
-<img src="./interface/dialogs.jpg" width="299">
+<a href="#" target="_blank"><img src="./interface/page-1.jpg" width="299"></a>
+<a href="#" target="_blank"><img src="./interface/page-2.jpg" width="299"></a>
+<a href="#" target="_blank"><img src="./interface/page-3.jpg" width="299"></a>
+<a href="#" target="_blank"><img src="./interface/page-4.jpg" width="299"></a>
+<a href="#" target="_blank"><img src="./interface/dialogs.jpg" width="299"></a>
 
 ## Quick start
 
