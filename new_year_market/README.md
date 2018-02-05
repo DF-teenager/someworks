@@ -1,10 +1,10 @@
 
 ## User Interface
 
-<a href="#" target="_blank"><img src="./_ui/page-1.jpg" width="218"></a>
-<a href="#" target="_blank"><img src="./_ui/page-2.jpg" width="218"></a>
-<a href="#" target="_blank"><img src="./_ui/page-3.jpg" width="218"></a>
-<a href="#" target="_blank"><img src="./_ui/page-4.jpg" width="218"></a>
+<a href="#" target="_blank"><img src="./_uis/page-1.jpg" width="218"></a>
+<a href="#" target="_blank"><img src="./_uis/page-2.jpg" width="218"></a>
+<a href="#" target="_blank"><img src="./_uis/page-3.jpg" width="218"></a>
+<a href="#" target="_blank"><img src="./_uis/page-4.jpg" width="218"></a>
 
 ## Quick start
 
