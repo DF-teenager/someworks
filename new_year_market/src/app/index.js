@@ -24,7 +24,7 @@ var home = Vue.extend({
             couponIds: [],
             lotteryNum: 0,
             couponNum: 0,
-            isBind: false, // 绑定状态
+            isBind: true, // 绑定状态
             marketCoupons: [
                 { id: 1, value: 2000, name: '现金卡', firstBit: '2', plusBit: '000', unit: '元', checked: false },
                 { id: 2, value: 50, name: '现金券', firstBit: '5', plusBit: '0', unit: '元', checked: false },
@@ -79,7 +79,8 @@ var home = Vue.extend({
         },
         page_show: function(value) {
             if(value === 2) {
-                window.scrollTo(0, document.body.scrollHeight);
+                // window.scrollTo(0, document.body.scrollHeight);
+                document.body.scrollHeight > window.innerHeight ? document.body.scrollTop = document.body.scrollHeight : null;
             }
         }
     },
