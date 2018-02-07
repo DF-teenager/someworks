@@ -13,31 +13,35 @@ import '../assets/app.scss';
 
 var YD = {};
 var template;
+var $el;
 
 YD.Template = function () {
     /** 变量 */
-    this.anchorLinks = ['section-01', 'section-02', 'section-03', 'section-04', 'section-05', 'section-06', 'section-07', 'section-08', 'section-09', 'section-10', 'section-11', 'section-12', 'section-13', 'section-14'];
-
+    this.$anchorLinks = ['section-01', 'section-02', 'section-03', 'section-04', 'section-05', 'section-06', 'section-07', 'section-08', 'section-09', 'section-10', 'section-11', 'section-12', 'section-13', 'section-14', 'section-15', 'section-16'];
+    this.$nextPage = $('#nextPage');
     /** 初始化 */
     this.init = function () {
         var self = this;
         self.events();
         if (!$('html').hasClass('fp-enabled')) {
             $('#fullpage').fullpage({
-                anchors: self.anchorLinks,
-                afterLoad: function (anchorLink) {
-                    var $el = $('.' + anchorLink + ' .animated');
+                anchors: self.$anchorLinks,
+                afterLoad: function (anchorLink, index) {
+                    $el = $('.' + anchorLink + ' .animated');
                     $el.each(function (i, item) {
                         var dataAn = $(item).attr('data-an');
                         var dataDelay = $(item).attr('data-delay');
                         $(item).css({ 'animation-delay': dataDelay + 's', '-webkit-animation-delay': dataDelay + 's', '-moz-animation-delay': dataDelay + 's', '-ms-animation-delay': dataDelay + 's' }).addClass(dataAn).css('opacity', '1');
+                        item.id === 'path_light' ? $(item).attr('class', 'animated ringRotate') : null;
                     });
+                    index === 16 ? self.$nextPage.hide() : self.$nextPage.show();
                 },
                 onLeave: function () {
                     var $anEl = $('.animated');
                     $anEl.each(function (j, item) {
                         var dataAn = $(item).attr('data-an');
                         $(item).css('opacity', '0').removeClass(dataAn);
+                        item.id === 'path_light' ? $(item).attr('class', 'animated') : null;
                     });
                 },
             });
@@ -46,6 +50,10 @@ YD.Template = function () {
 
     this.events = function () {
         /** 事件方法 */
+        var self = this;
+        self.$nextPage.on('click', function () {
+            $.fn.fullpage.moveSectionDown();
+        });
     };
 };
 

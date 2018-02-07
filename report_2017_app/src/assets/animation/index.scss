@@ -1,11 +1,167 @@
-/**
- * 打字效果
- */
-@keyframes typing {
-    from {
-        width: 0;
+
+@keyframes arrowdown {
+    0% {
+        opacity: 0;
+        bottom: .786667rem
+    }
+    50% {
+        opacity: 1;
+        bottom: .52rem;
+    }
+    to {
+        opacity: 0;
+        bottom: .253333rem;
+    }    
+}
+
+@keyframes zoomInBig {
+    0% {
+        opacity: 0;
+        transform: scale3d(0,0,0)
+    }
+
+    50% {
+        opacity: 1;
     }
 }
-@keyframes caret {
-    50% { border-right-color: currentColor}
+
+.zoomInBig {
+    animation-name: zoomInBig
+}
+
+@keyframes pointToLine {
+    0% {
+        width: 0;
+        transform: scale(0);
+    }
+    20% {
+        width: 0;
+        transform: scale(1);
+    }
+    50%, 
+    100% {
+        width: 1.16rem;
+    }
+}
+.pointToLine {
+    animation-name: pointToLine;
+}
+@keyframes pointToHollowCircle {
+    0% {
+        transform: scale(0);
+    }
+    30% {
+        transform: scale(1);
+    }
+}
+.pointToHollowCircle {
+    animation-name: pointToHollowCircle;
+}
+@keyframes pointToCirclePlus {
+    0% {
+        transform: scale(0);
+    }
+    30% {
+        transform: scale(1.2);
+    }
+    70%,
+    50% {
+        transform: scale(1);
+    }
+    60% {
+        transform: scale(1.1);
+    }
+}
+.pointToCirclePlus {
+    animation-name: pointToCirclePlus;
+}
+@keyframes fadeInLeftSmall {
+    0% {
+        opacity: 0;
+        transform: translate3d(-30%,0,0)
+    }
+    to {
+        opacity: 1;
+        transform: none
+    }
+}
+.fadeInLeftSmall {
+    animation-name: fadeInLeftSmall;
+}
+@keyframes fadeInLeftSmall {
+    0% {
+        opacity: 0;
+        transform: translate3d(-30%,0,0)
+    }
+    to {
+        opacity: 1;
+        transform: none
+    }
+}
+.fadeInLeftSmall {
+    animation-name: fadeInLeftSmall;
+}
+@keyframes ringRotate {
+    0% {
+        stroke-dashoffset: 301.593px;
+    }
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+.ringRotate{
+    animation-name: ringRotate;
+}
+@keyframes ringBoxShadow {
+    0% {
+        box-shadow: 0 0 0 #1c82c6;
+    }
+    50% {
+        box-shadow: 0 0 12px #1c82c6;
+    }
+    100% {
+        box-shadow: 0 0 0 #1c82c6;
+    }
+}
+.ringBoxShadow{
+    animation-name: ringBoxShadow;
+}
+@keyframes barToLen {
+    0%,
+    9% {
+        opacity: 0;
+        transform: scale3d(1, 0, 0);
+    }
+    10% {
+        opacity: 0;
+        transform: scale3d(1, .3, .3);
+    }
+    50% {
+        opacity: 1;
+    }
+}
+.barToLen{
+    animation-name: barToLen;
+}
+@keyframes __lightSpeedIn {
+    from {
+        transform: translateX(-50%) translate3d(100%, 0, 0) skewX(-30deg);
+        opacity: 0;
+    }
+    60% {
+        transform: translateX(-50%) skewX(20deg);
+        opacity: 1;
+    }
+    80% {
+        transform: translateX(-50%) skewX(-5deg);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(-50%);
+        opacity: 1;
+    }
+}
+.__lightSpeedIn {
+    animation-name: __lightSpeedIn;
+    animation-timing-function: ease-out;
 }
