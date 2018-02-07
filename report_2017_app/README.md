@@ -24,7 +24,7 @@ new_year_market/
 │   │   ├── normalize/
 │   │   │   └── index.scss    //统一浏览器默认样式
 │   │   ├── iconfonts/
-│   │   │   └── index.scss    //常用图标
+│   │   │   └── index.scss    //内联字体&&字体图标
 │   │   ├── animation/
 │   │   │   └── index.scss    //css动画
 │   │   ├── mixins/

@@ -23,6 +23,8 @@ new_year_market/
 │   ├── assets/
 │   │   ├── normalize/
 │   │   │   └── index.scss    //统一浏览器默认样式
+│   │   ├── iconfonts/
+│   │   │   └── index.scss    //内联字体&&字体图标
 │   │   ├── animation/
 │   │   │   └── index.scss    //css动画
 │   │   ├── mixins/
