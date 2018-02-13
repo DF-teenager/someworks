@@ -9,7 +9,7 @@ Several quick start options are available:
 
 ## Link
 
-- [click here](https://www.yindou.com/events/report_2017)
+ - [click here](https://www.yindou.com/events/report_2017)
 
 ## User Interface
 
