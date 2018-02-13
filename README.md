@@ -1,6 +1,6 @@
-# someworks
+# Someworks
 
-## web
+## Web
 
 - [fouth_annual](https://github.com/l-hammer/someworks/tree/master/fouth_annual)
 - [report_2017](https://github.com/l-hammer/someworks/tree/master/report_2017)
