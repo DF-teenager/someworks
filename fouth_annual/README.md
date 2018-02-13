@@ -1,16 +1,11 @@
-# Parcel Vue Example
+## User Interface
 
-> Vue.js example using parcel bundler
+<a href="#" target="_blank"><img src="./uis/page.png" width="100%"></a>
 
-## Build Setup
+## Quick start
 
-```bash
-# install dependencies
-npm install
+Several quick start options are available:
 
-# serve with hot reload at localhost:1234
-npm run dev
-
-# build for production with minification
-npm run build
-```
+- Install dependencies with [npm](https://www.npmjs.com/): `npm install`
+- App development Run `npm run dev`
+- Open `http://localhost:1234` in your browser.
