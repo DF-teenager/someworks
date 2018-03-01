@@ -62,7 +62,6 @@
     "karma-sauce-launcher": "^1.2.0",
     "node-sass": "^4.7.2",
     "parcel-bundler": "^1.6.2",
-    "parcel-plugin-eslint": "^1.0.3",
-    "qs": "^6.5.1"
+    "parcel-plugin-eslint": "^1.0.3"
   }
 }
