@@ -18,11 +18,25 @@ YD.Template = function () {
     /** 初始化 */
     this.init = function () {
         this.events();
+        this.$rankdata();
     };
 
     this.events = function () {
         /** 事件方法 */
-        console.log(this);
+        var self = this;
+        self.$rankdata = function () {
+            $.ajax({
+                url: '/webapi/get_loan_rank',
+                type: 'POST',
+                success: function (res) {
+                    var result = $.parseJSON(res);
+                    console.log(result);
+                },
+                error: function (res) {
+                    alert(res);
+                },
+            });
+        };
     };
 };
 

@@ -28,9 +28,9 @@ app.use(
   proxy({
     changeOrigin: true,
     // 代理到测试环境
-    // target: 'http://songhwwww.yind123.com/',
+    target: 'http://songhwwww.yind123.com/',
     // 代理到mock环境
-    target: 'https://www.easy-mock.com/mock/5a952f51a563ca3b10c483fe/example/',
+    // target: 'https://www.easy-mock.com/mock/5a952f51a563ca3b10c483fe/example/',
     pathRewrite: { 
       '^/api': '' 
     },
