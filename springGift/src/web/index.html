@@ -82,31 +82,15 @@
                 <span>我的累计出借金额：</span><a class="btn" href="javascript: void(0);">请登录</a>
             </div>
             <div class="ranking">
-                <a href="javascript: void(0);" class="btn primary ele1 active">日排行</a>
-                <a href="javascript: void(0);" class="btn primary ele2">七日排行</a>
-                <a href="javascript: void(0);" class="btn primary ele3">活动期间排行</a>
+                <a data-type="day" href="javascript: void(0);" class="btn primary ele1 active">日排行</a>
+                <a data-type="week" href="javascript: void(0);" class="btn primary ele2">七日排行</a>
+                <a data-type="total" href="javascript: void(0);" class="btn primary ele3">活动期间排行</a>
             </div>
             <div class="shops-outer">
-                <div class="shops clearfix">
-                    <div class="shop">
-                        <span class="NO">NO.1</span>
-                        <img src="https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/03/spring_gift/pc/shop1.jpg" alt="">
-                        <span class="name">九阳电火锅</span>
-                    </div>
-                    <div class="shop">
-                        <span class="NO">NO.2</span>
-                        <img src="https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/03/spring_gift/pc/shop2.jpg" alt="">
-                        <span class="name">九阳电火锅</span>
-                    </div>
-                    <div class="shop">
-                        <span class="NO">NO.3</span>
-                        <img src="https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/03/spring_gift/pc/shop3.jpg" alt="">
-                        <span class="name">九阳电火锅</span>
-                    </div>
-                </div>
+                <div id="rankShopList" class="shops clearfix"></div>
             </div>
             <div class="backcash">
-                <span>日出借排行榜</span>
+                <span id="rankType">日出借排行榜</span>
             </div>
             <div class="table-container clearfix">
                 <div class="table">
@@ -115,21 +99,7 @@
                         <span>用户名</span>
                         <span class="lineend">出借金额</span>
                     </div>
-                    <div class="row">
-                        <span>第1名</span>
-                        <span>LHammer</span>
-                        <span class="lineend"><i class="icon gold_bag"></i>666666</span>
-                    </div>
-                    <div class="row">
-                        <span>第2名</span>
-                        <span>LHammer</span>
-                        <span class="lineend"><i class="icon gold_bag"></i> 999999</span>
-                    </div>
-                    <div class="row">
-                        <span class="last">第3名</span>
-                        <span class="last">LHammer</span>
-                        <span class="lineend last"><i class="icon gold_bag"></i> 888888</span>
-                    </div>
+                    <div id="rankListTbody"></div>
                 </div>
             </div>
             <div class="rules">
@@ -150,6 +120,24 @@
             </div>
         </div>
     </div>
+    <script id="rank-list-template" type="text/x-handlebars-template">
+        {{#each this}}
+        <div class="row">
+            <span {{#islast @index}} class="last" {{/islast}}>第{{onrank @index}}名</span>
+            <span {{#islast @index}} class="last" {{/islast}}>{{username}}</span>
+            <span class="lineend {{#islast @index}}last{{/islast}}"><i class="icon gold_bag"></i>{{total_money}}</span>
+        </div>
+        {{/each}}
+    </script>
+    <script id="rank-shop-list-template" type="text/x-handlebars-template">
+        {{#each this}}
+        <div class="shop {{#isfirst @index}}first{{/isfirst}}">
+            <span class="NO">{{rank}}</span>
+            <img src="{{src}}" alt="{{name}}">
+            <span class="name">{{name}}</span>
+        </div>
+        {{/each}}
+    </script>
     <!-- end line, please don't delete -->
     <script src="./index.js"></script>
 </body>

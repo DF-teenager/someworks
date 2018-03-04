@@ -202,6 +202,14 @@ $auxiliary-color: #fec519;
         height: 1804px;
         background: url('https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/03/spring_gift/pc/bg-3.jpg') no-repeat center;
         padding-top: 185px;
+        &.week {
+            height: 1929px;
+            background: url('https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/03/spring_gift/pc/rank-week-bg.jpg') no-repeat center;
+        }
+        &.total {
+            height: 2262px;
+            background: url('https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/03/spring_gift/pc/rank-total-bg.jpg') no-repeat center;
+        }
         .laon-sum {
             text-align: center;
             color: $auxiliary-color;
@@ -258,9 +266,13 @@ $auxiliary-color: #fec519;
                 width: 271px; height: 255px;
                 border: 1px solid #eeeeee;
                 margin-right: 12px;
+                margin-bottom: 12px;
                 padding: 6px;
                 position: relative;
                 background: white;
+                &.first {
+                    margin-left: 140px;
+                }
                 .NO {
                     color: $primary-color;
                     font: {
