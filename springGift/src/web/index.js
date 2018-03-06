@@ -39,45 +39,45 @@ YD.Template = function () {
     }, {
         rank: 'NO.2',
         src: 'https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/03/spring_gift/pc/shop2.jpg',
-        name: '九阳电火锅',
+        name: '小熊迷你煮咖啡壶',
     }, {
         rank: 'NO.3',
         src: 'https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/03/spring_gift/pc/shop3.jpg',
-        name: '九阳电火锅',
+        name: '50元返现',
     }];
     this.$rankWeekShopList = [{
         rank: 'NO.1',
         src: 'https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/03/spring_gift/pc/week-shop1.jpg',
-        name: '九阳电火锅',
+        name: '安睡宝 哥特纯羊毛加厚冬被',
     }, {
         rank: 'NO.2-3',
         src: 'https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/03/spring_gift/pc/week-shop2.jpg',
-        name: '九阳电火锅',
+        name: '九阳电饭煲',
     }, {
         rank: 'NO.4-5',
         src: 'https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/03/spring_gift/pc/week-shop3.jpg',
-        name: '九阳电火锅',
+        name: '银豆定制限量版水杯',
     }];
     this.$rankTotalShopList = [{
         rank: 'NO.1',
         src: 'https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/03/spring_gift/pc/total-shop1.jpg',
-        name: '九阳电火锅',
+        name: '华为 mate10 128G',
     }, {
         rank: 'NO.2-3',
         src: 'https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/03/spring_gift/pc/total-shop2.jpg',
-        name: '九阳电火锅',
+        name: '达氏进口空气净化器',
     }, {
         rank: 'NO.4-6',
         src: 'https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/03/spring_gift/pc/total-shop3.jpg',
-        name: '九阳电火锅',
+        name: '莱克手持除螨吸尘器',
     }, {
         rank: 'NO.7-10',
         src: 'https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/03/spring_gift/pc/total-shop4.jpg',
-        name: '九阳电火锅',
+        name: '爱华仕拉杆箱',
     }, {
         rank: 'NO.11-20',
         src: 'https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/03/spring_gift/pc/total-shop5.jpg',
-        name: '九阳电火锅',
+        name: '小熊迷你香薰机',
     }];
     this.$selectSelected = $('#selectSelected');
     this.$selectListEle = $('#selectList');
