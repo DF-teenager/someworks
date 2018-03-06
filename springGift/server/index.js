@@ -30,7 +30,7 @@ app.use(
     // 代理到测试环境
     target: 'http://songhwwww.yind123.com/',
     // 代理到mock环境
-    // target: ' https://www.easy-mock.com/mock/5a9bbebbf732a260b26dfef4/springGift',
+    target: ' https://www.easy-mock.com/mock/5a9bbebbf732a260b26dfef4/springGift',
     pathRewrite: { 
       '^/api': '' 
     },

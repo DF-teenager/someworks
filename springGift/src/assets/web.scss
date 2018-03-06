@@ -3,7 +3,7 @@
  * 例如：swiper.scss就不要使用@import引入，直接使用<link rel="stylesheet" href="https://static.yindou.com/web/css/swiper.min.css">
  */
 @import "normalize/index.scss";  /* resets */
-@import "animation/index.scss";  /* 常用动画 */
+@import "perfect-scrollbar/index.scss";  /* 常用动画 */
 @import "mixins/index.scss";  /* mixins */
 @import "iconfonts/index.scss";  /* mixins */
 
@@ -17,7 +17,14 @@
     line-height: 1;
 } 
 a, a:hover, a:active, a:visited {
+    color: white;
 	text-decoration: none;
+}
+.fl {
+    float: left;
+}
+.fr {
+    float: right;
 }
 html, body {
     height: 100%;
@@ -94,6 +101,7 @@ $auxiliary-color: #fec519;
             box-shadow: -1px 1px 0px 1px rgba($auxiliary-color, .6);
         }
         &.primary {
+            border: none;
             background: $primary-color;
             box-shadow: -1px 1px 0px 2px rgba($primary-color, .6); 
         }
@@ -202,6 +210,11 @@ $auxiliary-color: #fec519;
                 background: $primary-color;
             }
         }
+        .recordTbody{
+            width:100%; 
+            height: 180px;
+            position: relative; 
+        }
         a.btn.primary {
             width: 335px;
             @include pc-center(-169px, 192px);
@@ -229,7 +242,6 @@ $auxiliary-color: #fec519;
             background: url('https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/03/spring_gift/pc/rank-total-bg.jpg') no-repeat center;
             .table-container .table {
                 max-height: 359px;
-                overflow: scroll;
             }
         }
         .laon-sum {
@@ -354,6 +366,11 @@ $auxiliary-color: #fec519;
         }
         .table-container {
             margin-top: 42px;
+            .rankListTbody{
+                width:100%; 
+                max-height: 300px;
+                position: relative; 
+            }
             .table .row span {
                 width: 33.333333%;
                 &:nth-of-type(1) {
@@ -393,112 +410,124 @@ $auxiliary-color: #fec519;
     min-width: 165px;
     color: #b4b4b4;
     font-size: 12px;
-    vertical-align: middle
-}
-
-.at-select__selection {
-    position: relative;
-    display: block;
-    padding-left: 8px;
-    outline: none;
-    height: 36px;
-    line-height: 34px;
-    border: 1px solid #d4d4d4;
-    border-radius: 4px;
-    background-color: #fff;
-    transition: all .3s;
-    cursor: pointer;
-    overflow: hidden;
-    color: #939393;
-    .at-select__selected {
-        display: inline-block;
-        width: 126px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        word-wrap: normal;
-    }
-    .at-select__icon {
+    vertical-align: middle;
+    .at-select__selection {
         position: relative;
-        display: inline-block;
-        width: 36px; height: 34px;
+        display: block;
+        padding-left: 8px;
+        outline: none;
+        height: 36px;
         line-height: 34px;
-        background: #fafafa;
-    }
-    .YDSICON.yds-icon-arrow-down-b {
-        position: absolute;
-        top: 13px; right: 11px;
-        color: #d4d4d4;
-        transform-origin: center 5px;
-        transition: transform .3s;
-        &.reverse {
-            transform: rotate(180deg);
-            transition: transform .3s;
+        border: 1px solid #d4d4d4;
+        border-radius: 4px;
+        background-color: #fff;
+        transition: all .3s;
+        cursor: pointer;
+        overflow: hidden;
+        color: #939393;
+        .at-select__selected {
+            display: inline-block;
+            width: 126px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            word-wrap: normal;
         }
-    }
-    &:hover {
-        border-color: $primary-color;
+        .at-select__icon {
+            position: relative;
+            display: inline-block;
+            width: 36px; height: 34px;
+            line-height: 34px;
+            background: #fafafa;
+        }
         .YDSICON.yds-icon-arrow-down-b {
-            color: $primary-color;
+            position: absolute;
+            top: 13px; right: 11px;
+            color: #d4d4d4;
+            transform-origin: center 5px;
+            transition: transform .3s;
+            &.reverse {
+                transform: rotate(180deg);
+                transition: transform .3s;
+            }
+        }
+        &:hover {
+            border-color: $primary-color;
+            .YDSICON.yds-icon-arrow-down-b {
+                color: $primary-color;
+            }
+        }
+    }
+    .at-select__dropdown {
+        position: absolute;
+        top: 36px; left: 0px;
+        width: 100%;
+        max-height: 288px;
+        font-size: 12px;
+        border-radius: 4px;
+        background-color: #fff;
+        border: 1px solid #d4d4d4;
+        overflow-y: auto;
+        z-index: 99;
+        transform-origin: center top;
+        opacity: 0;
+        transform: scaleY(0);
+        transition: all .3s ease-in;
+        &.slideDownInGrow {
+            opacity: 1;
+            transform: scaleY(1);
+            transition: all .3s ease-in;
+        }
+        .at-select__list {
+            list-style: none;
+            padding: 0;
+            font-size: 0
+        }
+        .at-select__option {
+            display: inline-block;
+            max-width: 100%;
+            text-overflow: ellipsis;
+            word-wrap: normal;
+            width: 100%;
+            padding: 6px 12px;
+            font-size: 12px;
+            line-height: 2;
+            text-align: left;
+            white-space: nowrap;
+            transition: all .3s;
+            overflow: hidden;
+            cursor: pointer;
+            &:hover, &--focus {
+                background-color: #f2fcf2;
+                color: #86cd9e;
+            }
         }
     }
 }
-.at-select__dropdown {
-    position: absolute;
-    top: 36px; left: 0px;
-    width: 100%;
-    max-height: 288px;
-    font-size: 12px;
-    border-radius: 4px;
-    background-color: #fff;
-    border: 1px solid #d4d4d4;
-    overflow-y: auto;
-    z-index: 99;
-    transform-origin: center top;
-    opacity: 0;
-    transform: scaleY(0);
-    transition: all .3s ease-in;
-    &.slideDownInGrow {
-        opacity: 1;
-        transform: scaleY(1);
-        transition: all .3s ease-in;
+// 侧边导航
+.float_menu{
+    display: none;
+    position: fixed;
+    top: 50%; left: 50%;
+    margin-left: 425px;
+    margin-top: -139px;
+    width: 233px; height: 278px;
+    padding-top: 112px;
+    padding-left: 36px; 
+    font: {
+        size: 20px;
+        weight: 500;
     }
-}
-.at-select__dropdown .at-select__list {
-    list-style: none;
-    padding: 0;
-    font-size: 0
-}
-
-.at-select__dropdown .at-select__not-found {
-    padding: 6px 12px
-}
-
-.at-select__dropdown .at-select__option {
-    display: inline-block;
-    max-width: 100%;
-    text-overflow: ellipsis;
-    word-wrap: normal;
-    width: 100%;
-    padding: 6px 12px;
-    font-size: 12px;
-    line-height: 2;
-    text-align: left;
-    white-space: nowrap;
-    transition: all .3s;
-    overflow: hidden;
-    cursor: pointer
-}
-
-// .at-select__dropdown .at-select__option--selected {
-//     background-color: #f7f7f7
-// }
-
-.at-select__dropdown .at-select__option--focus,.at-select__dropdown .at-select__option:hover {
-    background-color: #f2fcf2;
-    color: #86cd9e;
-}
-
-.at-select--visible .at-select__arrow {
-    
+    z-index: 100;
+    background: url('https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/03/spring_gift/pc/float_menu.png') no-repeat center;
+    .menu_item{
+        display: inline-block;
+        width: 143px;
+        line-height: 39px;
+        text-align: center;
+        color: #ffffff;
+        &:hover, &.active{
+            color: #f8f25b;
+        }
+    }
 }

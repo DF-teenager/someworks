@@ -10,7 +10,7 @@
     <div class="main">
         <a href="#" class="back_index ft-14">返回首页</a>
         <div class="floor floor1"></div>
-        <div class="floor floor2">
+        <div class="floor floor2" id="floor2">
             <p class="con">活动期间，用户出借直投项目（新手标除外）单笔出借金额达到指定金额，即可按照比例获得返现。</p>
             <div class="table-container clearfix">
                 <div class="table">
@@ -44,7 +44,7 @@
                         <span class="lineend">返现金额（元）</span>
                     </div>
                     <div id="recordTbody" class="recordTbody clearfix">
-                        <!-- <div class="row">
+                        <div class="row">
                             <span>2017-11-1 11:00</span>
                             <span><i class="icon gold_bag"></i> 10000</span>
                             <span class="lineend">30</span>
@@ -58,15 +58,25 @@
                             <span>2017-11-1 11:00</span>
                             <span><i class="icon gold_bag"></i> 100000</span>
                             <span class="lineend ">100</span>
-                        </div> -->
-                        <div class="norecord">
-                            暂无返现记录
                         </div>
+                        <div class="row">
+                            <span>2017-11-1 11:00</span>
+                            <span><i class="icon gold_bag"></i> 20000</span>
+                            <span class="lineend">60</span>
+                        </div>
+                        <div class="row">
+                            <span>2017-11-1 11:00</span>
+                            <span><i class="icon gold_bag"></i> 100000</span>
+                            <span class="lineend ">100</span>
+                        </div>
+                        <!-- <div class="norecord">
+                            暂无返现记录
+                        </div> -->
                     </div>
-                    <!-- <div class="row footer">
+                    <div class="row footer">
                         <span class="all last">总计</span>
                         <span class="sum lineend last">199</span>
-                    </div> -->
+                    </div>
                 </div>
             </div>
             <!-- <{else}>
@@ -79,7 +89,7 @@
                 <p class="txt">4、本次活动最终解释权归银豆网所有。</p>
             </div>
         </div>
-        <div class="floor floor3">
+        <div class="floor floor3" id="floor3">
             <p class="con">活动期间，用户在规定周期内累计出借金额登上该周期的奖励名次，即可获得相应奖品。</p>
             <div class="laon-sum">
                 <!-- <span>我的累计出借金额：<span class="val">999999.99</span> 元</span> -->
@@ -98,9 +108,9 @@
             </div>
             <div class="at-select-outer">
                 <div class="at-select">
-                    <div class="at-select__selection">
-                        <span class="at-select__selected" id="selectSelected"></span>
-                        <span class="at-select__icon"><i class="YDSICON yds-icon-arrow-down-b"></i></span>
+                    <div class="at-select__selection clearfix">
+                        <span class="at-select__selected fl" id="selectSelected"></span>
+                        <span class="at-select__icon fl"><i class="YDSICON yds-icon-arrow-down-b"></i></span>
                     </div>
                     <div class="at-select__dropdown">
                         <ul class="at-select__list" id="selectList"></ul>
@@ -114,7 +124,7 @@
                         <span>用户名</span>
                         <span class="lineend">出借金额</span>
                     </div>
-                    <div id="rankListTbody"></div>
+                    <div id="rankListTbody" class="rankListTbody"></div>
                 </div>
             </div>
             <div class="rules">
@@ -125,7 +135,7 @@
                 <p class="txt">5、本次活动最终解释权归银豆网所有。</p>
             </div>
         </div>
-        <div class="floor floor4">
+        <div class="floor floor4" id="floor4">
             <p class="con">活动期间，每个项目（转让项目除外）最后一个出借成功的豆粉，可额外获得388积分奖励！（日常封标奖励388积分，活动期间奖励积分388*2=776积分，活动结束后恢复388积分）</p>
             <div class="rules">
                 <p class="txt">1、自动投标、手动投标均可参与本活动；</p>
@@ -134,6 +144,12 @@
                 <p class="txt">4、本次活动最终解释权归银豆网所有。</p>
             </div>
         </div>
+        <div class="float_menu">
+            <a href="#floor2" class="menu_item active">返现添收益</a>
+            <a href="#floor3" class="menu_item">土豪有惊喜</a>
+            <a href="#floor4" class="menu_item">封标奖励*2</a>
+            <a href="javascript: void(0);" id="scrollTop" class="menu_item">返回顶部</a>
+        </div>        
     </div>
     <!-- <input id="isLogin" type="hidden" value="<{$is_login}>"/> -->
     <script id="rank-list-template" type="text/x-handlebars-template">
@@ -165,7 +181,7 @@
     </script>
     <!-- end line, please don't delete -->
     <script type="text/javascript" src="https://static.yindou.com/web/js/jquery-1.11.1.min.js"></script>
-    <script src="https://cdn.bootcss.com/jquery.perfect-scrollbar/0.6.16/js/perfect-scrollbar.jquery.min.js"></script>
+    <script src="https://static.yindou.com/web/js/perfect-scrollbar.jquery.min.js"></script>
     <script src="./index.js"></script>
 </body>
 

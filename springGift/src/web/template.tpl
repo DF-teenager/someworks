@@ -1,11 +1,12 @@
 <!-- 
-    web端开发.tpl模板
+    web端开发.tpl模板示例
  -->
-<{extends file='web/layout/event/main.tpl'}>    
+ <{extends file='web/layout/event/main.tpl'}>
 
-<{block name=local_css_link}>  
-    <link rel="stylesheet" href="<{$g_resources_url}>/web/css/normalize.min.css">
-    <link href="<{$g_resources_url}>/web/css/perfect-scrollbar.min.css" rel="stylesheet">
+<{block name=local_css_link}> 
+<link rel="stylesheet" href="<{$g_resources_url}>/web/css/normalize.min.css">	
+<link href="<{$g_resources_url}>/web/css/perfect-scrollbar.min.css" rel="stylesheet">
+<link rel="stylesheet" href="<{$g_resources_url}>/web/css/swiper.min.css">	
 <{/block}>
 
 <{block name=content}>
@@ -13,7 +14,8 @@
 <{/block}>
 
 <{block name=local_js_link}>
-    <script src="<{$g_resources_url}>/web/js/perfect-scrollbar.jquery.min.js"></script>
+<script src="<{$g_resources_url}>/web/js/perfect-scrollbar.jquery.min.js"></script>
+<script type="text/javascript" src="<{$g_resources_url}>/web/js/swiper.min.js"></script>
 <{/block}>
 
 <{block name=local_js_block}>
@@ -28,3 +30,5 @@
 </style>
 <{/block}>
 
+
+<!-- 线上代码 http://118.190.126.206:8888/back-end/yindou_02/blob/master/application/views/web/events/2018/01/fourth_annual.tpl -->

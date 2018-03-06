@@ -3,6 +3,7 @@
  * 上线时拷贝dist目录下生成的样式，并在./template.tpl引入对应脚本
  */
 import $ from 'jquery';
+import PerfectScrollbar from 'perfect-scrollbar';
 import Handlebars from 'handlebars';
 import '../assets/web.scss';
 
@@ -18,6 +19,8 @@ YD.Template = function () {
     this.$unLoginBtn = $('.unLogin');
     this.$floor3Ele = $('.floor.floor3');
     this.$isLogin = $('#isLogin').val();
+    this.$scrollTop = $('#scrollTop');
+    this.$recordTbody = $('#recordTbody');
     this.$selectSelection = $('.at-select__selection');
     this.$selectDropdown = $('.at-select__dropdown');
     this.$iconArrowDown = $('.yds-icon-arrow-down-b');
@@ -141,13 +144,35 @@ YD.Template = function () {
         this.$getRankData(this.$rankArgs);
         this.$handleRankShops(this.$rankDayShopList);
         this.$handleSelectList(this.$selectList);
+        new PerfectScrollbar('#recordTbody');
+        new PerfectScrollbar('#rankListTbody');
     };
 
     this.events = function () {
         /** 事件方法 */
         var self = this;
+        // 滚动条
         self.$unLoginBtn.on('click', function () {
             YD.showLogin();
+        });
+        self.$scrollTop.on('click', function () {
+            $(window).scrollTop() === 0 ? false : ($('html, body').stop(true).animate({ scrollTop: 0 }, 600));
+        });
+        $(window).scroll(function () {
+            var i,
+                wst = $(window).scrollTop(),
+                wstmid = wst + ($(window).height() / 2);
+            if (wst > 589) {
+                $('.float_menu').fadeIn();
+            } else {
+                $('.float_menu').fadeOut();
+            }
+            for (i = 2; i < 5; i++) {
+                if ($('#floor' + i).offset().top <= wstmid) {
+                    $('.menu_item').removeClass('active');
+                    $('a[href="#floor' + i + '"]').addClass('active');
+                }
+            }
         });
         self.selectDropdownToggleClass = function () {
             self.$selectDropdown.toggleClass('slideDownInGrow');
@@ -171,7 +196,6 @@ YD.Template = function () {
             return self.$today().slice(2, -1) * 1 > 15 ? '3月9日 - 3月15日' : '3月16日 - 3月22日';
         };
         self.$getRankData = function (data) {
-            // if (self.$isLogin) {
             $.ajax({
                 url: '/webapi/get_loan_rank',
                 type: 'POST',
@@ -191,9 +215,6 @@ YD.Template = function () {
                     alert(res);
                 },
             });
-            // } else {
-            //     YD.showLogin();
-            // }
         };
         self.$rankBtnEles.on('click', function () {
             var list;
@@ -204,12 +225,13 @@ YD.Template = function () {
                 case 'day':
                     self.$rankArgs = {
                         sign: 1,
-                        date: self.$today(),
+                        date: new Date(new Date().getTime()).toISOString().split('T')[0],
                     };
                     list = self.$rankDayShopList;
                     self.$showRankCon('floor floor3');
                     self.$rankType.text('日出借排行榜');
                     self.$handleSelectList(self.$selectList);
+                    self.$selectSelection.show();
                     break;
                 case 'week':
                     self.$rankArgs = {
@@ -221,6 +243,7 @@ YD.Template = function () {
                     self.$rankType.text('七日出借排行榜');
                     self.$handleSelectList(self.$selectWeekList);
                     self.$selectSelected.text(self.$week());
+                    self.$selectSelection.show();
                     break;
                 case 'total':
                     self.$rankArgs = {
