@@ -144,8 +144,12 @@ YD.Template = function () {
         this.$getRankData(this.$rankArgs);
         this.$handleRankShops(this.$rankDayShopList);
         this.$handleSelectList(this.$selectList);
-        new PerfectScrollbar('#recordTbody');
-        new PerfectScrollbar('#rankListTbody');
+        new PerfectScrollbar('#recordTbody', {
+            wheelPropagation: true,
+        });
+        new PerfectScrollbar('#rankListTbody', {
+            wheelPropagation: true,
+        });
     };
 
     this.events = function () {
