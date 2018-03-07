@@ -79,6 +79,18 @@ YD.Template = function () {
         src: 'https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/03/spring_gift/pc/total-shop5.jpg',
         name: '小熊迷你香薰机',
     }];
+    this.$floor3bgs = [
+        'https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/03/spring_gift/pc/bg-3-old.jpg',
+        'https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/03/spring_gift/pc/rank-week-bg-old.jpg',
+        'https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/03/spring_gift/pc/rank-total-bg-old.jpg',
+    ];
+    this.$floor4bgs = [
+        'https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/03/spring_gift/pc/bg-4-old.jpg',
+        'https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/03/spring_gift/pc/bg-4-week.jpg',
+        'https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/03/spring_gift/pc/bg-4-total.jpg',
+    ];
+    this.$floor4Ele = $('.floor.floor4');
+    this.$cacheImgs = [];
     this.$selectSelected = $('#selectSelected');
     this.$selectListEle = $('#selectList');
     this.$selectListTemplate = $('#select-list-template').html();
@@ -159,6 +171,11 @@ YD.Template = function () {
         self.$unLoginBtn.on('click', function () {
             YD.showLogin();
         });
+        // 图片缓存
+        self.$floor3bgs.forEach(function (url, idx) {
+            self.$cacheImgs[idx] = new Image();
+            self.$cacheImgs[idx].src = url;
+        });
         self.$scrollTop.on('click', function () {
             $(window).scrollTop() === 0 ? false : ($('html, body').stop(true).animate({ scrollTop: 0 }, 600));
         });
@@ -236,6 +253,7 @@ YD.Template = function () {
                     self.$rankType.text('日出借排行榜');
                     self.$handleSelectList(self.$selectList);
                     self.$selectSelection.show();
+                    self.$floor4Ele.css('background-image', 'url(' + self.$floor4bgs[0] + ')');
                     break;
                 case 'week':
                     self.$rankArgs = {
@@ -248,6 +266,7 @@ YD.Template = function () {
                     self.$handleSelectList(self.$selectWeekList);
                     self.$selectSelected.text(self.$week());
                     self.$selectSelection.show();
+                    self.$floor4Ele.css('background-image', 'url(' + self.$floor4bgs[1] + ')');
                     break;
                 case 'total':
                     self.$rankArgs = {
@@ -257,6 +276,7 @@ YD.Template = function () {
                     self.$showRankCon('floor floor3 total');
                     self.$rankType.text('总出借排行榜');
                     self.$selectSelection.hide();
+                    self.$floor4Ele.css('background-image', 'url(' + self.$floor4bgs[2] + ')');
                     break;
                 default: break;
             }

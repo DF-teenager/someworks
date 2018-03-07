@@ -31,6 +31,7 @@ html, body {
     font: 100%/1 'Lantinghei SC' ,'Microsoft Yahei Mono';
     user-select: none;
     -webkit-font-smoothing: antialiased;
+    background: #86b73a;
 }
 .back_index {
     position: fixed;
@@ -174,7 +175,7 @@ $auxiliary-color: #fec519;
     }
     &.#{$floor}1 {
         height: 872px;
-	    background: url('https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/03/spring_gift/pc/bg-1-old.jpg') no-repeat center;
+	    background: url('https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/03/spring_gift/pc/bg-1-amend.jpg') no-repeat center;
     }
     &.#{$floor}2 {
         height: 1317px;
@@ -392,7 +393,9 @@ $auxiliary-color: #fec519;
     }
     &.#{$floor}4{
         height: 1342px;
-        background: url('https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/03/spring_gift/pc/bg-4-old.jpg') no-repeat center;
+        background-image: url('https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/03/spring_gift/pc/bg-4-old.jpg');
+        background-repeat: no-repeat;
+        background-position: center;
         padding-top: 502px;
         p.con {
             width: 742px;
@@ -509,7 +512,7 @@ $auxiliary-color: #fec519;
     display: none;
     position: fixed;
     top: 50%; left: 50%;
-    margin-left: 425px;
+    margin-left: 466px;
     margin-top: -139px;
     width: 233px; height: 278px;
     padding-top: 112px;
