@@ -194,7 +194,7 @@ YD.Template = function () {
         });
         self.$today = function () {
             var cur = new Date(new Date().getTime()).toISOString().split('T')[0];
-            return cur.slice(5).replace(/0/g, '').replace('-', '月') + '日';
+            return cur.slice(5).replace(/0/, '').replace('-0', '月').replace('-', '月') + '日';
         };
         self.$week = function () {
             return self.$today().slice(2, -1) * 1 > 15 ? '3月9日 - 3月15日' : '3月16日 - 3月22日';
