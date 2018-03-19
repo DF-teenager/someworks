@@ -534,3 +534,23 @@ $auxiliary-color: #fec519;
         }
     }
 }
+// 美化滚动条（LZ最后一次用你）
+.ps-container {
+    >.ps-scrollbar-y-rail {
+        width: 12px;
+        >.ps-scrollbar-y{ 
+            width: 4px; background-color: #4f7d1d;
+        }
+        &:hover>.ps-scrollbar-y{ 
+            width: 8px; background-color: #4f7d1d;
+        }
+    }
+    &:hover {
+        >.ps-scrollbar-y-rail:hover>.ps-scrollbar-y {
+            width: 8px; background-color: #4f7d1d;
+        }
+        &.ps-in-scrolling.ps-y>.ps-scrollbar-y-rail>.ps-scrollbar-y {
+            width: 8px; background-color: #4f7d1d;
+        }
+    }
+}
