@@ -15,13 +15,18 @@ const home = Vue.extend({
     data() {
         return {
             showPage: 0,
+            redpacketTypes: Array.from({ length: 7 }),
             redpackets: [1, 2, 3, 4, 5, 6, 7],
+            ariaControls: [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
         };
     },
     computed: {
         showProgress: function () {
             return this.$root.showProgress;
         },
+    },
+    created() {
+
     },
     watch: {
         showProgress: function (value) {
