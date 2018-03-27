@@ -1,0 +1,20 @@
+#运行环境
+language: node_js
+node_js: stable
+
+cache:
+  directories:
+    - node_modules
+
+install:
+  - npm install
+
+script:
+  # - npm run appbuildmin // parcel-plugin-eslint bug
+  - npm run webbuildmin
+  - npm run appegbuildmin
+  - npm run webegbuildmin
+
+branches:
+  only:
+    - master

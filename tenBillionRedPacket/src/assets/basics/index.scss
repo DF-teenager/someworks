@@ -1,0 +1,91 @@
+/**
+ * Created by LHammer on 18/03/07.
+ * base.scss
+ */
+@import "../mixins/index.scss";  /* mixins */
+
+@include font-size(12px, ".ft-12");
+@include font-size(13px, ".ft-13");
+@include font-size(14px, ".ft-14");
+@include font-size(15px, ".ft-15");
+@include font-size(16px, ".ft-16");
+@include font-size(18px, ".ft-18");
+
+html,
+body {
+    height: 100%;
+    line-height: 1;
+    user-select: none;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    font-family: 'Lantinghei SC', 'Microsoft Yahei Mono';
+}
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+.clearfix {
+    @include clearfix();
+}
+::-webkit-input-placeholder { /* WebKit browsers */ 
+    line-height: 1;
+}
+li {
+    list-style: none;
+}
+a, a:hover, a:active, a:visited{
+    text-decoration: none;
+}
+.fl {
+    float: left;
+}
+.fr {
+    float: right;
+}
+
+/** 
+ * 1px border
+ */
+ /** 
+ * 1px border
+ */
+.line-border {
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, .8);
+}
+@media (min-resolution: 2dppx) {
+    .line-border {
+        box-shadow: 0 0 0 .5px rgba(255, 255, 255, .8);
+    }
+}
+@media (min-resolution: 3dppx) {
+    .line-border {
+        box-shadow: 0 0 0 .33333333px rgba(255, 255, 255, .8);
+    }
+}
+@media (min-resolution: 4dppx) {
+    .line-border {
+        box-shadow: 0 0 0 .25px rgba(255, 255, 255, .8);
+    }
+}
+.line-border-bottom {
+    border-style: solid;
+    border-bottom-color: rgba(255, 255, 255, .8);
+    border-width: 0 0 1px;
+}
+@media (min-resolution: 2dppx) {
+    .line-border-bottom {
+        border-bottom-width: 0.5px;
+    }
+}
+@media (min-resolution: 3dppx) {
+    .line-border-bottom {
+        border-bottom-width: 0.33333333px;
+    }
+}
+@media (min-resolution: 4dppx) {
+    .line-border-bottom {
+        border-bottom-width: 0.25px;
+    }
+}
+

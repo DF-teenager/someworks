@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>银豆网</title>
+    <script src="https://static.yindou.com/weixin/js/flexible_css.js"></script>
+    <script src="https://static.yindou.com/weixin/js/flexible.js"></script>
+</head>
+
+<body>
+    <div id="app" class="main">
+        <div class="progress-block" v-if="showProgress">
+            <div class="progress-outer">
+                <div class="progress-enter">
+                    <div class="progress-bg" :style="{width: progressPercent + '%'}"></div>
+                </div>
+                <div class="tooltip ft-14" :style="{left: 'calc(' + progressPercent + '%)'}">{{progressPercent}}%</div>
+            </div>
+        </div>
+        <router-view></router-view>
+    </div>
+    <template id="home">
+        <div class="pages" v-if="!showProgress">
+            <div class="page01">
+                <div class="page01-header">
+                    <div class="left">
+                        <i class="YDSICON ICONCOMMON redpacket"></i>
+                        <span class="ft-20 line-border-bottom">200</span>
+                        <i class="YDSICON yds-icon-help-a ft-22"></i>
+                    </div>
+                    <div class="center ft-48">
+                        8<span class="ft-19">s</span>
+                    </div>
+                    <div class="right">
+                        <i class="YDSICON ICONCOMMON money"></i>
+                        <span class="ft-20 line-border-bottom">200</span>
+                        <i class="YDSICON yds-icon-help-a ft-22"></i>
+                    </div>
+                </div>
+                <div class="page01-body">
+                    <span class="RPICONCOMMON redpacket-1 aria-controls-1"></span>
+                    <span class="RPICONCOMMON redpacket-2 aria-controls-2"></span>
+                    <span class="RPICONCOMMON redpacket-3 aria-controls-3"></span>
+                    <span class="RPICONCOMMON redpacket-4 aria-controls-4"></span>
+                    <span class="RPICONCOMMON redpacket-5 aria-controls-5"></span>
+                    <span class="RPICONCOMMON redpacket-6 aria-controls-6"></span>
+                    <span class="RPICONCOMMON redpacket-7 aria-controls-7"></span>
+                    <span class="RPICONCOMMON redpacket-1 aria-controls-8"></span>
+                    <span class="RPICONCOMMON redpacket-2 aria-controls-9"></span>
+                    <span class="RPICONCOMMON redpacket-3 aria-controls-10"></span>
+                    <span class="RPICONCOMMON redpacket-4 aria-controls-11"></span>
+                    <span class="RPICONCOMMON redpacket-5 aria-controls-12"></span>
+                    <span class="RPICONCOMMON redpacket-6 aria-controls-13"></span>
+                    <span class="RPICONCOMMON redpacket-7 aria-controls-14"></span>
+                    <span class="RPICONCOMMON redpacket-1 aria-controls-15"></span>
+                    <span class="RPICONCOMMON redpacket-2 aria-controls-16"></span>
+                    <span class="RPICONCOMMON redpacket-3 aria-controls-17"></span>
+                    <span class="RPICONCOMMON redpacket-4 aria-controls-18"></span>
+                    <span class="RPICONCOMMON redpacket-5 aria-controls-19"></span>
+                </div>
+                <div class="page01-footer clearfix">
+                    <a class="btn line-border ft-19 fl" href="javascript: void(0);">已领记录<i class="YDSICON yds-icon-arrow-double-right-a ft-14"></i></a>
+                    <a class="btn line-border ft-19 fr" href="javascript: void(0);">活动规则<i class="YDSICON yds-icon-arrow-double-right-a ft-14"></i></a>
+                </div>
+            </div>
+        </div>
+    </template>
+    <!-- end line, please don't delete -->
+    <script src="./index.js"></script>
+</body>
+
+</html>
