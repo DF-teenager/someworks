@@ -6,14 +6,22 @@
 @import "animation/index.scss";  /* 常用动画 */
 @import "basics/index.scss";  /* base */
 @import "iconfonts/index.scss";  /* iconfonts */
+@import "components/app/dialog.scss";  /* dialog */
 
 @include font-size(19px, ".ft-19");
 @include font-size(20px, ".ft-20");
+@include font-size(21px, ".ft-21");
 @include font-size(22px, ".ft-22");
+@include font-size(28px, ".ft-28");
+@include font-size(38px, ".ft-38");
 @include font-size(48px, ".ft-48");
+@include font-size(100px, ".ft-100");
 
 #app{
     height: 100%;
+    > div {
+        height: 100%;
+    }
 }
 $progress: 'progress-';
 .#{$progress} {
@@ -73,6 +81,7 @@ $progress: 'progress-';
         }
     }
 }
+
 $page: 'page';
 .#{$page} {
     &s {
@@ -145,87 +154,99 @@ $page: 'page';
     }
     &-body {
         height: 10.026667rem;
-        // background: palevioletred;
         position: relative;
-        span[class*=redpacket] {
+        span[class*=redpacket], span[class*=aria-controls], span[class*=redpacket-main] {
             position: absolute;
             width: 1.44rem; height: 1.946667rem;
         }
+        span.coupon {
+            position: absolute;
+            top: 0; left: .426667rem;
+            color: #fff000;
+            z-index: 999;
+            opacity: 0;
+            > span.val {
+                font-weight: 800;
+            }
+            &.active {
+                animation: slideUpCoupon 1s linear;
+            }
+        }
         span.aria-controls-1 {
             top: .106667rem; left: 5.853333rem;
-            transform: rotate(25deg);
+            // transform: rotate(25deg);
         }
         span.aria-controls-2 {
             top: 1.066667rem; left: 2.52rem;
-            transform: rotate(25deg);
+            // transform: rotate(25deg);
         }
         span.aria-controls-3 {
             top: 3.36rem; left: 7.226667rem;
-            transform: rotate(25deg);
+            // transform: rotate(25deg);
         }
         span.aria-controls-4 {
             top: 4.026667rem; left: 3.853333rem;
-            transform: rotate(-25deg);
+            // transform: rotate(-25deg);
         }
         span.aria-controls-5 {
             top: 4.786667rem; left: .653333rem;
-            transform: rotate(0deg);
+            // transform: rotate(0deg);
         }
         span.aria-controls-6 {
             top: 7.186667rem; left: 5.986667rem;
-            transform: rotate(0deg);
+            // transform: rotate(0deg);
         }
         span.aria-controls-7 {
             top: 7.72rem; left: 1.986667rem;
-            transform: rotate(25deg);
+            // transform: rotate(25deg);
         }
         span.aria-controls-8 {
             top: 3.453333rem; left: 2.253333rem;
-            transform: rotate(0deg);
+            // transform: rotate(0deg);
         }
         span.aria-controls-9 {
             top: 5.226667rem; left: 6.653333rem;
-            transform: rotate(-25deg);
+            // transform: rotate(-25deg);
         }
         span.aria-controls-10 {
             top: 5.586667rem; left: 4.786667rem;
-            transform: rotate(25deg);
+            // transform: rotate(25deg);
         }
         span.aria-controls-11 {
             top: 1.76rem; left: 6.386667rem;
-            transform: rotate(-25deg);
+            // transform: rotate(-25deg);
         }
         span.aria-controls-12 {
             top: 3.453333rem; left: 5.453333rem;
-            transform: rotate(0deg);
+            // transform: rotate(0deg);
         }
         span.aria-controls-13 {
             top: 2.026667rem; left: 4.253333rem;
-            transform: rotate(25deg);
+            // transform: rotate(25deg);
         }
         span.aria-controls-14 {
             top: 7.586667rem; left: 4.12rem;
-            transform: rotate(-25deg);
+            // transform: rotate(-25deg);
         }
         span.aria-controls-15 {
             top: 2.92rem; left: .653333rem;
-            transform: rotate(-25deg);
+            // transform: rotate(-25deg);
         }
         span.aria-controls-16 {
             top: 5.72rem; left: 2.653333rem;
-            transform: rotate(-25deg);
+            // transform: rotate(-25deg);
         }
         span.aria-controls-17 {
             top: 6.52rem; left: .92rem;
-            transform: rotate(-25deg);
+            // transform: rotate(-25deg);
         }
         span.aria-controls-18 {
             top: 1.053333rem; left: .92rem;
-            transform: rotate(25deg);
+            // transform: rotate(25deg);
         }
         span.aria-controls-19 {
             top: .16rem; left: 4.013333rem;
-            transform: rotate(-25deg);
+            // transform: rotate(-25deg);
         }
     }
     &-footer {
@@ -248,5 +269,141 @@ $page: 'page';
             margin-left: .106667rem;
             vertical-align: -.013333rem;
         }
+    }
+}
+
+$dialog: 'dialog';
+.#{$dialog}-main {
+    width: 100%; height: 100%;
+}
+.#{$dialog}-container {
+    width: 100%; height: inherit;
+    background: transparent;
+}
+.#{$dialog}-grapRedpacket {
+    height: inherit;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-around;
+    padding: .92rem 0 .613333rem;
+    position: relative;
+    &::before {
+        content: "";
+        position: absolute;
+        width: 100%; height: 11.093333rem;
+        top: .693333rem; left: 0;
+        background: url('https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/03/tenBilRedPacket/page-bg-4.png') no-repeat center / 100%;
+        z-index: -1;
+    }
+    .top, .mid, .bot {
+        width: 10rem;
+    }
+    .top {
+        height: 4.066667rem;
+        > .bg {
+            display: inline-block;
+            width: 100%; height: inherit;
+            background: url('https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/03/tenBilRedPacket/page-bg-1.png') no-repeat center / 100%;
+        }
+    }
+    .mid {
+        height: 5.946667rem;
+        position: relative;
+        .mid-inner {
+            width: 100%; height: inherit;
+            background: url('https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/03/tenBilRedPacket/page-bg-3.png') no-repeat center / 100%;
+        }
+        .message-wraper {
+            position: absolute;
+            top: .56rem; left: .613333rem;
+            width: 1.933333rem; height: 1.36rem;
+            transform-origin: 199px 159px;
+        }
+        .message {
+            position: absolute;
+            top: 0; left: 0;
+            width: 1.933333rem; height: 1.36rem;
+            transform-origin: 199px 159px;
+            animation: shake 2s ease .5s infinite;
+        }
+        &::before {
+            content: "";
+            position: absolute;
+            width: 100%; height: 10.853333rem;
+            top: -2.293333rem; left: 0;
+            background: url('https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/03/tenBilRedPacket/page-bg-2.png') no-repeat center / 100%;
+            z-index: -1;
+        }
+        &.fadeOut::before {
+            animation: fadeOut 1s ease;
+        }
+    }
+    .bot {
+        height: 2.88rem;
+        position: relative;
+        padding-top: .32rem;
+        .startBtn {
+            display: inline-block;
+            width: 2.253333rem; height: 2.253333rem;
+            background-image: linear-gradient(to bottom, #ffa047, #ff3c28);
+            border-radius: 50%;
+            font-family: 'ydshkpp';
+            letter-spacing: 5px;
+            text-align: center;
+            padding-top: .52rem;
+            padding-left: .066667rem;
+            color: #fff475;
+            box-shadow: 0 0 0 .16rem #6e1d6a, 0 0 0 .32rem rgba($color: #6e1d6a, $alpha: .3);
+            &:active {
+                background-image: linear-gradient(to bottom, rgba($color: #ffa047, $alpha: .85), rgba($color: #ff3c28, $alpha: .85));
+                box-shadow: 0 0 0 .106667rem #6e1d6a, 0 0 0 .213333rem rgba($color: #6e1d6a, $alpha: .3);
+            }
+        }
+    }
+}
+.#{$dialog}-countdown {
+    width: 100%; height: 10.786667rem;
+    background: url('https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/03/tenBilRedPacket/countdown-bg-2.png') no-repeat center / 100%;
+    position: absolute;
+    top: 50%; left: 0;
+    margin-top: -5.4rem;
+    > span {
+        display: inline-block;
+        color: white;
+        font-weight: 800;
+        line-height: 10.786667rem;
+    }
+    .bg {
+        width: 100%; height: 10.786667rem;
+        background: url('https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/03/tenBilRedPacket/countdown-bg-1.png') no-repeat center / 100%;
+        position: absolute;
+        left: 0; top: 0;
+        z-index: -1;
+        animation: zoomInBig .9s 3;
+        animation-play-state: paused;
+        &.running {
+            animation-play-state: running;
+        }
+    }
+}
+.#{$dialog}-timeover {
+    width: 100%; height: 12.84rem;
+    background: url('https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/03/tenBilRedPacket/dialog-bg-3.png') no-repeat center / 100%;
+    position: absolute;
+    top: 50%; left: 0;
+    margin-top: -6.4rem;
+    padding-top: 1.946667rem;
+    h3.title {
+        color: white;
+        font-weight: 500;
+        font-family: 'PingFang SC';
+        text-shadow:    0 0 .16rem #74047e,
+                        0 0 .16rem #74047e,
+                        0 0 .16rem #74047e,
+                        0 0 .16rem #74047e,
+                        0 0 .16rem #74047e,
+                        0 0 .16rem #74047e,
+                        0 0 .16rem #74047e,
+                        0 0 .16rem #74047e;
     }
 }

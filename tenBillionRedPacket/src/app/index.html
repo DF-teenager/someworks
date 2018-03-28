@@ -20,50 +20,104 @@
         <router-view></router-view>
     </div>
     <template id="home">
-        <div class="pages" v-if="!showProgress">
-            <div class="page01">
-                <div class="page01-header">
-                    <div class="left">
-                        <i class="YDSICON ICONCOMMON redpacket"></i>
-                        <span class="ft-20 line-border-bottom">200</span>
-                        <i class="YDSICON yds-icon-help-a ft-22"></i>
+        <div>
+            <div class="pages" v-if="!showProgress">
+                <div class="page01">
+                    <div class="page01-header">
+                        <div class="left">
+                            <i class="YDSICON ICONCOMMON redpacket"></i>
+                            <span class="ft-20 line-border-bottom">200</span>
+                            <i class="YDSICON yds-icon-help-a ft-22"></i>
+                        </div>
+                        <div class="center ft-48">
+                            {{countdowns.play}}<span class="ft-19">s</span>
+                        </div>
+                        <div class="right">
+                            <i class="YDSICON ICONCOMMON money"></i>
+                            <span class="ft-20 line-border-bottom">200</span>
+                            <i class="YDSICON yds-icon-help-a ft-22"></i>
+                        </div>
                     </div>
-                    <div class="center ft-48">
-                        8<span class="ft-19">s</span>
+                    <div class="page01-body">
+                        <span v-for="(redpacket, index) in redpackets">
+                            <transition name="zoomRedpacket">
+                                <span :class="['aria-controls-' + redpacket.aria]" :key="redpacket.aria">
+                                    <span
+                                        :class="['redpacket-' + redpacket.type, 'RPICONCOMMON']"
+                                        :style="{transform: 'rotate(' + redpacket.rotate + 'deg)'}"
+                                        @click="onRedpacket(index)">
+                                    </span>
+                                    <span v-if="redpacket.lastAria === undefined" class="coupon ft-21"
+                                        :class="{active: redpacket.active}" 
+                                        @click="onRedpacket(index)">+<span class="val">200</span>
+                                    </span>
+                                </span>
+                            </transition>
+                            <span v-if="redpacket.lastAria" class="coupon ft-21"
+                                :key="redpacket.aria"
+                                :class="['aria-controls-' + redpacket.lastAria, {active: redpacket.lastActive}]" 
+                                @click="onRedpacket(index)">+<span class="val">200</span>
+                            </span>
+                        </span>
                     </div>
-                    <div class="right">
-                        <i class="YDSICON ICONCOMMON money"></i>
-                        <span class="ft-20 line-border-bottom">200</span>
-                        <i class="YDSICON yds-icon-help-a ft-22"></i>
+                    <div class="page01-footer clearfix">
+                        <a class="btn line-border ft-19 fl" href="javascript: void(0);">已领记录<i class="YDSICON yds-icon-arrow-double-right-a ft-14"></i></a>
+                        <a class="btn line-border ft-19 fr" href="javascript: void(0);">活动规则<i class="YDSICON yds-icon-arrow-double-right-a ft-14"></i></a>
                     </div>
-                </div>
-                <div class="page01-body">
-                    <span class="RPICONCOMMON redpacket-1 aria-controls-1"></span>
-                    <span class="RPICONCOMMON redpacket-2 aria-controls-2"></span>
-                    <span class="RPICONCOMMON redpacket-3 aria-controls-3"></span>
-                    <span class="RPICONCOMMON redpacket-4 aria-controls-4"></span>
-                    <span class="RPICONCOMMON redpacket-5 aria-controls-5"></span>
-                    <span class="RPICONCOMMON redpacket-6 aria-controls-6"></span>
-                    <span class="RPICONCOMMON redpacket-7 aria-controls-7"></span>
-                    <!-- <span class="RPICONCOMMON redpacket-1 aria-controls-8"></span>
-                    <span class="RPICONCOMMON redpacket-2 aria-controls-9"></span>
-                    <span class="RPICONCOMMON redpacket-3 aria-controls-10"></span>
-                    <span class="RPICONCOMMON redpacket-4 aria-controls-11"></span>
-                    <span class="RPICONCOMMON redpacket-5 aria-controls-12"></span>
-                    <span class="RPICONCOMMON redpacket-6 aria-controls-13"></span>
-                    <span class="RPICONCOMMON redpacket-7 aria-controls-14"></span>
-                    <span class="RPICONCOMMON redpacket-1 aria-controls-15"></span>
-                    <span class="RPICONCOMMON redpacket-2 aria-controls-16"></span>
-                    <span class="RPICONCOMMON redpacket-3 aria-controls-17"></span>
-                    <span class="RPICONCOMMON redpacket-4 aria-controls-18"></span>
-                    <span class="RPICONCOMMON redpacket-5 aria-controls-19"></span> -->
-                </div>
-                <div class="page01-footer clearfix">
-                    <a class="btn line-border ft-19 fl" href="javascript: void(0);">已领记录<i class="YDSICON yds-icon-arrow-double-right-a ft-14"></i></a>
-                    <a class="btn line-border ft-19 fr" href="javascript: void(0);">活动规则<i class="YDSICON yds-icon-arrow-double-right-a ft-14"></i></a>
                 </div>
             </div>
+            <v-dialog :show-dialog="dialogs.grab.open" @globalCloseDialog="closeDialog('grab')">
+                <div class="dialog-grapRedpacket" :class="{fadeOut: !unStart}" slot="mian">
+                    <div class="top">
+                        <transition name="bounceIn">
+                            <span v-if="unStart" class="bg"></span>
+                        </transition>
+                    </div>
+                    <div class="mid" :class="{fadeOut: !unStart}">
+                        <transition name="zoom">
+                            <div v-if="unStart" class="mid-inner"></div>
+                        </transition>
+                        <transition name="zoommsg">
+                            <div v-if="unStartMsg" class="message-wraper">
+                                <span class="ICONCOMMON popredpacket message"></span>
+                            </div>
+                        </transition>
+                    </div>
+                    <div class="bot">
+                        <transition name="reverseBounceIn">
+                            <a v-if="unStart" class="startBtn ft-28" @click="startGrab">开始<br>抢包</a>
+                        </transition>
+                    </div>
+                </div>
+            </v-dialog>
+            <v-dialog :show-dialog="dialogs.countdown.open" @globalCloseDialog="closeDialog('countdown')">
+                <div class="dialog-countdown" slot="mian">
+                    <span class="bg" :class="{running: dialogs.countdown.open}"></span>
+                    <span class="ft-100">{{countdowns.begin}}</span>
+                </div>
+            </v-dialog>
+            <v-dialog :show-dialog="dialogs.timeover.open" @globalCloseDialog="closeDialog('timeover')">
+                <div class="dialog-timeover" slot="mian">
+                    <h3 class="title ft-38">时间到</h3>
+                </div>
+            </v-dialog>
         </div>
+    </template>
+
+    <!-- 对话框组件 -->
+    <template id="dialog">
+        <transition name="dialog-fade">
+            <div class="dialog" v-show="showDialog">
+                <div class="dialog-mask"  @click="globalCloseDialog"></div>
+                <div class="dialog-main">
+                    <div class="dialog-container">
+                        <slot name="mian"></slot>
+                        <slot name="rule"></slot>
+                        <slot name="btn"></slot>
+                    </div>
+                </div>
+            </div>
+        </transition>
     </template>
     <!-- end line, please don't delete -->
     <script src="./index.js"></script>

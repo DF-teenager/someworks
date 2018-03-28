@@ -7,13 +7,12 @@ $dialog-prefix-cls: 'dialog';
 .#{$dialog-prefix-cls} {
     position: fixed;
     top: 0; right: 0; bottom: 0; left: 0;
-    z-index: 100;
+    z-index: 99999;
     &-mask {
         position: absolute;
         width: 100%; height: 100%;
         overflow: hidden;
-        background-color: #25262d;
-        opacity: .4;
+        background-color: rgba($color: #000000, $alpha: .8);
         &:before {
             content: ".";
             display: block;

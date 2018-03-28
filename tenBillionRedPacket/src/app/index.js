@@ -10,23 +10,155 @@ import '../assets/app.scss';
 Vue.use(VueRouter);
 // Vue.prototype.$axios = axios;
 
+Vue.component('v-dialog', {
+    template: '#dialog',
+    props: {
+        name: String,
+        showDialog: {
+            type: Boolean,
+            default: false,
+        },
+    },
+    methods: {
+        closeDialog() {
+            this.$emit('closeDialog', this.name);
+        },
+        globalCloseDialog() {
+            this.$emit('globalCloseDialog');
+        },
+    },
+});
 const home = Vue.extend({
     template: '#home',
     data() {
         return {
             showPage: 0,
-            redpacketTypes: Array.from({ length: 7 }),
-            redpackets: [1, 2, 3, 4, 5, 6, 7],
-            ariaControls: [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
+            redpackets: [
+                { type: 1, aria: 1, rotate: 25, active: false },
+                { type: 2, aria: 2, rotate: 25, active: false },
+                { type: 3, aria: 3, rotate: 25, active: false },
+                { type: 4, aria: 4, rotate: -25, active: false },
+                { type: 5, aria: 5, rotate: 25, active: false },
+                { type: 6, aria: 6, rotate: 0, active: false },
+                { type: 7, aria: 7, rotate: 25, active: false },
+            ],
+            dialogs: {
+                grab: {
+                    open: false,
+                },
+                countdown: {
+                    open: false,
+                },
+                timeover: {
+                    open: true,
+                },
+            },
+            unStart: false,
+            unStartMsg: false,
+            countdowns: {
+                begin: 3,
+                play: 8,
+            },
         };
     },
     computed: {
         showProgress: function () {
             return this.$root.showProgress;
         },
+        preRedpackets: function () {
+            const redPacketRotates = [25, 0, -25];
+            const redPacketTypes = Array.from({ length: 7 }).map((v, i) => i + 1);
+            const simpleType = () => redPacketTypes[Math.floor(Math.random() * redPacketTypes.length)];
+            const simpleRotate = () => redPacketRotates[Math.floor(Math.random() * redPacketRotates.length)];
+            const zipObject = (props, values) => props.reduce((obj, prop, index) => {
+                const o = (obj[prop] = values[index], obj);
+                return o;
+            }, {});
+
+            return Array.from({ length: 12 }).map((v, i) => {
+                return zipObject(['type', 'aria', 'rotate', 'active'], [simpleType(), i + 8, simpleRotate(), false]);
+            });
+        },
     },
     created() {
+        console.log(this.preRedpackets);
+    },
+    methods: {
+        remove(arr, func) {
+            Array.isArray(arr) ? arr.filter(func).reduce((acc, val) => {
+                arr.splice(arr.indexOf(val), 1);
+                return acc.concat(val);
+            }, []) : [];
+        },
+        onRedpacket(idx) {
+            const self = this;
+            // 点击的红包
+            const selectedRedpacket = self.redpackets[idx];
+            // 随机生成一个红包
+            const simpleRedpacket = self.preRedpackets[Math.floor(Math.random() * self.preRedpackets.length)];
+            // 从可选的红包中remove点击的红包
+            // self.remove(self.redpackets, ele => ele.aria === selectedRedpacket.aria);
+            self.redpackets[idx].active = true;
+            // push点击的红包预选红包中
+            self.preRedpackets.push(selectedRedpacket);
+            // 从预选红包中remove随机生成的红包
+            self.remove(self.preRedpackets, ele => ele.aria === simpleRedpacket.aria);
+            // push随生成的红包到可选的红包中
+            // self.redpackets.push(simpleRedpacket);
+            // 用随机生成的红包替换已点击的红包
+            simpleRedpacket.lastAria = selectedRedpacket.aria;
+            simpleRedpacket.lastActive = selectedRedpacket.active || true;
+            self.redpackets = self.redpackets.map((ele) => {
+                ele.lastAria = false;
+                ele.lastActive = false;
+                return ele.aria === selectedRedpacket.aria ? simpleRedpacket : ele;
+            });
+        },
+        closeDialog(name) {
+            const self = this;
+            self.dialogs[name].open = false;
+        },
+        startGrab() {
+            const self = this;
+            self.unStart = false;
+            self.unStartMsg = false;
+            setTimeout(() => {
+                self.closeDialog('grab');
+                self.dialogs.countdown.open = true;
+                self.startCountdown();
+            }, 600);
+        },
+        startCountdown() {
+            let timer = null;
+            const self = this;
 
+            timer = setInterval(() => {
+                self.countdowns.begin -= 1;
+                if (self.countdowns.begin === 0) {
+                    clearInterval(timer);
+                    self.closeDialog('countdown');
+                    self.playCountdown();
+                }
+            }, 1000);
+        },
+        playCountdown() {
+            let timer = null;
+            const self = this;
+
+            timer = setInterval(() => {
+                self.countdowns.play -= 1;
+                if (self.countdowns.play === 0) {
+                    clearInterval(timer);
+                }
+            }, 1000);
+        },
+    },
+    mounted() {
+        const self = this;
+        self.unStart = true;
+        setTimeout(() => {
+            self.unStartMsg = true;
+        }, 600);
     },
     watch: {
         showProgress: function (value) {
@@ -65,7 +197,7 @@ new Vue({
             },
         ],
     }),
-    mounted: function () {
+    mounted() {
         var self = this;
         self.imgs.forEach(function (url, idx) {
             self.cacheImgs[idx] = new Image();
