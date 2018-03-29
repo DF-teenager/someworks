@@ -5,21 +5,53 @@
 import axios from './config';
 
 export function fetch(url, params) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
         axios.post(url, params).then((response) => {
-            resolve(response.data);
+            if (response.code === 0) {
+                resolve(response.data);
+            } else {
+                alert(response.message);
+            }
         }).catch((error) => {
-            reject(error);
+            alert(error);
         });
     });
 }
 
 export default {
     /**
-     * 示例接口
-     * @param {*} data username
+     * 领取记录
+     * @param {*} data null
      */
-    test(data) {
-        return fetch('/webapi/test', data);
+    getCardRecords(data) {
+        return fetch('/webapi/get_activity_record', data);
+    },
+    /**
+     * 红包面值
+     * @param {*} data null
+     */
+    getRedpacketValues(data) {
+        return fetch('/webapi/get_user_bonus', data);
+    },
+    /**
+     * 领取奖励
+     * @param {*} data total_money: 本次红包金额, max_money: 历史最高奖励金额
+     */
+    receiveRedpacket(data) {
+        return fetch('/webapi/receive_user_bonus', data);
+    },
+    /**
+     * 保存数据
+     * @param {*} data total_money: 本次红包金额, max_money: 历史最高奖励金额
+     */
+    setDataToCatch(data) {
+        return fetch('/webapi/keep_user_bonus', data);
+    },
+    /**
+     * 获取保存数据
+     * @param {*} data null
+     */
+    getDataToCatch(data) {
+        return fetch('/webapi/get_user_cashcard', data);
     },
 };

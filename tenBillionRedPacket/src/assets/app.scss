@@ -8,6 +8,7 @@
 @import "iconfonts/index.scss";  /* iconfonts */
 @import "components/app/dialog.scss";  /* dialog */
 
+@include font-size(17px, ".ft-17");
 @include font-size(19px, ".ft-19");
 @include font-size(20px, ".ft-20");
 @include font-size(21px, ".ft-21");
@@ -26,12 +27,14 @@
 $progress: 'progress-';
 .#{$progress} {
     &block {
+        position: absolute;
         width: 100%; height: 100%;
         padding: 0 1.386667rem;
         background: #25213c url('https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/03/tenBilRedPacket/loading-bg.jpg') no-repeat left top / 100% 100%;
         display: flex;
         justify-content: center;
         flex-direction: column;
+        z-index: 999999;
     }
     &outer {
         border: 1px solid rgba(255, 255, 255, .8);
@@ -317,13 +320,13 @@ $dialog: 'dialog';
             position: absolute;
             top: .56rem; left: .613333rem;
             width: 1.933333rem; height: 1.36rem;
-            transform-origin: 199px 159px;
+            transform-origin: 2.653333rem 2.12rem;
         }
         .message {
             position: absolute;
             top: 0; left: 0;
             width: 1.933333rem; height: 1.36rem;
-            transform-origin: 199px 159px;
+            transform-origin: 2.653333rem 2.12rem;
             animation: shake 2s ease .5s infinite;
         }
         &::before {
@@ -348,7 +351,7 @@ $dialog: 'dialog';
             background-image: linear-gradient(to bottom, #ffa047, #ff3c28);
             border-radius: 50%;
             font-family: 'ydshkpp';
-            letter-spacing: 5px;
+            letter-spacing: .066667rem;
             text-align: center;
             padding-top: .52rem;
             padding-left: .066667rem;
@@ -386,7 +389,7 @@ $dialog: 'dialog';
         }
     }
 }
-.#{$dialog}-timeover {
+.#{$dialog}-timeover, .#{$dialog}-gameover, .#{$dialog}-congratulations {
     width: 100%; height: 12.84rem;
     background: url('https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/03/tenBilRedPacket/dialog-bg-3.png') no-repeat center / 100%;
     position: absolute;
@@ -405,5 +408,139 @@ $dialog: 'dialog';
                         0 0 .16rem #74047e,
                         0 0 .16rem #74047e,
                         0 0 .16rem #74047e;
+    }
+    .con {
+        padding: 1.173333rem 1.066667rem;
+        font-family: 'PingFang SC';
+        color: #ffe400;
+        > p {
+            margin-bottom: .333333rem;
+        }
+        .white {
+            color: white;
+            margin-bottom: .6rem;
+        }
+        .tips {
+            color: #fac8ff;
+        }
+        .btns {
+            padding-top: 1.133333rem;
+            a.btn {
+                display: inline-block;
+                width: 3.733333rem; height: 1.213333rem;
+                line-height: 1.213333rem; 
+                background: #ff9600;
+                margin-bottom: .4rem;
+                color: white;
+                border-radius: .24rem;
+                &.row {
+                    width: 100%;
+                    background: #ff612f;
+                    &:active {
+                        background: rgba($color: #ff612f, $alpha: .85);
+                    }
+                }
+                &.row + a {
+                    margin-right: .386667rem;
+                }
+                &:active {
+                    background: rgba($color: #ff9600, $alpha: .85);
+                }
+            }
+        }
+    }
+}
+.#{$dialog}-congratulations {
+    .con {
+        padding-top: 1.853333rem;
+    }
+    .card {
+        font-weight: 500;
+        margin-bottom: .653333rem !important;
+    }
+}
+.#{$dialog}-rules, .#{$dialog}-single, .#{$dialog}-highest {
+    width: 100%; height: 10.933333rem;
+    background: url('https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/03/tenBilRedPacket/dialog-bg-1.png') no-repeat center / 100%;
+    position: absolute;
+    top: 50%; left: 0;
+    margin-top: -5.466667rem;
+    padding: 1.44rem .933333rem;
+    letter-spacing: .026667rem;
+    > p {
+        color: white;
+        line-height: .56rem;
+    }
+    > p.justify {
+        text-align: justify;
+    }
+}
+.#{$dialog}-single, .#{$dialog}-highest {
+    height: 3.706667rem;
+    background: url('https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/03/tenBilRedPacket/dialog-bg-2.png') no-repeat center / 100%;
+    position: absolute;
+    margin-top: -1.853333rem;
+    padding-top: 1.306667rem;
+}
+
+// records
+.records {
+    height: 100%;
+    background: #a82891 url('https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/03/tenBilRedPacket/records-bg.jpg') no-repeat center top / 100%;
+    padding: 2.44rem .4rem .4rem;
+    &-table {
+        width: 100%; min-height: .386667rem;
+        background: #fff;
+        font-size: .32rem;
+        &-header {
+            background: #821cf6;
+            color: #fef3dd;
+            display: flex;
+            > span {
+                height: .813333rem;
+                flex: 1;
+                text-align: center;
+                line-height: .8rem;
+                border-bottom: 1px solid #621d8c;
+                &:not(:last-child) {
+                    border-right: 1px solid #621d8c;
+                }
+            }
+        }
+        &-body {
+            background: #f4eaff;
+            color: #555555;
+            .item {
+                width: 100%;
+                display: flex;
+                > span {
+                    height: .813333rem;
+                    flex: 1;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border-bottom: 1px solid #621d8c;
+                    &:not(:last-child){
+                        border-right: 1px solid #621d8c;
+                    }
+                }
+            }
+        }
+        .empty{
+            background: #f4eaff;
+            color: #555555;
+            height: 2.4rem;
+            line-height: 2.4rem;
+            text-align: center;
+        }
+        div.loading {
+            background: #f4eaff;
+            text-align: center;
+            padding: 1.226667rem;
+            > span[class*=loading] {
+                color: #821cf6;
+                animation: loading-circle 1s linear infinite;
+            }
+        }
     }
 }

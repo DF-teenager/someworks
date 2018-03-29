@@ -19,6 +19,17 @@
         background-position: 200% 0;
     }
 }
+@keyframes loading-circle {
+    from { 
+        transform: rotate(0deg);
+    }
+    50%  { 
+        transform: rotate(180deg);
+    }
+    to   { 
+        transform: rotate(360deg);
+    }
+}
 
 /**
  * fadein
@@ -45,8 +56,12 @@
 .dialog-fade-enter-active {
     animation: dialog-fadein .4s
 }
-
-.dialog-fade-enter-active .dialog-container {
+.dialog-fade-enter-active .dialog-container .dialog-countdown,
+.dialog-fade-enter-active .dialog-container .dialog-congratulations,
+.dialog-fade-enter-active .dialog-container .dialog-timeover,
+.dialog-fade-enter-active .dialog-container .dialog-single,
+.dialog-fade-enter-active .dialog-container .dialog-highest,
+.dialog-fade-enter-active .dialog-container .dialog-rules {
     animation: dialog-zoom .4s
 }
 

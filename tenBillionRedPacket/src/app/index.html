@@ -26,16 +26,16 @@
                     <div class="page01-header">
                         <div class="left">
                             <i class="YDSICON ICONCOMMON redpacket"></i>
-                            <span class="ft-20 line-border-bottom">200</span>
-                            <i class="YDSICON yds-icon-help-a ft-22"></i>
+                            <span class="ft-20 line-border-bottom">{{currentTotal}}</span>
+                            <i class="YDSICON yds-icon-help-a ft-22" @click="showDialog('single')"></i>
                         </div>
                         <div class="center ft-48">
                             {{countdowns.play}}<span class="ft-19">s</span>
                         </div>
                         <div class="right">
                             <i class="YDSICON ICONCOMMON money"></i>
-                            <span class="ft-20 line-border-bottom">200</span>
-                            <i class="YDSICON yds-icon-help-a ft-22"></i>
+                            <span class="ft-20 line-border-bottom">{{highestTotal}}</span>
+                            <i class="YDSICON yds-icon-help-a ft-22" @click="showDialog('highest')"></i>
                         </div>
                     </div>
                     <div class="page01-body">
@@ -49,71 +49,146 @@
                                     </span>
                                     <span v-if="redpacket.lastAria === undefined" class="coupon ft-21"
                                         :class="{active: redpacket.active}" 
-                                        @click="onRedpacket(index)">+<span class="val">200</span>
+                                        @click="onRedpacket(index)">+<span class="val">{{redpacket.lastValue}}</span>
                                     </span>
                                 </span>
                             </transition>
                             <span v-if="redpacket.lastAria" class="coupon ft-21"
                                 :key="redpacket.aria"
                                 :class="['aria-controls-' + redpacket.lastAria, {active: redpacket.lastActive}]" 
-                                @click="onRedpacket(index)">+<span class="val">200</span>
+                                @click="onRedpacket(index)">+<span class="val">{{redpacket.lastValue}}</span>
                             </span>
                         </span>
                     </div>
                     <div class="page01-footer clearfix">
-                        <a class="btn line-border ft-19 fl" href="javascript: void(0);">已领记录<i class="YDSICON yds-icon-arrow-double-right-a ft-14"></i></a>
-                        <a class="btn line-border ft-19 fr" href="javascript: void(0);">活动规则<i class="YDSICON yds-icon-arrow-double-right-a ft-14"></i></a>
+                        <a class="btn line-border ft-19 fl" href="javascript: void(0);" @click="viewRecords">已领记录<i class="YDSICON yds-icon-arrow-double-right-a ft-14"></i></a>
+                        <a class="btn line-border ft-19 fr" href="javascript: void(0);" @click="showDialog('rules')">活动规则<i class="YDSICON yds-icon-arrow-double-right-a ft-14"></i></a>
                     </div>
                 </div>
             </div>
-            <v-dialog :show-dialog="dialogs.grab.open" @globalCloseDialog="closeDialog('grab')">
-                <div class="dialog-grapRedpacket" :class="{fadeOut: !unStart}" slot="mian">
+            <v-dialog :show-dialog="dialogs.grab.open" @global-close-dialog="closeDialog('grab')">
+                <div class="dialog-grapRedpacket" :class="{fadeOut: !startStatus}" slot="mian">
                     <div class="top">
                         <transition name="bounceIn">
-                            <span v-if="unStart" class="bg"></span>
+                            <span v-if="startStatus" class="bg"></span>
                         </transition>
                     </div>
-                    <div class="mid" :class="{fadeOut: !unStart}">
+                    <div class="mid" :class="{fadeOut: !startStatus}">
                         <transition name="zoom">
-                            <div v-if="unStart" class="mid-inner"></div>
+                            <div v-if="startStatus" class="mid-inner"></div>
                         </transition>
                         <transition name="zoommsg">
-                            <div v-if="unStartMsg" class="message-wraper">
+                            <div v-if="startStatusDelay" class="message-wraper">
                                 <span class="ICONCOMMON popredpacket message"></span>
                             </div>
                         </transition>
                     </div>
                     <div class="bot">
                         <transition name="reverseBounceIn">
-                            <a v-if="unStart" class="startBtn ft-28" @click="startGrab">开始<br>抢包</a>
+                            <a v-if="startStatus" class="startBtn ft-28" @click="startGrab">开始<br>抢包</a>
                         </transition>
                     </div>
                 </div>
             </v-dialog>
-            <v-dialog :show-dialog="dialogs.countdown.open" @globalCloseDialog="closeDialog('countdown')">
+            <v-dialog :show-dialog="dialogs.countdown.open">
                 <div class="dialog-countdown" slot="mian">
                     <span class="bg" :class="{running: dialogs.countdown.open}"></span>
                     <span class="ft-100">{{countdowns.begin}}</span>
                 </div>
             </v-dialog>
-            <v-dialog :show-dialog="dialogs.timeover.open" @globalCloseDialog="closeDialog('timeover')">
+            <v-dialog :show-dialog="dialogs.timeover.open" @global-close-dialog="closeDialog('timeover')">
                 <div class="dialog-timeover" slot="mian">
                     <h3 class="title ft-38">时间到</h3>
+                    <div class="con">
+                        <p class="ft-19 white">速度666</p>
+                        <p class="ft-19">获得红包金额：{{currentTotal}}元</p>
+                        <p class="ft-19">最高奖励金额：{{highestTotal}}元</p>
+                        <div class="btns clearfix">
+                            <a class="btn ft-16 row" href="javascript: void(0);" @click="playAgain('timeover')">再玩一次</a>
+                            <a class="btn ft-16 fl" href="javascript: void(0);" @click="receiveRedpacket('total_money')">领取本次红包金额</a>
+                            <a class="btn ft-16 fl" href="javascript: void(0);" @click="receiveRedpacket('max_money')">领取历史最高奖励</a>
+                        </div>
+                    </div>
+                </div>
+            </v-dialog>
+            <v-dialog :show-dialog="dialogs.gameover.open" @global-close-dialog="closeDialog('gameover')">
+                <div class="dialog-gameover" slot="mian">
+                    <h3 class="title ft-38">时间到</h3>
+                    <div class="con">
+                        <p class="ft-19 white">速度666</p>
+                        <p class="ft-19">获得红包金额：{{currentTotal}}元</p>
+                        <p class="ft-19">最高奖励金额：{{highestTotal}}元</p>
+                        <div class="btns">
+                            <a class="btn ft-16 row" href="javascript: void(0);" @click="playAgain('gameover')">再玩一次</a>
+                            <p class="tips ft-14">很遗憾您今日领取机会已用完，明天还可再领</p>
+                        </div>
+                    </div>
+                </div>
+            </v-dialog>
+            <v-dialog :show-dialog="dialogs.congratulations.open" @global-close-dialog="closeDialog('congratulations')">
+                <div class="dialog-congratulations" slot="mian">
+                    <h3 class="title ft-38">恭喜您</h3>
+                    <div class="con">
+                        <p class="ft-28 card">200元现金卡</p>
+                        <p class="ft-14 tips">已经发放到您的平台账户</p>
+                        <div class="btns">
+                            <a class="btn ft-16 row" href="javascript: void(0);" @click="closeDialog('congratulations')">确定</a>
+                        </div>
+                    </div>
+                </div>
+            </v-dialog>
+            <v-dialog :show-dialog="dialogs.rules.open" @global-close-dialog="closeDialog('rules')">
+                <div class="dialog-rules" slot="mian">
+                    <p class="ft-14 justify">1.活动时间：4月2日00:00-4月30日23:59:59；</p>
+                    <p class="ft-14 justify">2.8秒内快速点击屏幕内出现的红包，点击多少送多少，点击更多送更多，红包金额随机，奖励上不封顶；</p>
+                    <p class="ft-14 justify">3.豆粉可多次参与游戏，但每天只可领取一次奖励。可领取的红包金额以单次游戏最高纪录为准；</p>
+                    <p class="ft-14 justify">4.所获红包金额均为0.8%比例激活使用的现金卡，≧30天自动投标、手动投标（新手标及债权转让项目除外）均可参与本活动，有效期2天；</p>
+                    <p class="ft-14 justify">5.本次活动最终解释权归银豆网所有。</p>
+                </div>
+            </v-dialog>
+            <v-dialog :show-dialog="dialogs.single.open" @global-close-dialog="closeDialog('single')">
+                <div class="dialog-single" slot="mian">
+                    <p class="ft-14">实时记录单次游戏红包总金额<br>再玩一次会重新计算</p>
+                </div>
+            </v-dialog>
+            <v-dialog :show-dialog="dialogs.highest.open" @global-close-dialog="closeDialog('highest')">
+                <div class="dialog-highest" slot="mian">
+                    <p class="ft-14">保留记录当天单次游戏最高红包点击金额<br>如有更高记录随时刷新</p>
                 </div>
             </v-dialog>
         </div>
     </template>
-
+    <!-- 现金卡记录 -->
+    <template id="records">
+        <div class="records">
+            <div class="records-table">
+                <div class="records-table-header">
+                    <span>日期</span>
+                    <span>类型</span>
+                    <span>金额（元）</span>
+                </div>
+                <div v-if="!loading && records.length > 0" class="records-table-body">
+                    <div class="item" v-for="record in records">
+                        <span>{{record.dt}}</span>
+                        <span>{{record.bonus_type}}</span>
+                        <span>{{record.money}}</span>
+                    </div>
+                </div>
+                <div v-if="!loading && records.length === 0" class="empty">暂无年货记录</div>
+                <div v-if="loading" class="loading"><span class="YDSICON yds-icon-loading ft-20"></span></div>
+            </div>
+        </div>
+    </template>
     <!-- 对话框组件 -->
     <template id="dialog">
         <transition name="dialog-fade">
             <div class="dialog" v-show="showDialog">
-                <div class="dialog-mask"  @click="globalCloseDialog"></div>
+                <div class="dialog-mask"></div>
                 <div class="dialog-main">
-                    <div class="dialog-container">
+                    <div class="dialog-container" @click="globalCloseDialog">
                         <slot name="mian"></slot>
                         <slot name="rule"></slot>
-                        <slot name="btn"></slot>
+                        <slot name="btns"></slot>
                     </div>
                 </div>
             </div>
