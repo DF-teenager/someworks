@@ -176,7 +176,6 @@ const home = Vue.extend({
             // 点击的红包
             const selectedRedpacket = self.redpackets[idx];
             // console.log(selectedRedpacket);
-            console.log(idx);
             // 随机生成一个红包
             const simpleRedpacket = self.preRedpackets[Math.floor(Math.random() * self.preRedpackets.length)];
             // console.log(simpleRedpacket);
