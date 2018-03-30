@@ -37,7 +37,7 @@ export default {
      * 领取奖励
      * @param {*} data total_money: 本次红包金额, max_money: 历史最高奖励金额
      */
-    receiveRedpacket(data) {
+    gainRedpacket(data) {
         return fetch('/webapi/receive_user_bonus', data);
     },
     /**
@@ -59,6 +59,6 @@ export default {
      * @param {*} data null
      */
     getWxShareConfig(data) {
-        return fetch('/webapi/wx_share_api', data);
+        return fetch('/wx/wx_share_api', data);
     },
 };

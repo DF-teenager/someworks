@@ -11,13 +11,17 @@ import wx from 'weixin-js-sdk';
  * @param {Object} data 分享内容（标题、描述、图标、链接）
  */
 export default {
-    setConfig: function (data) {
+    setConfig: function () {
         wx.config({
-            debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-            appId: data.appid, // 必填，公众号的唯一标识
-            timestamp: data.timestamp, // 必填，生成签名的时间戳
-            nonceStr: data.noncestr, // 必填，生成签名的随机串
-            signature: data.signature, // 必填，签名
+            debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+            // appId: data.appid, // 必填，公众号的唯一标识
+            // timestamp: data.timestamp, // 必填，生成签名的时间戳
+            // nonceStr: data.noncestr, // 必填，生成签名的随机串
+            // signature: data.signature, // 必填，签名
+            appId: '<{$ticket.appid}>', // 必填，公众号的唯一标识
+            timestamp: '<{$ticket.timestamp}>', // 必填，生成签名的时间戳
+            nonceStr: '<{$ticket.noncestr}>', // 必填，生成签名的随机串
+            signature: '<{$ticket.signature}>', // 必填，签名
             jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareQZone'], // 必填，需要使用的JS接口列表
         });
     },
@@ -26,8 +30,7 @@ export default {
             wx.checkJsApi({
                 // 检测是否支持分享的接口
                 jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareQZone'],
-                success: function (res) {
-                    console.log(res);
+                success: function () {
                     /**
                      * 发送给朋友
                      */

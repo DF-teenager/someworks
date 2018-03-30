@@ -538,6 +538,8 @@ $dialog: 'dialog';
         &-body {
             background: #f4eaff;
             color: #555555;
+            max-height: 10.573333rem;
+            overflow: scroll;
             .item {
                 width: 100%;
                 display: flex;

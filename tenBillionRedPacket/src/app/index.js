@@ -42,7 +42,8 @@ const home = Vue.extend({
             preRedpackets: [], // 预选红包
             currentTotal: 0,
             highestTotal: 0,
-            isGet: false,
+            gainMoney: 0,
+            isGet: 0,
             dialogs: {
                 grab: {
                     open: false,
@@ -87,6 +88,7 @@ const home = Vue.extend({
     },
     created() {
         this.getDataToCatch();
+        this.getRedpacketValues();
     },
     watch: {
         showProgress(progress) {
@@ -173,8 +175,11 @@ const home = Vue.extend({
             const self = this;
             // 点击的红包
             const selectedRedpacket = self.redpackets[idx];
+            // console.log(selectedRedpacket);
+            console.log(idx);
             // 随机生成一个红包
             const simpleRedpacket = self.preRedpackets[Math.floor(Math.random() * self.preRedpackets.length)];
+            // console.log(simpleRedpacket);
             // 从可选的红包中remove点击的红包
             // self.remove(self.redpackets, ele => ele.aria === selectedRedpacket.aria);
             // 累加本轮游戏的红包面值
@@ -211,7 +216,7 @@ const home = Vue.extend({
                     if (timer) {
                         clearTimeout(timer);
                     }
-                }, 900);
+                }, 1000);
             }
         },
         closeDialog(name, playStatus) {
@@ -275,12 +280,13 @@ const home = Vue.extend({
         viewRecords() {
             this.$router.push({ name: 'records' });
         },
-        receiveRedpacket(type) {
+        gainRedpacket(type) {
             const self = this;
             const data = {
                 [type]: type === 'total_money' ? this.currentTotal : this.highestTotal,
             };
-            self.$axios.receiveRedpacket(data).then((res) => {
+            self.gainMoney = data[type];
+            self.$axios.gainRedpacket(data).then((res) => {
                 if (res) {
                     self.closeDialog('timeover', 'delayPlay');
                     self.showDialog('congratulations');
@@ -339,7 +345,7 @@ new Vue({
     data() {
         return {
             count: 0,
-            showProgress: true,
+            showProgress: false,
             progressPercent: 60,
             cacheImgs: [],
             imgs: [
@@ -388,15 +394,13 @@ new Vue({
             self.cacheImgs[idx].src = url;
         });
         const shareData = {
-            title: '红bao', // 分享标题
-            desc: '百亿活动', // 分享描述
-            link: 'http://songhwwww.yind123.com/wx/fight_red_bonus', // 分享链接
+            title: '冲刺百亿大放送 奖励上不封顶', // 分享标题
+            desc: '手速越快金额越高~快来看看你能拿多少', // 分享描述
+            link: '<{$share_url}>', // 分享链接
             imgUrl: 'https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/03/tenBilRedPacket/share-icon.png', // 分享图标
         };
-        this.$axios.getWxShareConfig().then((data) => {
-            wxShare.setConfig(data);
-            wxShare.init(shareData);
-        });
+        wxShare.setConfig();
+        wxShare.init(shareData);
     },
     watch: {
         count: function (val) {

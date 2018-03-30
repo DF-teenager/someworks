@@ -48,15 +48,13 @@
                                         @click="onRedpacket(index)">
                                     </span>
                                     <span v-if="redpacket.lastAria === undefined" class="coupon ft-21"
-                                        :class="{active: redpacket.active}" 
-                                        @click="onRedpacket(index)">+<span class="val">{{redpacket.lastValue}}</span>
+                                        :class="{active: redpacket.active}">+<span class="val">{{redpacket.lastValue}}</span>
                                     </span>
                                 </span>
                             </transition>
                             <span v-if="redpacket.lastAria" class="coupon ft-21"
                                 :key="redpacket.aria"
-                                :class="['aria-controls-' + redpacket.lastAria, {active: redpacket.lastActive}]" 
-                                @click="onRedpacket(index)">+<span class="val">{{redpacket.lastValue}}</span>
+                                :class="['aria-controls-' + redpacket.lastAria, {active: redpacket.lastActive}]">+<span class="val">{{redpacket.lastValue}}</span>
                             </span>
                         </span>
                     </div>
@@ -102,7 +100,7 @@
                     <span class="ft-100">{{countdowns.begin}}</span>
                 </div>
             </v-dialog>
-            <v-dialog :show-dialog="dialogs.timeover.open" @global-close-dialog="closeDialog('timeover')">
+            <v-dialog :show-dialog="dialogs.timeover.open">
                 <div class="dialog-timeover" slot="mian">
                     <h3 class="title ft-38">时间到</h3>
                     <div class="con">
@@ -111,13 +109,13 @@
                         <p class="ft-19">最高奖励金额：{{highestTotal}}元</p>
                         <div class="btns clearfix">
                             <a class="btn ft-16 row" :class="{disabled: delayEmitClick}" href="javascript: void(0);" @click="playAgain('timeover')">再玩一次</a>
-                            <a class="btn ft-16 fl" :class="{disabled: delayEmitClick}" href="javascript: void(0);" @click="receiveRedpacket('total_money')">领取本次红包金额</a>
-                            <a class="btn ft-16 fl" :class="{disabled: delayEmitClick}" href="javascript: void(0);" @click="receiveRedpacket('max_money')">领取历史最高奖励</a>
+                            <a class="btn ft-16 fl" :class="{disabled: delayEmitClick}" href="javascript: void(0);" @click="gainRedpacket('total_money')">领取本次红包金额</a>
+                            <a class="btn ft-16 fl" :class="{disabled: delayEmitClick}" href="javascript: void(0);" @click="gainRedpacket('max_money')">领取历史最高奖励</a>
                         </div>
                     </div>
                 </div>
             </v-dialog>
-            <v-dialog :show-dialog="dialogs.gameover.open" @global-close-dialog="closeDialog('gameover')">
+            <v-dialog :show-dialog="dialogs.gameover.open">
                 <div class="dialog-gameover" slot="mian">
                     <h3 class="title ft-38">时间到</h3>
                     <div class="con">
@@ -135,7 +133,7 @@
                 <div class="dialog-congratulations" slot="mian">
                     <h3 class="title ft-38">恭喜您</h3>
                     <div class="con">
-                        <p class="ft-28 card">200元现金卡</p>
+                        <p class="ft-28 card">{{gainMoney}}元现金卡</p>
                         <p class="ft-14 tips">已经发放到您的平台账户</p>
                         <div class="btns">
                             <a class="btn ft-16 row" href="javascript: void(0);" @click="closeDialog('congratulations')">确定</a>
