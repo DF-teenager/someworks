@@ -175,10 +175,8 @@ const home = Vue.extend({
             const self = this;
             // 点击的红包
             const selectedRedpacket = self.redpackets[idx];
-            // console.log(selectedRedpacket);
             // 随机生成一个红包
             const simpleRedpacket = self.preRedpackets[Math.floor(Math.random() * self.preRedpackets.length)];
-            // console.log(simpleRedpacket);
             // 从可选的红包中remove点击的红包
             // self.remove(self.redpackets, ele => ele.aria === selectedRedpacket.aria);
             // 累加本轮游戏的红包面值
@@ -344,7 +342,7 @@ new Vue({
     data() {
         return {
             count: 0,
-            showProgress: false,
+            showProgress: true,
             progressPercent: 60,
             cacheImgs: [],
             imgs: [
