@@ -5,10 +5,6 @@
 {{htmlCode}}
 <{/block}>
 
-<{block name=local_js_link}>
-
-<{/block}>
-
 <{block name=common_js_link}>
 
 <{/block}>
