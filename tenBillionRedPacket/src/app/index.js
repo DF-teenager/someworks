@@ -390,7 +390,7 @@ new Vue({
         const shareData = {
             title: '红bao', // 分享标题
             desc: '百亿活动', // 分享描述
-            link: '/wx/fight_red_bonus', // 分享链接
+            link: 'http://songhwwww.yind123.com/wx/fight_red_bonus', // 分享链接
             imgUrl: 'https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/03/tenBilRedPacket/share-icon.png', // 分享图标
         };
         this.$axios.getWxShareConfig().then((data) => {

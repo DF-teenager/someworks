@@ -1,14 +1,16 @@
-<!-- 
-    app端开发.tpl模板
- -->
-<{extends file='h5/layout/main.tpl'}>
+<!-- 微信百亿红包上线模板 -->
+<{extends file='wx/layout/events/main.tpl'}>
 
 <{block name=content}>
 {{htmlCode}}
 <{/block}>
 
 <{block name=local_js_link}>
-<script src="<{$g_resources_url}>/weixin/js/vue-router-3.0.1.js"></script>
+
+<{/block}>
+
+<{block name=common_js_link}>
+
 <{/block}>
 
 <{block name=local_js_block}>
