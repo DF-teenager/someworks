@@ -61,8 +61,8 @@
                         </span>
                     </div>
                     <div class="page01-footer clearfix">
-                        <a class="btn line-border ft-19 fl" href="javascript: void(0);" @click="viewRecords">已领记录<i class="YDSICON yds-icon-arrow-double-right-a ft-14"></i></a>
-                        <a class="btn line-border ft-19 fr" href="javascript: void(0);" @click="showDialog('rules')">活动规则<i class="YDSICON yds-icon-arrow-double-right-a ft-14"></i></a>
+                        <!-- <a class="btn line-border ft-19 fl" href="javascript: void(0);" @click="viewRecords">已领记录<i class="YDSICON yds-icon-arrow-double-right-a ft-14"></i></a>
+                        <a class="btn line-border ft-19 fr" href="javascript: void(0);" @click="showDialog('rules')">活动规则<i class="YDSICON yds-icon-arrow-double-right-a ft-14"></i></a> -->
                     </div>
                 </div>
             </div>
@@ -87,6 +87,12 @@
                         <transition name="reverseBounceIn">
                             <a v-if="startStatus" class="startBtn ft-28" @click="startGrab">开始<br>抢包</a>
                         </transition>
+                        <transition name="fade">
+                            <div v-if="startStatusDelay" class="btns clearfix">
+                                <a class="btn ft-19 fl" href="javascript: void(0);" @click="viewRecords">已领记录<i class="YDSICON yds-icon-arrow-double-right-a ft-14"></i></a>
+                                <a class="btn ft-19 fr" href="javascript: void(0);" @click="showDialog('rules')">活动规则<i class="YDSICON yds-icon-arrow-double-right-a ft-14"></i></a>
+                            </div>
+                        </transition>
                     </div>
                 </div>
             </v-dialog>
@@ -104,9 +110,9 @@
                         <p class="ft-19">获得红包金额：{{currentTotal}}元</p>
                         <p class="ft-19">最高奖励金额：{{highestTotal}}元</p>
                         <div class="btns clearfix">
-                            <a class="btn ft-16 row" href="javascript: void(0);" @click="playAgain('timeover')">再玩一次</a>
-                            <a class="btn ft-16 fl" href="javascript: void(0);" @click="receiveRedpacket('total_money')">领取本次红包金额</a>
-                            <a class="btn ft-16 fl" href="javascript: void(0);" @click="receiveRedpacket('max_money')">领取历史最高奖励</a>
+                            <a class="btn ft-16 row" :class="{disabled: delayEmitClick}" href="javascript: void(0);" @click="playAgain('timeover')">再玩一次</a>
+                            <a class="btn ft-16 fl" :class="{disabled: delayEmitClick}" href="javascript: void(0);" @click="receiveRedpacket('total_money')">领取本次红包金额</a>
+                            <a class="btn ft-16 fl" :class="{disabled: delayEmitClick}" href="javascript: void(0);" @click="receiveRedpacket('max_money')">领取历史最高奖励</a>
                         </div>
                     </div>
                 </div>
@@ -119,7 +125,7 @@
                         <p class="ft-19">获得红包金额：{{currentTotal}}元</p>
                         <p class="ft-19">最高奖励金额：{{highestTotal}}元</p>
                         <div class="btns">
-                            <a class="btn ft-16 row" href="javascript: void(0);" @click="playAgain('gameover')">再玩一次</a>
+                            <a class="btn ft-16 row" href="javascript: void(0);" :class="{disabled: delayEmitClick}" @click="playAgain('gameover')">再玩一次</a>
                             <p class="tips ft-14">很遗憾您今日领取机会已用完，明天还可再领</p>
                         </div>
                     </div>

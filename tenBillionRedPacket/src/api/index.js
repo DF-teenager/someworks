@@ -54,4 +54,11 @@ export default {
     getDataToCatch(data) {
         return fetch('/webapi/get_user_cashcard', data);
     },
+    /**
+     * 微信分享config
+     * @param {*} data null
+     */
+    getWxShareConfig(data) {
+        return fetch('/webapi/wx_share_api', data);
+    },
 };

@@ -5,6 +5,7 @@
 import Vue from 'vue/dist/vue';
 import VueRouter from 'vue-router';
 import axios from '../api/index';
+import wxShare from '../utils/es5/wxShare';
 import '../assets/app.scss';
 
 Vue.use(VueRouter);
@@ -76,6 +77,7 @@ const home = Vue.extend({
             },
             chance: true,
             timerPlay: null,
+            delayEmitClick: true,
         };
     },
     computed: {
@@ -197,10 +199,20 @@ const home = Vue.extend({
             });
         },
         showDialog(name) {
-            if (name === 'rules' || name === 'single' || name === 'highest') {
+            let timer = null;
+            const self = this;
+            if (name === 'single' || name === 'highest') {
                 clearInterval(this.timerPlay);
             }
             this.dialogs[name].open = true;
+            if (name === 'timeover' || name === 'gameover') {
+                timer = setTimeout(() => {
+                    self.delayEmitClick = false;
+                    if (timer) {
+                        clearTimeout(timer);
+                    }
+                }, 900);
+            }
         },
         closeDialog(name, playStatus) {
             this.dialogs[name].open = false;
@@ -210,8 +222,11 @@ const home = Vue.extend({
                     this.play();
                 }
             }
-            if (name === 'rules' || name === 'single' || name === 'highest') {
+            if (name === 'single' || name === 'highest') {
                 this.playCountdown();
+            }
+            if (name === 'congratulations') {
+                this.play();
             }
         },
         startGrab() {
@@ -221,7 +236,7 @@ const home = Vue.extend({
             self.startStatusDelay = false;
             timer = setTimeout(() => {
                 self.closeDialog('grab');
-                self.dialogs.countdown.open = true;
+                self.showDialog('countdown');
                 self.startCountdown();
                 if (timer) {
                     clearTimeout(timer);
@@ -328,7 +343,7 @@ new Vue({
             progressPercent: 60,
             cacheImgs: [],
             imgs: [
-                'https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/03/tenBilRedPacket/page01-bg.jpg',
+                'https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/03/tenBilRedPacket/page01-bg-amend.jpg',
                 'https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/03/tenBilRedPacket/page-bg-1.png',
                 'https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/03/tenBilRedPacket/page-bg-2.png',
                 'https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/03/tenBilRedPacket/page-bg-3.png',
@@ -371,6 +386,16 @@ new Vue({
                 Math.floor(self.count / self.imgs.length) * 100 + '%';
             };
             self.cacheImgs[idx].src = url;
+        });
+        const shareData = {
+            title: '红bao', // 分享标题
+            desc: '百亿活动', // 分享描述
+            link: '/wx/fight_red_bonus', // 分享链接
+            imgUrl: 'https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/03/tenBilRedPacket/share-icon.png', // 分享图标
+        };
+        this.$axios.getWxShareConfig().then((data) => {
+            wxShare.setConfig(data);
+            wxShare.init(shareData);
         });
     },
     watch: {

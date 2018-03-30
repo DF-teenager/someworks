@@ -100,7 +100,7 @@ $page: 'page';
     flex-flow: column nowrap;
     justify-content: space-around;
     padding: 0 .4rem;
-    background: url('https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/03/tenBilRedPacket/page01-bg.jpg') no-repeat center top / 100% 100%;
+    background: url('https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/03/tenBilRedPacket/page01-bg-amend.jpg') no-repeat center top / 100% 100%;
     &-header {
         display: flex;
         height: 1.973333rem;
@@ -362,6 +362,24 @@ $dialog: 'dialog';
                 box-shadow: 0 0 0 .106667rem #6e1d6a, 0 0 0 .213333rem rgba($color: #6e1d6a, $alpha: .3);
             }
         }
+        .btns {
+            margin-top: -.266667rem;
+        }
+        a.btn {
+            display: inline-block;
+            width: 3.653333rem;
+            text-align: center;
+            font-family: 'ydshkpp';
+            color: white;
+            padding: .373333rem .266667rem .133333rem;
+            &:hover, &:active {
+                color: #f44f49;
+            }
+        }
+        a i[class*=double-right-a] {
+            margin-left: .106667rem;
+            vertical-align: -.013333rem;
+        }
     }
 }
 .#{$dialog}-countdown {
@@ -439,12 +457,22 @@ $dialog: 'dialog';
                     &:active {
                         background: rgba($color: #ff612f, $alpha: .85);
                     }
+                    &.disabled,
+                    &[disabled] {
+                        pointer-events: none;
+                        background: rgba($color: #ff612f, $alpha: .85)
+                    }
                 }
                 &.row + a {
                     margin-right: .386667rem;
                 }
                 &:active {
                     background: rgba($color: #ff9600, $alpha: .85);
+                }
+                &.disabled,
+                &[disabled] {
+                    pointer-events: none;
+                    background: rgba($color: #ff9600, $alpha: .85)
                 }
             }
         }
