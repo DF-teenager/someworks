@@ -1,12 +1,10 @@
 <!-- 微信百亿红包上线模板 -->
 <{extends file='wx/layout/events/main.tpl'}>
 
+<{block name=common_js_link}><{/block}>
+
 <{block name=content}>
 {{htmlCode}}
-<{/block}>
-
-<{block name=common_js_link}>
-
 <{/block}>
 
 <{block name=local_js_block}>
