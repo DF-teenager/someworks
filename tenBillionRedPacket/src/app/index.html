@@ -14,7 +14,7 @@
                 <div class="progress-enter">
                     <div class="progress-bg" :style="{width: progressPercent + '%'}"></div>
                 </div>
-                <div class="tooltip ft-14" :style="{left: 'calc(' + progressPercent + '%)'}" v-html="progressPercent + '%'"></div>
+                <div class="tooltip ft-14" :style="{left: progressPercent + '%'}" v-html="progressPercent + '%'"></div>
             </div>
         </div>
         <router-view></router-view>
@@ -178,7 +178,7 @@
                         <span>{{record.money}}</span>
                     </div>
                 </div>
-                <div v-if="!loading && records.length === 0" class="empty">暂无年货记录</div>
+                <div v-if="!loading && records.length === 0" class="empty">暂无记录</div>
                 <div v-if="loading" class="loading"><span class="YDSICON yds-icon-loading ft-20"></span></div>
             </div>
         </div>
