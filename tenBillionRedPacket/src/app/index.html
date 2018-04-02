@@ -14,7 +14,7 @@
                 <div class="progress-enter">
                     <div class="progress-bg" :style="{width: progressPercent + '%'}"></div>
                 </div>
-                <div class="tooltip ft-14" :style="{left: 'calc(' + progressPercent + '%)'}">{{progressPercent}}%</div>
+                <div class="tooltip ft-14" :style="{left: 'calc(' + progressPercent + '%)'}" v-html="progressPercent + '%'"></div>
             </div>
         </div>
         <router-view></router-view>
@@ -143,7 +143,7 @@
             </v-dialog>
             <v-dialog :show-dialog="dialogs.rules.open" @global-close-dialog="closeDialog('rules')">
                 <div class="dialog-rules" slot="mian">
-                    <p class="ft-14 justify">1.活动时间：4月2日00:00-4月30日23:59:59；</p>
+                    <p class="ft-14 justify">1.活动时间：04月06日09:30 - 05月09日23:59:59；</p>
                     <p class="ft-14 justify">2.8秒内快速点击屏幕内出现的红包，点击多少送多少，点击更多送更多，红包金额随机，奖励上不封顶；</p>
                     <p class="ft-14 justify">3.豆粉可多次参与游戏，但每天只可领取一次奖励。可领取的红包金额以单次游戏最高纪录为准；</p>
                     <p class="ft-14 justify">4.所获红包金额均为0.8%比例激活使用的现金卡，≧30天自动投标、手动投标（新手标及债权转让项目除外）均可参与本活动，有效期2天；</p>

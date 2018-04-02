@@ -87,8 +87,8 @@ const home = Vue.extend({
         },
     },
     created() {
-        this.getDataToCatch();
-        this.getRedpacketValues();
+        // this.getDataToCatch();
+        // this.getRedpacketValues();
     },
     watch: {
         showProgress(progress) {
@@ -296,6 +296,7 @@ const home = Vue.extend({
         play() {
             let timer = null;
             this.getRedpacketValues();
+            this.getDataToCatch();
             this.resetCountdown();
             this.showDialog('grab');
             this.currentTotal = 0;
@@ -343,7 +344,7 @@ new Vue({
         return {
             count: 0,
             showProgress: true,
-            progressPercent: 60,
+            progressPercent: 0,
             cacheImgs: [],
             imgs: [
                 'https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/03/tenBilRedPacket/page01-bg-amend.jpg',
@@ -392,7 +393,7 @@ new Vue({
         });
         const shareData = {
             title: '冲刺百亿大放送 奖励上不封顶', // 分享标题
-            desc: '手速越快金额越高~快来看看你能拿多少', // 分享描述
+            desc: '点击多少送你多少，手速越快金额越高，送出奖励不设上限~~~快来看看你能拿多少', // 分享描述
             link: '<{$share_url}>', // 分享链接
             imgUrl: 'https://caiyunupload.b0.upaiyun.com/ydimg/theme/2018/03/tenBilRedPacket/share-icon.png', // 分享图标
         };
