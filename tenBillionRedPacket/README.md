@@ -1,7 +1,7 @@
 
 ## User Interface
 
-<p align="center"><a href="#" target="_blank"><img src="./uis/tenBnRedpacket-HD-HD.gif" width="218"></a></p>
+<p align="center"><a href="#" target="_blank"><img src="./uis/tenBnRedpacket-HD.gif" width="292"></a></p>
 
 ## Quick start
 
