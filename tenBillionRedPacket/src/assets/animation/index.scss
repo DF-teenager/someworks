@@ -265,3 +265,12 @@
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
     opacity: 0;
 }
+
+@keyframes blink {
+    0% {
+        box-shadow: 0 0 0 .04rem #6e1d6a, 0 0 0 .08rem rgba($color: #6e1d6a, $alpha: .3);
+    }
+    to {
+        box-shadow: 0 0 0 .24rem #6e1d6a, 0 0 0 .48rem rgba($color: #6e1d6a, $alpha: .3);
+    }
+}

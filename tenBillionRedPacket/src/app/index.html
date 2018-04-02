@@ -83,7 +83,9 @@
                     </div>
                     <div class="bot">
                         <transition name="reverseBounceIn">
-                            <a v-if="startStatus" class="startBtn ft-28" @click="startGrab">开始<br>抢包</a>
+                            <div v-if="startStatus">
+                                <a class="startBtn ft-28" @click="startGrab">开始<br>抢包</a>
+                            </div>
                         </transition>
                         <transition name="fade">
                             <div v-if="startStatusDelay" class="btns clearfix">
