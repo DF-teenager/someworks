@@ -89,6 +89,10 @@ const home = Vue.extend({
     created() {
         // this.getDataToCatch();
         // this.getRedpacketValues();
+        const self = this;
+        window.addEventListener('popstate', function () {
+            self.play();
+        }, false);
     },
     watch: {
         showProgress(progress) {
